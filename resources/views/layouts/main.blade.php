@@ -6,8 +6,10 @@
     <title>Casa y chalet</title>
     @vite('resources/css/app.css')
     
+    
 </head>
 <body>
     @include('shared.header')
+    
 </body>
 </html>
