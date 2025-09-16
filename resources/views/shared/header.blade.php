@@ -2,7 +2,7 @@
 <header class="bg-[#e09129] bg-opacity-5 text-white shadow-lg">
   <div class="container mx-auto flex items-center h-24 justify-between md:justify-center space-x-0 md:space-x-32 px-4">
     <!-- Logo -->
-    <a href="" class="flex items-center justify-center">
+    <a href="{{ route('inicio') }}" class="flex items-center justify-center">
       <img class="h-16 w-16 md:h-24 md:w-24" src="recursos/img/logo-blanco.png" alt="" />
     </a>
     <!-- Menú hamburguesa (solo móvil) -->
@@ -15,7 +15,7 @@
     <nav class="font-semibold text-sm menu-font hidden md:block">
       <ul class="flex items-center gap-x-8">
         <li class="px-3 active">
-          <a href="">
+          <a href="{{ route('inicio') }}">
             <span class="nav-text">INICIO</span>
           </a>
         </li>
