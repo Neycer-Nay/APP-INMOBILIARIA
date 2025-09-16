@@ -13,20 +13,10 @@
 <body>
     @include('shared.header')
 
-    <h1>Casa y chalet</h1>
 
-    <p>Bienvenido a nuestra página de Casa y Chalet. Aquí encontrarás las mejores opciones para comprar o alquilar tu nuevo hogar.</p>  
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, maxime blanditiis exercitationem corrupti nulla dicta unde quod vel quis magnam possimus non explicabo pariatur, enim, consectetur beatae architecto tempore similique?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel nam fugiat id veniam ea delectus similique? Ullam delectus natus accusamus molestiae cupiditate hic maxime nemo labore. Rem quos ea dicta!</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequuntur sunt dolore repudiandae corporis esse porro error. Deserunt suscipit corrupti, illum voluptas sunt perspiciatis adipisci, reiciendis facilis quod quidem maiores!</p>
-    <p>Bienvenido a nuestra página de Casa y Chalet. Aquí encontrarás las mejores opciones para comprar o alquilar tu nuevo hogar.</p>  
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, maxime blanditiis exercitationem corrupti nulla dicta unde quod vel quis magnam possimus non explicabo pariatur, enim, consectetur beatae architecto tempore similique?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel nam fugiat id veniam ea delectus similique? Ullam delectus natus accusamus molestiae cupiditate hic maxime nemo labore. Rem quos ea dicta!</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequuntur sunt dolore repudiandae corporis esse porro error. Deserunt suscipit corrupti, illum voluptas sunt perspiciatis adipisci, reiciendis facilis quod quidem maiores!</p>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel nam fugiat id veniam ea delectus similique? Ullam delectus natus accusamus molestiae cupiditate hic maxime nemo labore. Rem quos ea dicta!</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequuntur sunt dolore repudiandae corporis esse porro error. Deserunt suscipit corrupti, illum voluptas sunt perspiciatis adipisci, reiciendis facilis quod quidem maiores!</p>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel nam fugiat id veniam ea delectus similique? Ullam delectus natus accusamus molestiae cupiditate hic maxime nemo labore. Rem quos ea dicta!</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequuntur sunt dolore repudiandae corporis esse porro error. Deserunt suscipit corrupti, illum voluptas sunt perspiciatis adipisci, reiciendis facilis quod quidem maiores!</p>
+    @yield('contenido')
+
+    
     @include('shared.footer')
 </body>
 </html>
