@@ -28,4 +28,8 @@ Route::get('/inicio', function () {
     $imagenFondo = $imagenes[array_rand($imagenes)];
     return view('modulos.inicio.inicio', compact('imagenFondo'));
 })->name('inicio');
- 
+
+Route::get('/nosotros', function () {
+    return view('modulos.nosotros.nosotros');
+})->name('nosotros');
+

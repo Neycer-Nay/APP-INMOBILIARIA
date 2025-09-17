@@ -41,7 +41,7 @@
           </ul>
         </li>
         <li class="px-3">
-          <a href="">
+          <a href="{{ route('nosotros') }}">
             <span class="nav-text">NOSOTROS</span>
           </a>
         </li>
