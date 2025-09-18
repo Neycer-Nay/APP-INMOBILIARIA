@@ -27,7 +27,7 @@
     <!-- Horarios -->
     <div class="lg:w-1/3 text-left lg:text-right lg:pr-60 w-full">
       <h3 class="font-bold text-2xl mb-4 text-[#000]">Horarios de atención</h3>
-      <p class="mb-1"><span class="font-bold text-[#000]">Lunes a viernes</span><br>08:00 a 12:00 y de 14:00 a 18:00</p>
+      <p class="mb-1"><span class="font-bold text-[#000]">Lunes a viernes</span><br>08:00 a 12:00 y de 14:30 a 18:30</p>
       <p class="mb-1 mt-2"><span class="font-bold text-[#000]">Sábado</span><br>08:00 – 13:00</p>
     </div>
   </div>

@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('contenido')    
-    <div class="mx-auto px-4 py-8" style="max-width: 70vw;">
-    <div class="bg-white p-8 rounded-lg shadow-md fuente">
+    <div class="mx-auto px-4 py-8 w-full md:w-[70vw]">
+    <div class="bg-white p-4 md:p-8 rounded-lg shadow-md fuente">
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Izquierda: Quiénes Somos y Servicios -->
             <div class="md:w-1/2 space-y-8">
@@ -13,15 +13,7 @@
                 </section>
                 <!-- Servicios -->
                 <section>
-                    <h2 class="text-2xl font-semibold mb-4 text-[#404656]">Servicios que Realizamos</h2>
-                    <ul class="list-disc list-inside text-[#404656] space-y-2">
-                        <li>Compra y venta de propiedades residenciales y comerciales</li>
-                        <li>Alquiler de inmuebles</li>
-                        <li>Asesoramiento legal y financiero</li>
-                        <li>Gestión de trámites inmobiliarios</li>
-                        <li>Valoración y tasación de propiedades</li>
-                        <li>Promoción y marketing inmobiliario</li>
-                    </ul>
+                    <img src="{{ asset('recursos/img/c-c.png') }}" alt="fachada Casa y Chalet" class="rounded-lg shadow-md w-full object-cover max-h-82">
                 </section>
             </div>
             <!-- Derecha: Misión, Visión y Valores -->
