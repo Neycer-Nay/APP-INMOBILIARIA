@@ -63,7 +63,7 @@
   <nav id="mobile-menu" class="md:hidden hidden bg-[#e09129] bg-opacity-95 text-[#404656] px-4 pt-2 pb-4">
     <ul class="flex flex-col gap-y-2 font-semibold text-base menu-font">
       <li>
-        <a href="" class="block py-2 px-2 nav-text">INICIO</a>
+        <a href="{{ route('inicio') }}" class="block py-2 px-2 nav-text">INICIO</a>
       </li>
       <li>
         <details>
@@ -87,7 +87,7 @@
         </details>
       </li>
       <li>
-        <a href="" class="block py-2 px-2 nav-text">NOSOTROS</a>
+        <a href="{{ route('nosotros') }}" class="block py-2 px-2 nav-text">NOSOTROS</a>
       </li>
       <li>
         <a href="" class="block py-2 px-2 nav-text">BLOG</a>
