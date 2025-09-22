@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     
 </head>
-<body>
+<body fuente-gral style='background-color: #02FADB;'>
     @include('shared.header')
 
 
@@ -20,3 +20,9 @@
     @include('shared.footer')
 </body>
 </html>
+
+<style>
+    body {
+        font-family: 'Muli', sans-serif;
+    }
+</style>
