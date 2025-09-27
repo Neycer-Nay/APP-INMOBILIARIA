@@ -16,11 +16,21 @@ return new class extends Migration
             $table->integer('codigo')->unique();
             $table->enum('tipo', ['venta', 'alquiler', 'anticretico', 'traspaso']);
             $table->enum('zona', ['norte', 'sur', 'este', 'oeste', 'centro']);
-            $table->float('superficie');
+            $table->enum('categoria', ['casa', 'departamento', 'comercial', 'quinta', 'terreno']);
+            $table->float('superficieTerreno');
+            $table->float('superficieConstruida');
             $table->decimal('precio', 12, 2);
             $table->string('direccion');
             $table->string('ciudad');
-            $table->string('descripcion');
+            $table->text('descripcion');
+            //Caracteristicas Principales
+            $table->integer('habitaciones')->default(0);
+            $table->integer('banos')->default(0);
+            $table->integer('garajes')->default(0);
+            $table->integer('plantas')->default(1);
+
+            $table->string('estado')->default('disponible'); // disponible, vendido, alquilado, etc.
+            $table->json('caracteristicas')->nullable(); // piscina, jardin, seguridad, etc.
             $table->timestamps();
         });
     }

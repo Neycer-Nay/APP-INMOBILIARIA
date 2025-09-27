@@ -33,3 +33,10 @@ Route::get('/nosotros', function () {
     return view('modulos.nosotros.nosotros');
 })->name('nosotros');
 
+
+
+Route::prefix('casas')->group(function () {
+    Route::get('/', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
+    Route::get('/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
+    Route::get('/{id}', [App\Http\Controllers\CasaController::class, 'show'])->name('casas.show');
+}); 
