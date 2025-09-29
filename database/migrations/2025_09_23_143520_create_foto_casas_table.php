@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('casa_id')->constrained('casas')->onDelete('cascade');
             $table->string('ruta_imagen');
+            $table->boolean('foto_principal')->default(false);
             $table->timestamps();
         });
     }
