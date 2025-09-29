@@ -1,19 +1,20 @@
 @extends('layouts.main') 
 
 @section('contenido')
-<div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-8">
-    <h2 class="text-2xl font-bold mb-6 text-blue-700">Registrar Nueva Casa</h2>
-    <form action="#" method="POST" enctype="multipart/form-data">
+<div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mt-8 mb-8 ">
+    <h2 class="text-xl font-semibold mb-6 text-[#404656]">REGISTRAR INMUEBLES</h2>
+    <form action="{{ route('casas.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Código</label>
-                <input type="number" name="codigo" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="number" name="codigo" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Tipo</label>
-                <select name="tipo" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <select name="tipo" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
+                    <option value="">Tipo</option>
                     <option value="venta">Venta</option>
                     <option value="alquiler">Alquiler</option>
                     <option value="anticretico">Anticretico</option>
@@ -22,7 +23,8 @@
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Zona</label>
-                <select name="zona" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <select name="zona" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
+                    <option value="">Zona</option>
                     <option value="norte">Norte</option>
                     <option value="sur">Sur</option>
                     <option value="este">Este</option>
@@ -32,7 +34,8 @@
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Categoría</label>
-                <select name="categoria" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <select name="categoria" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
+                    <option value="">Categoría</option>
                     <option value="casa">Casa</option>
                     <option value="departamento">Departamento</option>
                     <option value="comercial">Comercial</option>
@@ -42,47 +45,47 @@
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Superficie Terreno (m²)</label>
-                <input type="number" step="0.01" name="superficieTerreno" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="number" step="0.01" name="superficieTerreno" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Superficie Construida (m²)</label>
-                <input type="number" step="0.01" name="superficieConstruida" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="number" step="0.01" name="superficieConstruida" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Precio</label>
-                <input type="number" step="0.01" name="precio" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="number" step="0.01" name="precio" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Dirección</label>
-                <input type="text" name="direccion" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="text" name="direccion" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Ciudad</label>
-                <input type="text" name="ciudad" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="text" name="ciudad" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Descripción</label>
-                <textarea name="descripcion" rows="3" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                <textarea name="descripcion" rows="2" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"></textarea>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Habitaciones</label>
-                <input type="number" name="habitaciones" min="0" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="number" name="habitaciones" min="0" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Baños</label>
-                <input type="number" name="banos" min="0" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <input type="number" name="banos" min="0" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Garajes</label>
-                <input type="number" name="garajes" min="0" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <input type="number" name="garajes" min="0" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500">
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Plantas</label>
-                <input type="number" name="plantas" min="1" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <input type="number" name="plantas" min="1" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500">
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Estado</label>
-                <select name="estado" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <select name="estado" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500">
                     <option value="disponible">Disponible</option>
                     <option value="vendido">Vendido</option>
                     <option value="alquilado">Alquilado</option>
@@ -90,19 +93,54 @@
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Características (separadas por coma)</label>
-                <input type="text" name="caracteristicas" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Piscina, Jardín, Seguridad...">
-            </div>
-            <div class="col-span-2">
-                <label class="block text-gray-700 font-semibold mb-2">Fotos (máximo 8)</label>
-                <input type="file" name="fotos[]" multiple accept="image/*" class="w-full border border-blue-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <input type="text" name="caracteristicas" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" placeholder="Piscina, Jardín, Seguridad...">
             </div>
         </div>
 
-        <div class="mt-8 flex justify-end">
-            <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded shadow">
+        <div class="mt-6">
+            <label class="block text-gray-700 font-semibold mb-2">Fotos (máximo 8)</label>
+            <input type="file" id="fotos" name="fotos[]" multiple accept="image/*" class="hidden" onchange="previewFotos(event)">
+            <div id="preview" class="flex flex-wrap gap-2 mb-2"></div>
+            <div class="flex gap-2">
+                <button type="button" onclick="document.getElementById('fotos').click()" class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar Fotos</button>
+                <button type="button" onclick="cancelarFotos()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-1 px-4 rounded shadow text-sm">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-end gap-2">
+            <a href="{{ route('casas.index') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-6 rounded shadow text-sm">Cancelar</a>
+            <button type="submit" class="bg-[#293F5D] hover:bg-blue-800 text-white font-bold py-2 px-6 rounded shadow text-sm">
                 Guardar Casa
             </button>
         </div>
     </form>
 </div>
+
+<script>
+function previewFotos(event) {
+    const preview = document.getElementById('preview');
+    preview.innerHTML = '';
+    const files = event.target.files;
+    if (files.length > 8) {
+        alert('Solo puedes seleccionar hasta 8 fotos.');
+        event.target.value = '';
+        return;
+    }
+    Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = "h-20 w-20 object-cover rounded border";
+            preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function cancelarFotos() {
+    document.getElementById('fotos').value = '';
+    document.getElementById('preview').innerHTML = '';
+}
+</script>
 @endsection

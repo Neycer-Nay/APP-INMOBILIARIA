@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class FotoCasa extends Model
 {
-    //
+    protected $fillable = [
+        'casa_id',
+        'ruta_imagen'
+    ];
+
+    public function casa()
+    {
+        return $this->belongsTo(Casa::class);
+    }
 }
