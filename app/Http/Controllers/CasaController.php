@@ -10,15 +10,16 @@ use Illuminate\Support\Facades\Storage;
 class CasaController extends Controller
 {
     public function index()
-    {   $imagenes = [
-        'recursos/img/scz2.jpg',
-        'recursos/img/scz3.jpg',
-        'recursos/img/scz4.jpg',
-        'recursos/img/scz5.jpg',
-        'recursos/img/scz6.jpg',
-        'recursos/img/scz7.jpg',
-    ];
-    $imagenFondo = $imagenes[array_rand($imagenes)];
+    {
+        $imagenes = [
+            'recursos/img/scz2.jpg',
+            'recursos/img/scz3.jpg',
+            'recursos/img/scz4.jpg',
+            'recursos/img/scz5.jpg',
+            'recursos/img/scz6.jpg',
+            'recursos/img/scz7.jpg',
+        ];
+        $imagenFondo = $imagenes[array_rand($imagenes)];
         return view('modulos.inicio.inicio', compact('imagenFondo'));
     }
 
@@ -77,11 +78,12 @@ class CasaController extends Controller
 
         // Guardar fotos
         if ($request->hasFile('fotos')) {
-            foreach ($request->file('fotos') as $foto) {
+            foreach ($request->file('fotos') as $i => $foto) {
                 $ruta = $foto->store('casas', 'public');
                 FotoCasa::create([
                     'casa_id' => $casa->id,
-                    'ruta_imagen' => Storage::url($ruta),
+                    'ruta_imagen' => $ruta,
+                    'foto_principal' => $request->input('foto_principal') == $i,
                 ]);
             }
         }
@@ -107,8 +109,11 @@ class CasaController extends Controller
 
     public function casasAlquiler()
     {
-        // Obtiene todas las casas en alquiler con sus fotos
-        $casas = Casa::with('fotos')->where('estado', 'disponible')->where('tipo', 'alquiler')->get();
+        $casas = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->where('tipo', 'alquiler')->get();
         return view('modulos.inmuebles.alquiler.casa-alquiler', compact('casas'));
     }
 }

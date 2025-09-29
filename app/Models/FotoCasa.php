@@ -8,7 +8,8 @@ class FotoCasa extends Model
 {
     protected $fillable = [
         'casa_id',
-        'ruta_imagen'
+        'ruta_imagen',
+        'foto_principal',
     ];
 
     public function casa()

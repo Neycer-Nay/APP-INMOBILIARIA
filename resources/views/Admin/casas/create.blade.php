@@ -101,10 +101,12 @@
             <label class="block text-gray-700 font-semibold mb-2">Fotos (máximo 8)</label>
             <input type="file" id="fotos" name="fotos[]" multiple accept="image/*" class="hidden" onchange="previewFotos(event)">
             <div id="preview" class="flex flex-wrap gap-2 mb-2"></div>
+            <input type="hidden" name="foto_principal" id="foto_principal">
             <div class="flex gap-2">
                 <button type="button" onclick="document.getElementById('fotos').click()" class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar Fotos</button>
                 <button type="button" onclick="cancelarFotos()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-1 px-4 rounded shadow text-sm">Cancelar</button>
             </div>
+            <small>Seleciona en el circulo la foto principal</small>
         </div>
 
         <div class="mt-8 flex justify-end gap-2">
@@ -126,21 +128,42 @@ function previewFotos(event) {
         event.target.value = '';
         return;
     }
-    Array.from(files).forEach(file => {
+    Array.from(files).forEach((file, idx) => {
         const reader = new FileReader();
         reader.onload = e => {
+            const div = document.createElement('div');
+            div.className = "relative flex flex-col items-center";
             const img = document.createElement('img');
             img.src = e.target.result;
-            img.className = "h-20 w-20 object-cover rounded border";
-            preview.appendChild(img);
+            img.className = "h-20 w-20 object-cover rounded border mb-1";
+            // Radio para seleccionar principal
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'select_principal';
+            radio.value = idx;
+            radio.className = "mb-1";
+            radio.onclick = function() {
+                document.getElementById('foto_principal').value = idx;
+            };
+            // Etiqueta
+            const label = document.createElement('label');
+            label.innerText = ' ';
+            label.className = "text-xs";
+            div.appendChild(img);
+            div.appendChild(radio);
+            div.appendChild(label);
+            preview.appendChild(div);
         };
         reader.readAsDataURL(file);
     });
+    // Por defecto, selecciona la primera como principal
+    document.getElementById('foto_principal').value = 0;
 }
 
 function cancelarFotos() {
     document.getElementById('fotos').value = '';
     document.getElementById('preview').innerHTML = '';
+    document.getElementById('foto_principal').value = '';
 }
 </script>
 @endsection
