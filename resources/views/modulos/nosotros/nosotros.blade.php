@@ -2,7 +2,7 @@
 
 @section('contenido')    
     <div class="mx-auto px-4 py-8 w-full md:w-[70vw]">
-    <div class="bg-white p-4 md:p-8 rounded-lg shadow-md fuente">
+    <div class="bg-[#F8F5F2] p-4 md:p-8 rounded-lg shadow-md fuente">
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Izquierda: Quiénes Somos y Servicios -->
             <div class="md:w-1/2 space-y-8">

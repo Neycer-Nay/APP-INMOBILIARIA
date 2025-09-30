@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     
 </head>
-<body fuente-gral style='background-color: #02FADB;'>
+<body fuente-gral style='background-color: #fffaf3  ;'>
     @include('shared.header')
 
 

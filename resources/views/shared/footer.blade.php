@@ -1,5 +1,5 @@
 
-<footer class="bg-[#e8901d] text-white py-6 menu-font">
+<footer class="bg-[#e09129] text-white py-6 menu-font">
   <div class="container mx-auto flex flex-col lg:flex-row items-start justify-between">
     <!-- Redes sociales -->
     <div class="mb-6 lg:mb-0 lg:w-1/3 flex flex-col items-start lg:items-center lg:justify-center lg:pl-60 w-full">
