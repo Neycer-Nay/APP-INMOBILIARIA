@@ -2,10 +2,12 @@
 @section('contenido')
 
     <div class=" min-h-screen py-8 ">
+        <h3 class="text-3xl font-bold text-center mb-8 mt-2 text-[#404656] font-gotham-black tracking-widest">Inmuebles En Alquiler</h3>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             @foreach($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                     <!-- Imagen principal -->
+                     <a href="{{ route('casas.show', $casa->id) }}">
                     @if($casa->fotos->first())
                         <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
                             class="w-full h-68 object-cover rounded-lg mb-3">
@@ -13,7 +15,7 @@
                         <div class="w-full h-48 bg-gray-200 rounded-lg mb-3 flex items-center justify-center text-gray-400">Sin
                             imagen</div>
                     @endif
-
+                    </a>
                     <!-- Etiqueta tipo -->
 
                     <span
@@ -73,3 +75,8 @@
         </div>
     </div>
 @endsection
+<style>
+    .font-gotham-black {
+    font-family: 'Gotham Black', Arial, sans-serif;
+}
+</style>

@@ -20,20 +20,20 @@
           </a>
         </li>
         <li class="px-3 group relative">
-          <a href="">
+          
             <span class="nav-text">INMUEBLES</span>
-          </a>
+          
           <ul class="absolute left-0 top-full mt-0 w-25 bg-[#e09129] text-[#404656] rounded shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300 z-10">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Venta</a></li>
+            <li><a href="{{ route('venta') }}" class="block px-4 py-2 hover:bg-gray-100">Venta</a></li>
             <li><a href="{{ route('alquiler') }}" class="block px-4 py-2 hover:bg-gray-100">Alquiler</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Anticrético</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Traspaso</a></li>
+            <li><a href="{{ route('anticretico') }}" class="block px-4 py-2 hover:bg-gray-100">Anticrético</a></li>
+            <li><a href="{{ route('traspaso') }}" class="block px-4 py-2 hover:bg-gray-100">Traspaso</a></li>
           </ul>
         </li>
         <li class="px-3 group relative">
-          <a href="">
+          
             <span class="nav-text">SERVICIOS</span>
-          </a>
+          
           <ul class="absolute left-0 top-full mt-0 w-35 bg-[#e09129] text-[#404656] rounded shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300 z-10">
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Trámites legales</a></li>
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Avalúos</a></li>
@@ -69,10 +69,10 @@
         <details>
           <summary class="py-2 px-2 cursor-pointer nav-text">INMUEBLES</summary>
           <ul class="pl-4">
-            <li><a href="#" class="block py-1 px-2 hover:bg-gray-100">Venta</a></li>
+            <li><a href="{{ route('venta') }}" class="block py-1 px-2 hover:bg-gray-100">Venta</a></li>
             <li><a href="{{ route('alquiler') }}" class="block py-1 px-2 hover:bg-gray-100">Alquiler</a></li>
-            <li><a href="#" class="block py-1 px-2 hover:bg-gray-100">Anticrético</a></li>
-            <li><a href="#" class="block py-1 px-2 hover:bg-gray-100">Traspaso</a></li>
+            <li><a href="{{ route('anticretico') }}" class="block py-1 px-2 hover:bg-gray-100">Anticrético</a></li>
+            <li><a href="{{ route('traspaso') }}" class="block py-1 px-2 hover:bg-gray-100">Traspaso</a></li>
           </ul>
         </details>
       </li>
