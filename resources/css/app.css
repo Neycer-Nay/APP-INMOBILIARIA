@@ -3,3 +3,9 @@
 @tailwind utilities; */
 @import 'tailwindcss';
 
+@font-face {
+    font-family: 'Gotham Black';
+    src: url('/fonts/Gotham-Black.woff') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

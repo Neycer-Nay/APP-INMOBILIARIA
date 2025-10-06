@@ -92,6 +92,13 @@ class CasaController extends Controller
 
     }
 
+    public function show($id)
+    {
+        $casa = Casa::with('fotos')->findOrFail($id);
+        return view('modulos.inmuebles.detalle.casa-detalle', compact('casa'));
+    }
+
+
     public function edit(Request $request)
     {
         // Lógica para mostrar el formulario para editar una casa
@@ -115,5 +122,36 @@ class CasaController extends Controller
             }
         ])->where('estado', 'disponible')->where('tipo', 'alquiler')->get();
         return view('modulos.inmuebles.alquiler.casa-alquiler', compact('casas'));
+    }
+
+    public function casasVenta()
+    {
+        $casas = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->where('tipo', 'venta')->get();
+        return view('modulos.inmuebles.venta.casa-venta', compact('casas'));
+    }
+
+    public function casasAnticretico()
+    {
+        $casas = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->where('tipo', 'anticretico')->get();
+        return view('modulos.inmuebles.anticretico.casa-anticretico', compact('casas'));
+    }
+    
+
+    public function casasTraspaso()
+    {
+        $casas = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->where('tipo', 'traspaso')->get();
+        return view('modulos.inmuebles.traspaso.casa-traspaso', compact('casas'));
     }
 }

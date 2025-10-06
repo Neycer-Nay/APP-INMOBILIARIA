@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,17 +9,25 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    
+
+    <!-- Frameworks y librerias alpinejs y tailwindcss para carrusel -->
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 </head>
-<body fuente-gral style='background-color: #02FADB;'>
+
+<body fuente-gral style='background-color: #fffaf3  ;'>
     @include('shared.header')
 
 
     @yield('contenido')
 
-    
+
     @include('shared.footer')
 </body>
+
 </html>
 
 <style>
