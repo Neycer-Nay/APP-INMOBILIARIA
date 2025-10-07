@@ -33,6 +33,13 @@ Route::get('/nosotros', function () {
     return view('modulos.nosotros.nosotros');
 })->name('nosotros');
 
+Route::prefix('casas')->group(function () {
+    Route::get('/', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
+    Route::get('/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
+    
+    Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
+}); 
+
 Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');
 Route::get('/venta', [App\Http\Controllers\CasaController::class, 'casasVenta'])->name('venta');
 Route::get('/anticretico', [App\Http\Controllers\CasaController::class, 'casasAnticretico'])->name('anticretico');
@@ -40,9 +47,3 @@ Route::get('/traspaso', [App\Http\Controllers\CasaController::class, 'casasTrasp
 
 Route::get('/casas/{id}', [App\Http\Controllers\CasaController::class, 'show'])->name('casas.show');
 
-Route::prefix('casas')->group(function () {
-    Route::get('/', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
-    Route::get('/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
-    
-    Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
-}); 

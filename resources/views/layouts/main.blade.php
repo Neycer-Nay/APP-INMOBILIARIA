@@ -26,6 +26,8 @@
 
 
     @include('shared.footer')
+
+    @stack('scripts')
 </body>
 
 </html>
