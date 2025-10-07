@@ -121,7 +121,7 @@
     </div>
     <!-- Modal para visualizar fotos completas -->
     <div id="modalFotos"
-        class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden  transition-opacity duration-300">
+        class="fixed inset-0 bg-black/80  items-center justify-center z-50 hidden  transition-opacity duration-300">
         <button id="cerrarModal" class="absolute top-2 right-2 text-white text-4xl cursor-pointer">&times;</button>
         <div id="modalContent" class="bg-white rounded-lg shadow-lg p-4 relative max-w-5xl w-full">
             <div class="swiper modalSwiper">
@@ -182,7 +182,7 @@
         function abrirModal(index) {
             const modal = document.getElementById('modalFotos');
             modal.classList.remove('hidden');
-            modal.classList.add('opacity-100');
+            modal.classList.add('flex', 'opacity-100');
             document.body.classList.add('overflow-hidden');
             if (!modalSwiper) {
                 modalSwiper = new Swiper('.modalSwiper', {
@@ -217,7 +217,7 @@
         function cerrarModal() {
             const modal = document.getElementById('modalFotos');
             modal.classList.add('hidden');
-            modal.classList.remove('opacity-100');
+            modal.classList.remove('flex', 'opacity-100');
             document.body.classList.remove('overflow-hidden');
         }
     </script>
