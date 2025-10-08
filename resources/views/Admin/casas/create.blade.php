@@ -1,6 +1,16 @@
 @extends('layouts.main') 
 
 @section('contenido')
+
+@if ($errors->any())
+    <div class="mb-4 text-red-600">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mt-8 mb-8 ">
     <h2 class="text-xl font-semibold mb-6 text-[#404656]">REGISTRAR INMUEBLES</h2>
     <form action="{{ route('casas.store') }}" method="POST" enctype="multipart/form-data">
@@ -89,12 +99,18 @@
                     <option value="disponible">Disponible</option>
                     <option value="vendido">Vendido</option>
                     <option value="alquilado">Alquilado</option>
+                    <option value="entregado">Entregado</option>
                 </select>
             </div>
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Características (separadas por coma)</label>
+                <label class="block text-gray-700 font-semibold mb-2">Características Interior (separadas por coma)</label>
                 <input type="text" name="caracteristicas" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" placeholder="Piscina, Jardín, Seguridad...">
             </div>
+            <div>
+                <label class="block text-gray-700 font-semibold mb-2">Características Externas (separadas por coma)</label>
+                <input type="text" name="caracteristicasExternas" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" placeholder="Colegios, Parques, Mercados, Transporte...">
+            </div>
+
         </div>
 
         <div class="mt-6">

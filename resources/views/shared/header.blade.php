@@ -35,7 +35,7 @@
             <span class="nav-text">SERVICIOS</span>
           
           <ul class="absolute left-0 top-full mt-0 w-35 bg-[#e09129] text-[#404656] rounded shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300 z-10">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Trámites legales</a></li>
+            <li><a href="{{ route('casas.index') }}" class="block px-4 py-2 hover:bg-gray-100">Trámites legales</a></li>
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Avalúos</a></li>
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Préstamos hipotecarios</a></li>
           </ul>
@@ -46,7 +46,7 @@
           </a>
         </li>
         <li class="px-3">
-          <a href="">
+          <a href="{{ route('casas.create') }}">
             <span class="nav-text">BLOG</span>
           </a>
         </li>

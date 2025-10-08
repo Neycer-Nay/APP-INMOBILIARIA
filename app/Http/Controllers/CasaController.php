@@ -11,16 +11,12 @@ class CasaController extends Controller
 {
     public function index()
     {
-        $imagenes = [
-            'recursos/img/scz2.jpg',
-            'recursos/img/scz3.jpg',
-            'recursos/img/scz4.jpg',
-            'recursos/img/scz5.jpg',
-            'recursos/img/scz6.jpg',
-            'recursos/img/scz7.jpg',
-        ];
-        $imagenFondo = $imagenes[array_rand($imagenes)];
-        return view('modulos.inicio.inicio', compact('imagenFondo'));
+        $casas = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            },
+        ])->get();
+        return view('Admin.casas.index', compact('casas'));
     }
 
     public function create()
