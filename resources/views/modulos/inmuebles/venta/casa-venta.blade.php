@@ -22,7 +22,7 @@
                         class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">{{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
-                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->categoria) }} EN
+                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->categoria)) }} EN
                         {{ mb_strtoupper($casa->tipo) }}
                     </h3>
                     <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
@@ -57,6 +57,10 @@
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-store mr-1 text-gray-600"></i>
+                            {{ $casa->tiendas }} Tiendas
+                        </div>
                         <div class="flex items-center gap-1">
                             <i class="fas fa-bed mr-1 text-gray-600"></i>
                             {{ $casa->habitaciones }} Hab.

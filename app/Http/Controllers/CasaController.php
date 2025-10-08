@@ -30,19 +30,21 @@ class CasaController extends Controller
             'codigo' => 'required|integer|unique:casas,codigo',
             'tipo' => 'required|in:venta,alquiler,anticretico,traspaso',
             'zona' => 'required|in:norte,sur,este,oeste,centro',
-            'categoria' => 'required|in:casa,departamento,comercial,quinta,terreno',
+            'categoria' => 'required|in:casa,departamento,casa_comercial,quinta,terreno',
             'superficieTerreno' => 'required|numeric|min:0',
             'superficieConstruida' => 'required|numeric|min:0',
             'precio' => 'required|numeric|min:0',
             'direccion' => 'required|string|max:255',
             'ciudad' => 'required|string|max:100',
             'descripcion' => 'required|string',
+            'tiendas' => 'nullable|integer|min:0',
             'habitaciones' => 'nullable|integer|min:0',
             'banos' => 'nullable|integer|min:0',
             'garajes' => 'nullable|integer|min:0',
             'plantas' => 'nullable|integer|min:1',
             'estado' => 'nullable|in:disponible,vendido,alquilado',
             'caracteristicas' => 'nullable|string',
+            'caracteristicasExternas' => 'nullable|string',
             'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:8048'
         ]);
 
@@ -50,6 +52,10 @@ class CasaController extends Controller
         $caracteristicas = [];
         if (!empty($validatedData['caracteristicas'])) {
             $caracteristicas = array_map('trim', explode(',', $validatedData['caracteristicas']));
+        }
+        $caracteristicasExternas = [];
+        if (!empty($validatedData['caracteristicasExternas'])) {
+            $caracteristicasExternas = array_map('trim', explode(',', $validatedData['caracteristicasExternas']));
         }
 
         // Crear la casa
@@ -64,12 +70,14 @@ class CasaController extends Controller
             'direccion' => $validatedData['direccion'],
             'ciudad' => $validatedData['ciudad'],
             'descripcion' => $validatedData['descripcion'],
+            'tiendas' => $validatedData['tiendas'] ?? 0,
             'habitaciones' => $validatedData['habitaciones'] ?? 0,
             'banos' => $validatedData['banos'] ?? 0,
             'garajes' => $validatedData['garajes'] ?? 0,
             'plantas' => $validatedData['plantas'] ?? 1,
             'estado' => $validatedData['estado'] ?? 'disponible',
             'caracteristicas' => $caracteristicas,
+            'caracteristicasExternas' => $caracteristicasExternas,
         ]);
 
         // Guardar fotos

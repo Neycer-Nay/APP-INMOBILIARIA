@@ -29,7 +29,8 @@
             <div class=" rounded-lg  p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-bold text-[#404656] mb-2">
-                        {{ mb_strtoupper($casa->categoria) }} EN {{ mb_strtoupper($casa->tipo) }}
+                        {{ mb_strtoupper(str_replace('_', ' ', $casa->categoria)) }} EN
+                        {{ mb_strtoupper($casa->tipo) }}
                     </h2>
                     <p class="text-1xl font-bold text-[#404656] mb-2">
                         <i class="fas fa-map-marker-alt mr-1 text-gray-600"></i>
@@ -49,7 +50,12 @@
             <!-- Tarjeta: Detalles -->
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="font-bold text-lg mb-4 text-[#404656]">Detalles</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-store mr-2 text-[#404656]"></i>
+                        <span class="font-semibold text-[#404656]">Tiendas:</span>
+                        <span class="ml-1">{{ $casa->tiendas }}</span>
+                    </div>
                     <div class="flex items-center">
                         <i class="fas fa-bed mr-2 text-[#404656]"></i>
                         <span class="font-semibold text-[#404656]">Habitaciones:</span>
@@ -65,8 +71,7 @@
                         <span class="font-semibold text-[#404656]">Garajes:</span>
                         <span class="ml-1">{{ $casa->garajes }}</span>
                     </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
                     <div class="flex items-center">
                         <i class="fas fa-layer-group mr-2 text-[#404656]"></i>
                         <span class="font-semibold text-[#404656]">Plantas:</span>
@@ -94,12 +99,29 @@
             <!-- Tarjeta: Características interiores -->
             @if(!empty($casa->caracteristicas))
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h3 class="font-bold text-lg mb-2 text-[#404656]">Características - Interiror</h3>
-                    <ul class="list-disc list-inside text-gray-700">
+                    <h3 class="font-bold text-lg mb-2 text-[#404656]">Características - Interior</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach($casa->caracteristicas as $caracteristica)
-                            <li>{{ ucfirst($caracteristica) }}</li>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                            </div>
                         @endforeach
-                    </ul>
+                    </div>
+                </div>
+            @endif
+
+            @if(!empty($casa->caracteristicasExternas))
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-2 text-[#404656]">Características - Exteriores</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        @foreach($casa->caracteristicasExternas as $caracteristica)
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @endif
 
@@ -174,7 +196,7 @@
             });
         });
     </script>
-    @endpush
+@endpush
 @push('scripts')
     <script>
         let modalSwiper;

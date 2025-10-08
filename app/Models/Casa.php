@@ -17,16 +17,19 @@ class Casa extends Model
         'direccion',
         'ciudad',
         'descripcion',
+        'tiendas',
         'habitaciones',
         'banos',
         'garajes',
         'plantas',
         'estado',
-        'caracteristicas'
+        'caracteristicas',
+        'caracteristicasExternas'
     ];
 
     protected $casts = [
         'caracteristicas' => 'array',
+        'caracteristicasExternas' => 'array',
     ];
 
     public function fotos()

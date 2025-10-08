@@ -48,7 +48,7 @@
                     <option value="">Categoría</option>
                     <option value="casa">Casa</option>
                     <option value="departamento">Departamento</option>
-                    <option value="comercial">Comercial</option>
+                    <option value="casa_comercial">Casa Comercial</option>
                     <option value="quinta">Quinta</option>
                     <option value="terreno">Terreno</option>
                 </select>
@@ -76,6 +76,10 @@
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Descripción</label>
                 <textarea name="descripcion" rows="2" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"></textarea>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-semibold mb-2">Tiendas</label>
+                <input type="number" name="tiendas" min="0" class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Habitaciones</label>
