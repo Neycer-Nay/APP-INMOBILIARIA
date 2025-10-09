@@ -11,16 +11,12 @@ class CasaController extends Controller
 {
     public function index()
     {
-        $imagenes = [
-            'recursos/img/scz2.jpg',
-            'recursos/img/scz3.jpg',
-            'recursos/img/scz4.jpg',
-            'recursos/img/scz5.jpg',
-            'recursos/img/scz6.jpg',
-            'recursos/img/scz7.jpg',
-        ];
-        $imagenFondo = $imagenes[array_rand($imagenes)];
-        return view('modulos.inicio.inicio', compact('imagenFondo'));
+        $casas = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            },
+        ])->get();
+        return view('Admin.casas.index', compact('casas'));
     }
 
     public function create()
@@ -31,22 +27,26 @@ class CasaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'codigo' => 'required|integer|unique:casas,codigo',
+            'codigo' => 'required|string|unique:casas,codigo',
+            'titulo' => 'required|string|max:255',
             'tipo' => 'required|in:venta,alquiler,anticretico,traspaso',
             'zona' => 'required|in:norte,sur,este,oeste,centro',
-            'categoria' => 'required|in:casa,departamento,comercial,quinta,terreno',
+            'categoria' => 'required|in:casa,departamento,casa_comercial,quinta,terreno',
             'superficieTerreno' => 'required|numeric|min:0',
             'superficieConstruida' => 'required|numeric|min:0',
             'precio' => 'required|numeric|min:0',
             'direccion' => 'required|string|max:255',
             'ciudad' => 'required|string|max:100',
             'descripcion' => 'required|string',
+            'tiendas' => 'nullable|integer|min:0',
             'habitaciones' => 'nullable|integer|min:0',
             'banos' => 'nullable|integer|min:0',
             'garajes' => 'nullable|integer|min:0',
             'plantas' => 'nullable|integer|min:1',
             'estado' => 'nullable|in:disponible,vendido,alquilado',
             'caracteristicas' => 'nullable|string',
+            'caracteristicasExternas' => 'nullable|string',
+            'caracteristicasServicios' => 'nullable|string',
             'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:8048'
         ]);
 
@@ -55,10 +55,20 @@ class CasaController extends Controller
         if (!empty($validatedData['caracteristicas'])) {
             $caracteristicas = array_map('trim', explode(',', $validatedData['caracteristicas']));
         }
+        $caracteristicasExternas = [];
+        if (!empty($validatedData['caracteristicasExternas'])) {
+            $caracteristicasExternas = array_map('trim', explode(',', $validatedData['caracteristicasExternas']));
+        }
+
+        $caracteristicasServicios = [];
+        if (!empty($validatedData['caracteristicasServicios'])) {
+            $caracteristicasServicios = array_map('trim', explode(',', $validatedData['caracteristicasServicios']));
+        }   
 
         // Crear la casa
         $casa = Casa::create([
             'codigo' => $validatedData['codigo'],
+            'titulo' => $validatedData['titulo'],
             'tipo' => $validatedData['tipo'],
             'zona' => $validatedData['zona'],
             'categoria' => $validatedData['categoria'],
@@ -68,12 +78,15 @@ class CasaController extends Controller
             'direccion' => $validatedData['direccion'],
             'ciudad' => $validatedData['ciudad'],
             'descripcion' => $validatedData['descripcion'],
+            'tiendas' => $validatedData['tiendas'] ?? 0,
             'habitaciones' => $validatedData['habitaciones'] ?? 0,
             'banos' => $validatedData['banos'] ?? 0,
             'garajes' => $validatedData['garajes'] ?? 0,
             'plantas' => $validatedData['plantas'] ?? 1,
             'estado' => $validatedData['estado'] ?? 'disponible',
             'caracteristicas' => $caracteristicas,
+            'caracteristicasExternas' => $caracteristicasExternas,
+            'caracteristicasServicios' => $caracteristicasServicios,
         ]);
 
         // Guardar fotos

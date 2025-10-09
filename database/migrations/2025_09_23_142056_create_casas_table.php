@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('casas', function (Blueprint $table) {
             $table->id();
-            $table->integer('codigo')->unique();
+            $table->string('codigo')->unique();
+            $table->string('titulo');
             $table->enum('tipo', ['venta', 'alquiler', 'anticretico', 'traspaso']);
             $table->enum('zona', ['norte', 'sur', 'este', 'oeste', 'centro']);
-            $table->enum('categoria', ['casa', 'departamento', 'comercial', 'quinta', 'terreno']);
+            $table->enum('categoria', ['casa', 'departamento', 'casa_comercial', 'quinta', 'terreno']);
             $table->float('superficieTerreno');
             $table->float('superficieConstruida');
             $table->decimal('precio', 12, 2);
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('ciudad');
             $table->text('descripcion');
             //Caracteristicas Principales
+            $table->integer('tiendas')->default(0);
             $table->integer('habitaciones')->default(0);
             $table->integer('banos')->default(0);
             $table->integer('garajes')->default(0);
@@ -31,6 +33,8 @@ return new class extends Migration
 
             $table->string('estado')->default('disponible'); // disponible, vendido, alquilado, etc.
             $table->json('caracteristicas')->nullable(); // piscina, jardin, seguridad, etc.
+            $table->json('caracteristicasExternas')->nullable(); // colegios, parques, mercados, transporte, etc.
+            $table->json('caracteristicasServicios')->nullable(); // agua, luz, internet, etc.
             $table->timestamps();
         });
     }

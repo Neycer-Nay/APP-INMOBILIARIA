@@ -8,6 +8,7 @@ class Casa extends Model
 {
     protected $fillable = [
         'codigo',
+        'titulo',
         'tipo',
         'zona',
         'categoria',
@@ -17,16 +18,21 @@ class Casa extends Model
         'direccion',
         'ciudad',
         'descripcion',
+        'tiendas',
         'habitaciones',
         'banos',
         'garajes',
         'plantas',
         'estado',
-        'caracteristicas'
+        'caracteristicas',
+        'caracteristicasExternas',
+        'caracteristicasServicios'
     ];
 
     protected $casts = [
         'caracteristicas' => 'array',
+        'caracteristicasExternas' => 'array',
+        'caracteristicasServicios' => 'array',
     ];
 
     public function fotos()
