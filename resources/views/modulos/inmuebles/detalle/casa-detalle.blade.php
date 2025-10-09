@@ -29,7 +29,7 @@
             <div class=" rounded-lg  p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-bold text-[#404656] mb-2">
-                        {{ mb_strtoupper(str_replace('_', ' ', $casa->categoria)) }} EN
+                        {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }} EN
                         {{ mb_strtoupper($casa->tipo) }}
                     </h2>
                     <p class="text-1xl font-bold text-[#404656] mb-2">
@@ -125,6 +125,21 @@
                 </div>
             @endif
 
+            @if (!empty($casa->caracteristicasServicios))
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-2 text-[#404656]">Características - Servicios</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        @foreach ($casa->caracteristicasServicios as $caracteristica)
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            
+            @endif
+
         </div>
 
         <!-- Columna derecha: Tarjeta de requerimientos -->
@@ -145,7 +160,7 @@
     <div id="modalFotos"
         class="fixed inset-0 bg-black/80  items-center justify-center z-50 hidden  transition-opacity duration-300">
         <button id="cerrarModal" class="absolute top-2 right-2 text-white text-4xl cursor-pointer">&times;</button>
-        <div id="modalContent" class="bg-white rounded-lg shadow-lg p-4 relative max-w-5xl w-full">
+        <div id="modalContent" class=" rounded-lg shadow-lg p-4 relative max-w-5xl w-full">
             <div class="swiper modalSwiper">
                 <div class="swiper-wrapper">
                     @foreach($casa->fotos as $foto)

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('casas', function (Blueprint $table) {
             $table->id();
             $table->string('codigo')->unique();
+            $table->string('titulo');
             $table->enum('tipo', ['venta', 'alquiler', 'anticretico', 'traspaso']);
             $table->enum('zona', ['norte', 'sur', 'este', 'oeste', 'centro']);
             $table->enum('categoria', ['casa', 'departamento', 'casa_comercial', 'quinta', 'terreno']);
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->string('estado')->default('disponible'); // disponible, vendido, alquilado, etc.
             $table->json('caracteristicas')->nullable(); // piscina, jardin, seguridad, etc.
             $table->json('caracteristicasExternas')->nullable(); // colegios, parques, mercados, transporte, etc.
+            $table->json('caracteristicasServicios')->nullable(); // agua, luz, internet, etc.
             $table->timestamps();
         });
     }

@@ -27,7 +27,8 @@ class CasaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'codigo' => 'required|integer|unique:casas,codigo',
+            'codigo' => 'required|string|unique:casas,codigo',
+            'titulo' => 'required|string|max:255',
             'tipo' => 'required|in:venta,alquiler,anticretico,traspaso',
             'zona' => 'required|in:norte,sur,este,oeste,centro',
             'categoria' => 'required|in:casa,departamento,casa_comercial,quinta,terreno',
@@ -45,6 +46,7 @@ class CasaController extends Controller
             'estado' => 'nullable|in:disponible,vendido,alquilado',
             'caracteristicas' => 'nullable|string',
             'caracteristicasExternas' => 'nullable|string',
+            'caracteristicasServicios' => 'nullable|string',
             'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:8048'
         ]);
 
@@ -58,9 +60,15 @@ class CasaController extends Controller
             $caracteristicasExternas = array_map('trim', explode(',', $validatedData['caracteristicasExternas']));
         }
 
+        $caracteristicasServicios = [];
+        if (!empty($validatedData['caracteristicasServicios'])) {
+            $caracteristicasServicios = array_map('trim', explode(',', $validatedData['caracteristicasServicios']));
+        }   
+
         // Crear la casa
         $casa = Casa::create([
             'codigo' => $validatedData['codigo'],
+            'titulo' => $validatedData['titulo'],
             'tipo' => $validatedData['tipo'],
             'zona' => $validatedData['zona'],
             'categoria' => $validatedData['categoria'],
@@ -78,6 +86,7 @@ class CasaController extends Controller
             'estado' => $validatedData['estado'] ?? 'disponible',
             'caracteristicas' => $caracteristicas,
             'caracteristicasExternas' => $caracteristicasExternas,
+            'caracteristicasServicios' => $caracteristicasServicios,
         ]);
 
         // Guardar fotos

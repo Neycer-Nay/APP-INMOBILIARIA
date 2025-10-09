@@ -2,7 +2,10 @@
 @section('contenido')
 
     <div class=" min-h-screen py-8 ">
-        <h3 class="text-3xl font-bold text-center mb-8 mt-2 text-[#404656] font-gotham-black tracking-widest">Inmuebles En Venta</h3>
+        <h3 class="text-3xl text-center mb-0 mt-2 text-[#404656] titulo-poppins">Inmuebles En Venta</h3>
+        <span class="block text-base text-gray-500 text-center mb-8">
+            ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles para venta!
+        </span>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             @foreach($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
@@ -22,7 +25,7 @@
                         class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">{{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
-                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->categoria)) }} EN
+                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }} EN
                         {{ mb_strtoupper($casa->tipo) }}
                     </h3>
                     <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
@@ -70,7 +73,7 @@
                             {{ $casa->banos }} Baño
                         </div>
                         <div class="flex items-center gap-1">
-                            <i class="fas fa-ruler mr-1 text-gray-600"></i>
+                            <i class="fas fa-ruler-combined mr-2 text-[#404656]"></i>
                             {{ $casa->superficieConstruida }} mt2
                         </div>
                     </div>
@@ -80,7 +83,7 @@
     </div>
 @endsection
 <style>
-    .font-gotham-black {
-    font-family: 'Gotham Black', Arial, sans-serif;
+    .titulo-poppins {
+    font-family: 'Poppins', Arial, sans-serif;
 }
 </style>
