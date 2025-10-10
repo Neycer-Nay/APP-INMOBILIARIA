@@ -9,21 +9,21 @@
             <h1 class="text-6xl font-bold titulo-poppins mb-6">Encuentra El Hogar De Tus Sueños</h1>
             <!-- Buscador de inmuebles -->
             <form
-                class="bg-white bg-opacity-80 rounded-xl p-4 flex flex-row justify-between items-center gap-6 w-full max-w-4xl mx-auto shadow-sm"
-                method="GET" action="">
+                class="bg-white bg-opacity-80 rounded-xl font-bold p-4 flex flex-row justify-between items-center gap-6 w-full max-w-4xl mx-auto shadow-sm"
+                method="GET" action="{{ route('casas.buscar') }}">
                 <select
                     class="bg-transparent border-b border-[#00bfae] focus:border-[#404656] px-2 py-1 outline-none flex-1 text-gray-700"
-                    name="tipo_operacion" required>
+                    name="tipo_operacion" >
                     <option value="">Operación</option>
-                    <option value="comprar">Comprar</option>
-                    <option value="alquilar">Alquilar</option>
+                    <option value="venta">Comprar</option>
+                    <option value="alquiler">Alquilar</option>
                     <option value="anticretico">Anticrético</option>
                     <option value="traspaso">Traspaso</option>
                 </select>
                 <select
                     class="bg-transparent border-b border-[#00bfae] focus:border-[#404656] px-2 py-1 outline-none flex-1 text-gray-700"
-                    id="tipo_inmueble" name="tipo_inmueble" required>
-                    <option value="">Inmueble</option>
+                    id="tipo_inmueble" name="tipo_inmueble" >
+                    <option value="">Tipo de Propiedad</option>
                     <option value="casa">Casa</option>
                     <option value="departamento">Departamento</option>
                     <option value="casa_comercial">Casa Comercial</option>
@@ -32,7 +32,7 @@
                 </select>
                 <select
                     class="bg-transparent border-b border-[#00bfae] focus:border-[#404656] px-2 py-1 outline-none flex-1 text-gray-700"
-                    id="zona" name="zona" required>
+                    id="zona" name="zona" >
                     <option value="">Zona</option>
                     <option value="norte">Norte</option>
                     <option value="centro">Centro</option>

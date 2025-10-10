@@ -9,6 +9,46 @@ use Illuminate\Support\Facades\Storage;
 
 class CasaController extends Controller
 {
+
+    public function buscar(Request $request)
+    {
+        $query = Casa::query();
+
+        if ($request->filled('tipo_operacion')) {
+            $query->where('tipo', $request->tipo_operacion);
+        }
+        if ($request->filled('tipo_inmueble')) {
+            $query->where('categoria', $request->tipo_inmueble);
+        }
+        if ($request->filled('zona')) {
+            $query->where('zona', $request->zona);
+        }
+
+        $casas = $query->with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->get();
+
+        return view('modulos.inmuebles.buscador.buscador', compact('casas'));
+    }
+    public function inicio()
+    {
+
+        $imagenes = [
+            'recursos/img/scz2.jpg',
+            'recursos/img/scz3.jpg',
+            'recursos/img/scz4.jpg',
+            'recursos/img/scz5.jpg',
+            'recursos/img/scz6.jpg',
+            'recursos/img/scz7.jpg',
+        ];
+        $imagenFondo = $imagenes[array_rand($imagenes)];
+        $operaciones = ['venta' => 'Comprar', 'alquiler' => 'Alquilar', 'anticretico' => 'Anticrético', 'traspaso' => 'Traspaso'];
+        $tiposInmueble = ['casa' => 'Casa', 'departamento' => 'Departamento', 'casa_comercial' => 'Casa Comercial', 'quinta' => 'Quinta', 'terreno' => 'Terreno'];
+        $zonas = ['norte' => 'Norte', 'centro' => 'Centro', 'sur' => 'Sur', 'este' => 'Este', 'oeste' => 'Oeste'];
+        return view('modulos.inicio.inicio', compact('imagenFondo', 'operaciones', 'tiposInmueble', 'zonas'));
+    }
     public function index()
     {
         $casas = Casa::with([
@@ -63,7 +103,7 @@ class CasaController extends Controller
         $caracteristicasServicios = [];
         if (!empty($validatedData['caracteristicasServicios'])) {
             $caracteristicasServicios = array_map('trim', explode(',', $validatedData['caracteristicasServicios']));
-        }   
+        }
 
         // Crear la casa
         $casa = Casa::create([
@@ -156,7 +196,7 @@ class CasaController extends Controller
         ])->where('estado', 'disponible')->where('tipo', 'anticretico')->get();
         return view('modulos.inmuebles.anticretico.casa-anticretico', compact('casas'));
     }
-    
+
 
     public function casasTraspaso()
     {
