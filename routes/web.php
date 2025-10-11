@@ -15,7 +15,8 @@ Route::get('/nosotros', function () {
 Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
 Route::get('/casas/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
 Route::get('/casas/index', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
-
+Route::get('/casas/{id}/edit', [App\Http\Controllers\CasaController::class, 'edit'])->name('casas.edit');
+Route::put('/casas/{id}', [App\Http\Controllers\CasaController::class, 'update'])->name('casas.update');
 
 
 Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');

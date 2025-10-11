@@ -22,7 +22,7 @@
                     <!-- Etiqueta tipo -->
 
                     <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">{{ ucfirst($casa->tipo) }}</span>
+                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 font-bold rounded mb-2">En {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
                     <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }} EN
@@ -56,7 +56,7 @@
 
                     <!-- Precio -->
                     <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us <span
-                            class="text-base font-normal text-gray-500">Tipo de cambio 7Bs</span></div>
+                            class="text-base font-normal text-gray-500">T.C. 7 Bs</span></div>
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
