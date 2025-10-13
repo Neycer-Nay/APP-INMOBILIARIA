@@ -2,13 +2,14 @@
 
 @section('contenido')
     <div class=" min-h-screen py-8 ">
+        @if($casas->count())
         <h3 class="text-3xl text-center mb-0 mt-2 text-[#404656] titulo-poppins">
-            Se {{ $casas->count() === 1 ? 'Encontró' : 'Encontraron' }}
-            {{ $casas->count() }} {{ Str::plural('Inmueble', $casas->count()) }} en la búsqueda
+            Hemos {{ $casas->count() === 1 ? 'encontrado' : 'encontrado' }} {{ $casas->count() }} {{ Str::plural('inmueble', $casas->count()) }} para ti
         </h3>
         <span class="block text-base text-gray-500 text-center mb-8">
-            ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles!
+            Encuentra el espacio perfecto para ti y tu familia entre nuestras opciones disponibles.
         </span>
+    @endif
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             @forelse($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
@@ -25,7 +26,7 @@
                     <!-- Etiqueta tipo -->
 
                     <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">{{ ucfirst($casa->tipo) }}</span>
+                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">En {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
                     <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }}

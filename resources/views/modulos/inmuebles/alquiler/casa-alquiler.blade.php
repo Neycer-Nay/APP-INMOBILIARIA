@@ -21,15 +21,16 @@
                     </a>
                     <!-- Etiqueta tipo -->
 
-                    <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded mb-2">En {{ ucfirst($casa->tipo) }}</span>
+                    <span class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded mb-2">En
+                        {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
-                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
-                        {{ mb_strtoupper($casa->tipo) }}
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
-
+                    <a href="{{ route('casas.show', $casa->id) }}">
+                        <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
+                            {{ mb_strtoupper($casa->tipo) }}
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
+                    </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
                         <div class="flex items-center gap-2">

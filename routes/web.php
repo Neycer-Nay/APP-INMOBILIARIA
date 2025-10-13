@@ -17,6 +17,7 @@ Route::get('/casas/create', [App\Http\Controllers\CasaController::class, 'create
 Route::get('/casas/index', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
 Route::get('/casas/{id}/edit', [App\Http\Controllers\CasaController::class, 'edit'])->name('casas.edit');
 Route::put('/casas/{id}', [App\Http\Controllers\CasaController::class, 'update'])->name('casas.update');
+Route::delete('/casas/{id}', [App\Http\Controllers\CasaController::class, 'destroy'])->name('casas.destroy');
 
 
 Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');

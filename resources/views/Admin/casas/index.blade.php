@@ -53,7 +53,7 @@
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="#" method="POST" style="display:inline;">
+                                <form action="{{ route('casas.destroy', $casa->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -75,4 +75,17 @@
             </table>
         </div>
     </div>
+    
 @endsection
+@push('scripts')
+    @if(session('success'))
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            toastr.error("{{ session('error') }}");
+        </script>
+    @endif
+@endpush

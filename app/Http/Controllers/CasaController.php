@@ -47,7 +47,13 @@ class CasaController extends Controller
         $operaciones = ['venta' => 'Comprar', 'alquiler' => 'Alquilar', 'anticretico' => 'Anticrético', 'traspaso' => 'Traspaso'];
         $tiposInmueble = ['casa' => 'Casa', 'departamento' => 'Departamento', 'casa_comercial' => 'Casa Comercial', 'quinta' => 'Quinta', 'terreno' => 'Terreno'];
         $zonas = ['norte' => 'Norte', 'centro' => 'Centro', 'sur' => 'Sur', 'este' => 'Este', 'oeste' => 'Oeste'];
-        return view('modulos.inicio.inicio', compact('imagenFondo', 'operaciones', 'tiposInmueble', 'zonas'));
+
+        $casasRecientes = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->orderBy('created_at', 'desc')->take(6)->get();
+        return view('modulos.inicio.inicio', compact('imagenFondo', 'operaciones', 'tiposInmueble', 'zonas', 'casasRecientes'));
     }
     public function index()
     {
@@ -55,7 +61,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             },
-        ])->get();
+        ])->orderBy('created_at', 'desc')->get();
         return view('Admin.casas.index', compact('casas'));
     }
 
@@ -220,9 +226,18 @@ class CasaController extends Controller
         return redirect()->route('casas.index')->with('success', 'Casa actualizada correctamente.');
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        // Lógica para eliminar una casa
+        $casa = Casa::findOrFail($id);
+
+        foreach ($casa->fotos as $foto){
+            Storage::disk('public')->delete($foto->ruta_imagen);
+            $foto->delete();
+        }
+
+        $casa->delete();
+        
+        return redirect()->route('casas.index')->with('success', 'Casa eliminada correctamente.');
     }
 
     public function casasAlquiler()
@@ -241,7 +256,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('tipo', 'venta')->whereIn('estado', ['disponible', 'vendido'])->get();
+        ])->where('tipo', 'venta')->whereIn('estado', ['disponible', 'vendido'])->orderBy('created_at', 'desc')->get();
         return view('modulos.inmuebles.venta.casa-venta', compact('casas'));
     }
 
@@ -251,7 +266,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('tipo', 'anticretico')->whereIn('estado', ['disponible', 'entregado'])->get();
+        ])->where('tipo', 'anticretico')->whereIn('estado', ['disponible', 'entregado'])->orderBy('created_at', 'desc')->get();
         return view('modulos.inmuebles.anticretico.casa-anticretico', compact('casas'));
     }
 
@@ -262,7 +277,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('estado', 'disponible')->whereIn('estado', ['disponible', 'vendido'])->get();
+        ])->where('tipo', 'traspaso')->whereIn('estado', ['disponible', 'vendido'])->orderBy('created_at', 'desc')->get();
         return view('modulos.inmuebles.traspaso.casa-traspaso', compact('casas'));
     }
 }
