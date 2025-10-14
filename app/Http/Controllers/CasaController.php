@@ -14,6 +14,10 @@ class CasaController extends Controller
     {
         $query = Casa::query();
 
+        if ($request->filled('codigo')) {
+            $query->where('codigo', 'like', '%' . $request->codigo . '%');
+        } 
+
         if ($request->filled('tipo_operacion')) {
             $query->where('tipo', $request->tipo_operacion);
         }
@@ -53,7 +57,14 @@ class CasaController extends Controller
                 $q->orderByDesc('foto_principal');
             }
         ])->where('estado', 'disponible')->orderBy('created_at', 'desc')->take(6)->get();
-        return view('modulos.inicio.inicio', compact('imagenFondo', 'operaciones', 'tiposInmueble', 'zonas', 'casasRecientes'));
+
+        $casasTraspasoRecientes = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('tipo', 'traspaso')->where('estado', 'disponible')->orderBy('created_at', 'desc')->take(6)->get();
+
+        return view('modulos.inicio.inicio', compact('imagenFondo', 'operaciones', 'tiposInmueble', 'zonas', 'casasRecientes', 'casasTraspasoRecientes'));
     }
     public function index()
     {
