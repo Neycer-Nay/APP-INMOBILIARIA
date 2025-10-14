@@ -9,13 +9,59 @@ use Illuminate\Support\Facades\Storage;
 
 class CasaController extends Controller
 {
+
+    public function buscar(Request $request)
+    {
+        $query = Casa::query();
+
+        if ($request->filled('tipo_operacion')) {
+            $query->where('tipo', $request->tipo_operacion);
+        }
+        if ($request->filled('tipo_inmueble')) {
+            $query->where('categoria', $request->tipo_inmueble);
+        }
+        if ($request->filled('zona')) {
+            $query->where('zona', $request->zona);
+        }
+
+        $casas = $query->with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->get();
+
+        return view('modulos.inmuebles.buscador.buscador', compact('casas'));
+    }
+    public function inicio()
+    {
+
+        $imagenes = [
+            'recursos/img/scz2.jpg',
+            'recursos/img/scz3.jpg',
+            'recursos/img/scz4.jpg',
+            'recursos/img/scz5.jpg',
+            'recursos/img/scz6.jpg',
+            'recursos/img/scz7.jpg',
+        ];
+        $imagenFondo = $imagenes[array_rand($imagenes)];
+        $operaciones = ['venta' => 'Comprar', 'alquiler' => 'Alquilar', 'anticretico' => 'Anticrético', 'traspaso' => 'Traspaso'];
+        $tiposInmueble = ['casa' => 'Casa', 'departamento' => 'Departamento', 'casa_comercial' => 'Casa Comercial', 'quinta' => 'Quinta', 'terreno' => 'Terreno'];
+        $zonas = ['norte' => 'Norte', 'centro' => 'Centro', 'sur' => 'Sur', 'este' => 'Este', 'oeste' => 'Oeste'];
+
+        $casasRecientes = Casa::with([
+            'fotos' => function ($q) {
+                $q->orderByDesc('foto_principal');
+            }
+        ])->where('estado', 'disponible')->orderBy('created_at', 'desc')->take(6)->get();
+        return view('modulos.inicio.inicio', compact('imagenFondo', 'operaciones', 'tiposInmueble', 'zonas', 'casasRecientes'));
+    }
     public function index()
     {
         $casas = Casa::with([
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             },
-        ])->get();
+        ])->orderBy('created_at', 'desc')->get();
         return view('Admin.casas.index', compact('casas'));
     }
 
@@ -43,7 +89,7 @@ class CasaController extends Controller
             'banos' => 'nullable|integer|min:0',
             'garajes' => 'nullable|integer|min:0',
             'plantas' => 'nullable|integer|min:1',
-            'estado' => 'nullable|in:disponible,vendido,alquilado',
+            'estado' => 'nullable|in:disponible,vendido,alquilado,entregado',
             'caracteristicas' => 'nullable|string',
             'caracteristicasExternas' => 'nullable|string',
             'caracteristicasServicios' => 'nullable|string',
@@ -63,7 +109,7 @@ class CasaController extends Controller
         $caracteristicasServicios = [];
         if (!empty($validatedData['caracteristicasServicios'])) {
             $caracteristicasServicios = array_map('trim', explode(',', $validatedData['caracteristicasServicios']));
-        }   
+        }
 
         // Crear la casa
         $casa = Casa::create([
@@ -112,19 +158,86 @@ class CasaController extends Controller
     }
 
 
-    public function edit(Request $request)
+    public function edit($id)
     {
-        // Lógica para mostrar el formulario para editar una casa
+        $casa = Casa::with('fotos')->findOrFail($id);
+        return view('Admin.casas.edit', compact('casa'));
     }
 
-    public function update(Request $request)
+
+    public function update(Request $request, $id)
     {
-        // Lógica para actualizar una casa
+        $validatedData = $request->validate([
+            'codigo' => 'required|string|unique:casas,codigo,' . $id,
+            'titulo' => 'required|string|max:255',
+            'tipo' => 'required|in:venta,alquiler,anticretico,traspaso',
+            'zona' => 'required|in:norte,sur,este,oeste,centro',
+            'categoria' => 'required|in:casa,departamento,casa_comercial,quinta,terreno',
+            'superficieTerreno' => 'required|numeric|min:0',
+            'superficieConstruida' => 'required|numeric|min:0',
+            'precio' => 'required|numeric|min:0',
+            'direccion' => 'required|string|max:255',
+            'ciudad' => 'required|string|max:100',
+            'descripcion' => 'required|string',
+            'tiendas' => 'nullable|integer|min:0',
+            'habitaciones' => 'nullable|integer|min:0',
+            'banos' => 'nullable|integer|min:0',
+            'garajes' => 'nullable|integer|min:0',
+            'plantas' => 'nullable|integer|min:1',
+            'estado' => 'nullable|in:disponible,vendido,alquilado,entregado',
+            'caracteristicas' => 'nullable|string',
+            'caracteristicasExternas' => 'nullable|string',
+            'caracteristicasServicios' => 'nullable|string',
+            // Puedes agregar validación para fotos si permites editar imágenes
+        ]);
+
+        $casa = Casa::findOrFail($id);
+
+        // Procesar características
+        $caracteristicas = !empty($validatedData['caracteristicas']) ? array_map('trim', explode(',', $validatedData['caracteristicas'])) : [];
+        $caracteristicasExternas = !empty($validatedData['caracteristicasExternas']) ? array_map('trim', explode(',', $validatedData['caracteristicasExternas'])) : [];
+        $caracteristicasServicios = !empty($validatedData['caracteristicasServicios']) ? array_map('trim', explode(',', $validatedData['caracteristicasServicios'])) : [];
+
+        $casa->update([
+            'codigo' => $validatedData['codigo'],
+            'titulo' => $validatedData['titulo'],
+            'tipo' => $validatedData['tipo'],
+            'zona' => $validatedData['zona'],
+            'categoria' => $validatedData['categoria'],
+            'superficieTerreno' => $validatedData['superficieTerreno'],
+            'superficieConstruida' => $validatedData['superficieConstruida'],
+            'precio' => $validatedData['precio'],
+            'direccion' => $validatedData['direccion'],
+            'ciudad' => $validatedData['ciudad'],
+            'descripcion' => $validatedData['descripcion'],
+            'tiendas' => $validatedData['tiendas'] ?? 0,
+            'habitaciones' => $validatedData['habitaciones'] ?? 0,
+            'banos' => $validatedData['banos'] ?? 0,
+            'garajes' => $validatedData['garajes'] ?? 0,
+            'plantas' => $validatedData['plantas'] ?? 1,
+            'estado' => $validatedData['estado'] ?? 'disponible',
+            'caracteristicas' => $caracteristicas,
+            'caracteristicasExternas' => $caracteristicasExternas,
+            'caracteristicasServicios' => $caracteristicasServicios,
+        ]);
+
+        // Si quieres permitir editar fotos, agrega lógica aquí
+
+        return redirect()->route('casas.index')->with('success', 'Casa actualizada correctamente.');
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        // Lógica para eliminar una casa
+        $casa = Casa::findOrFail($id);
+
+        foreach ($casa->fotos as $foto){
+            Storage::disk('public')->delete($foto->ruta_imagen);
+            $foto->delete();
+        }
+
+        $casa->delete();
+        
+        return redirect()->route('casas.index')->with('success', 'Casa eliminada correctamente.');
     }
 
     public function casasAlquiler()
@@ -133,7 +246,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('estado', 'disponible')->where('tipo', 'alquiler')->get();
+        ])->where('tipo', 'alquiler')->whereIn('estado', ['disponible', 'alquilado'])->get();
         return view('modulos.inmuebles.alquiler.casa-alquiler', compact('casas'));
     }
 
@@ -143,7 +256,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('estado', 'disponible')->where('tipo', 'venta')->get();
+        ])->where('tipo', 'venta')->whereIn('estado', ['disponible', 'vendido'])->orderBy('created_at', 'desc')->get();
         return view('modulos.inmuebles.venta.casa-venta', compact('casas'));
     }
 
@@ -153,10 +266,10 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('estado', 'disponible')->where('tipo', 'anticretico')->get();
+        ])->where('tipo', 'anticretico')->whereIn('estado', ['disponible', 'entregado'])->orderBy('created_at', 'desc')->get();
         return view('modulos.inmuebles.anticretico.casa-anticretico', compact('casas'));
     }
-    
+
 
     public function casasTraspaso()
     {
@@ -164,7 +277,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('estado', 'disponible')->where('tipo', 'traspaso')->get();
+        ])->where('tipo', 'traspaso')->whereIn('estado', ['disponible', 'vendido'])->orderBy('created_at', 'desc')->get();
         return view('modulos.inmuebles.traspaso.casa-traspaso', compact('casas'));
     }
 }

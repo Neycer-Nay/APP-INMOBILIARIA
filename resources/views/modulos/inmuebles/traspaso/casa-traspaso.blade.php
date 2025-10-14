@@ -10,7 +10,7 @@
             @foreach($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                     <!-- Imagen principal -->
-                     <a href="{{ route('casas.show', $casa->id) }}">
+                    <a href="{{ route('casas.show', $casa->id) }}">
                     @if($casa->fotos->first())
                         <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
                             class="w-full h-68 object-cover rounded-lg mb-3">
@@ -20,16 +20,16 @@
                     @endif
                     </a>
                     <!-- Etiqueta tipo -->
-
+                    <a href="{{ route('casas.show', $casa->id) }}">
                     <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">{{ ucfirst($casa->tipo) }}</span>
+                        class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded mb-2">En {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
                     <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
                         {{ mb_strtoupper($casa->tipo) }}
                     </h3>
                     <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
-
+                    </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
                         <div class="flex items-center gap-2">

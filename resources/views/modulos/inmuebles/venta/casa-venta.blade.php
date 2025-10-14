@@ -10,31 +10,33 @@
             @foreach($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                     <!-- Imagen principal -->
-                     <a href="{{ route('casas.show', $casa->id) }}">
-                    @if($casa->fotos->first())
-                        <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
-                            class="w-full h-68 object-cover rounded-lg mb-3">
-                    @else
-                        <div class="w-full h-48 bg-gray-200 rounded-lg mb-3 flex items-center justify-center text-gray-400">Sin
-                            imagen</div>
-                    @endif
+                    <a href="{{ route('casas.show', $casa->id) }}">
+                        @if($casa->fotos->first())
+                            <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
+                                class="w-full h-68 object-cover rounded-lg mb-3">
+                        @else
+                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-3 flex items-center justify-center text-gray-400">Sin
+                                imagen</div>
+                        @endif
                     </a>
                     <!-- Etiqueta tipo -->
+                    <a href="{{ route('casas.show', $casa->id) }}">
+                        <span class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 font-bold rounded mb-2">En
+                            {{ ucfirst($casa->tipo) }}</span>
 
-                    <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">{{ ucfirst($casa->tipo) }}</span>
+                        <!-- Título y dirección -->
 
-                    <!-- Título y dirección -->
-                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }} EN
-                        {{ mb_strtoupper($casa->tipo) }}
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
-
+                        <h3 class="font-bold text-lg text-[#404656] mb-1">
+                            {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }} EN
+                            {{ mb_strtoupper($casa->tipo) }}
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
+                    </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
                         <div class="flex items-center gap-2">
-                            
-                        <span class="font-semibold text-[#404656]">Código:</span>
+
+                            <span class="font-semibold text-[#404656]">Código:</span>
                             <span>{{ $casa->codigo }}</span>
                         </div>
                         <div class="flex items-center gap-2">
@@ -55,8 +57,8 @@
                     </div>
 
                     <!-- Precio -->
-                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us <span
-                            class="text-base font-normal text-gray-500">Tipo de cambio 7Bs</span></div>
+                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us
+                        <span class="text-base font-normal text-gray-500">T.C. 7 Bs</span></div>
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
@@ -84,6 +86,6 @@
 @endsection
 <style>
     .titulo-poppins {
-    font-family: 'Poppins', Arial, sans-serif;
-}
+        font-family: 'Poppins', Arial, sans-serif;
+    }
 </style>

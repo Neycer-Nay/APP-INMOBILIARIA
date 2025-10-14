@@ -14,8 +14,7 @@
                         <th class="py-3 px-4 text-left">Dirección</th>
                         <th class="py-3 px-4 text-left">Código</th>
                         <th class="py-3 px-4 text-left">Precio</th>
-                        <th class="py-3 px-4 text-left">Habitaciones</th>
-                        <th class="py-3 px-4 text-left">Baños</th>
+                        
                         <th class="py-3 px-4 text-left">Estado</th>
                         <th class="py-3 px-4 text-left">Acciones</th>
                     </tr>
@@ -42,20 +41,19 @@
                                 {{ number_format($casa->precio, 0, ',', '.') }}
                                 {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}
                             </td>
-                            <td class="py-2 px-4">{{ $casa->habitaciones }}</td>
-                            <td class="py-2 px-4">{{ $casa->banos }}</td>
+                            
                             <td class="py-2 px-4">{{ $casa->estado }}</td>
                             <td class="py-2 px-4">
                                 <a href="{{ route('casas.show', $casa->id) }}"
                                     class="bg-[#404656] text-white py-1 px-3 rounded hover:bg-[#2c3240] text-sm" title="Ver detalles">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('casas.edit', $casa->id) }}"
                                     class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 text-sm"
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="#" method="POST" style="display:inline;">
+                                <form action="{{ route('casas.destroy', $casa->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -77,4 +75,17 @@
             </table>
         </div>
     </div>
+    
 @endsection
+@push('scripts')
+    @if(session('success'))
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            toastr.error("{{ session('error') }}");
+        </script>
+    @endif
+@endpush

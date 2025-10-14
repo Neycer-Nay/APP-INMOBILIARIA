@@ -1,13 +1,17 @@
 @extends('layouts.main')
-@section('contenido')
 
+@section('contenido')
     <div class=" min-h-screen py-8 ">
-        <h3 class="text-3xl text-center mb-0 mt-2 text-[#404656] titulo-poppins">Inmuebles En Alquiler</h3>
+        @if($casas->count())
+        <h3 class="text-3xl text-center mb-0 mt-2 text-[#404656] titulo-poppins">
+            Hemos {{ $casas->count() === 1 ? 'encontrado' : 'encontrado' }} {{ $casas->count() }} {{ Str::plural('inmueble', $casas->count()) }} para ti
+        </h3>
         <span class="block text-base text-gray-500 text-center mb-8">
-            ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles para alquiler!
+            Encuentra el espacio perfecto para ti y tu familia entre nuestras opciones disponibles.
         </span>
+    @endif
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-            @foreach($casas as $casa)
+            @forelse($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                     <!-- Imagen principal -->
                     <a href="{{ route('casas.show', $casa->id) }}">
@@ -21,16 +25,16 @@
                     </a>
                     <!-- Etiqueta tipo -->
 
-                    <span class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded mb-2">En
-                        {{ ucfirst($casa->tipo) }}</span>
+                    <span
+                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">En {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
-                    <a href="{{ route('casas.show', $casa->id) }}">
-                        <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
-                            {{ mb_strtoupper($casa->tipo) }}
-                        </h3>
-                        <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
-                    </a>
+                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }}
+                        EN
+                        {{ mb_strtoupper($casa->tipo) }}
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
+
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
                         <div class="flex items-center gap-2">
@@ -56,8 +60,9 @@
                     </div>
 
                     <!-- Precio -->
-                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} Bs <span
-                            class="text-base font-normal text-gray-500">/Mensual</span></div>
+                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }}
+                        {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}<span class="text-base font-normal text-gray-500"></span>
+                    </div>
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
@@ -79,7 +84,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-3 text-center text-xl text-gray-500 py-12">
+                    No se encontraron resultados para tu búsqueda.
+                </div>
+            @endforelse
         </div>
     </div>
 @endsection
