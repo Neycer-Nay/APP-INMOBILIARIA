@@ -54,10 +54,10 @@
     </nav>
     
     <!-- Botón -->
-    <a href="https://wa.me/59175026366" target="_blank"
+    <a href="https://wa.me/59175026366?text=Quiero%20vender%20mi%20casa" target="_blank"
       class="bg-[#4caf50] border border-white rounded-full font-bold px-4 py-2 items-center space-x-2 hover:bg-green-500 transition-colors hidden md:flex">
       <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-5 h-5" />
-      <span>CONTACTANOS</span>
+      <span>Publicar Inmueble</span>
     </a>
     
   </div>

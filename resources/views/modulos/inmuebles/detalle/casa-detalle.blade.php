@@ -20,7 +20,7 @@
         </div>
 
     </div>
-    <div class="max-w-7xl mx-auto py-8 px-2 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="max-w-7xl mx-auto py-8 px-2 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
         <!-- Columna principal (2/3) -->
         <div class="lg:col-span-2 space-y-6">
@@ -137,21 +137,51 @@
                         @endforeach
                     </div>
                 </div>
-            
+
             @endif
 
         </div>
 
-        <!-- Columna derecha: Tarjeta de requerimientos -->
-        <div class="space-y-6">
+        <!-- Columna derecha: Tarjeta de contacto -->
+        <div class="space-y-6 lg:sticky lg:top-8">
             <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="font-bold text-lg mb-4 text-[#404656]">Requerimientos</h3>
-                <ul class="list-disc list-inside text-gray-700">
-                    <li>Ejemplo de requerimiento 1</li>
-                    <li>Ejemplo de requerimiento 2</li>
-                    <li>Ejemplo de requerimiento 3</li>
-                    <!-- Agrega aquí los requerimientos reales -->
-                </ul>
+                <h3 class="font-bold text-lg mb-4 text-[#404656] text-center">¿Necesitas más información?</h3>
+                <div class="flex flex-col items-center mb-4">
+                    <img src="{{ asset('recursos/img/casaperfil.jpg') }}" alt="perfil"
+                        class="w-54 h-54 rounded-full object-cover mb-2 border">
+                    <span class="font-semibold text-[#404656]">Casa y Chalet Bienes Raices</span>
+                    <a href="https://wa.me/59175026366?text=Necesito%20Mas%20Información%20sobre%20la%20propiedad%20con%20COD:%20{{ $casa->codigo }}%20En%20{{ $casa->direccion }}%20{{ $casa->zona }}%20Con%20precio%20de%20:{{ number_format($casa->precio, 0, ',', '.') }}%20{{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}"
+                        target="blank" class="text-[#404656] hover:underline text-sm">+591
+                        75026366</a>
+                    <a href="casa_y_chalet@hotmail.com" target="blank"
+                        class="text-[#404656] hover:underline  text-sm">casa_y_chalet@hotmail.com</a>
+                </div>
+                <form id="formContacto" class="space-y-4" onsubmit="enviarWhatsapp(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="text" name="nombre" id="nombre" placeholder="Nombre" required
+                                class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
+                        </div>
+                        <div>
+                            <input type="text" name="telefono" id="telefono" placeholder="Teléfono" required
+                                class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="email" name="email" id="email" placeholder="Correo (opcional)"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
+                    </div>
+                    <div>
+                        <textarea name="mensaje" id="mensaje" rows="3"
+                            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]"
+                            placeholder="Mensaje">Hola, estoy interesado en la propiedad con COD: {{ $casa->codigo }} En {{ $casa->direccion }} {{ $casa->zona }} Con precio de :{{ number_format($casa->precio, 0, ',', '.') }} {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}</textarea>
+                    </div>
+                    
+                    <button type="submit"
+                        class="w-full bg-[#e09129] text-white font-bold py-2 rounded mt-2 hover:bg-[#293F5D] transition-colors">
+                        Contactar
+                    </button>
+                </form>
             </div>
             <!-- Puedes agregar aquí más tarjetas, como contacto del agente, etc. -->
         </div>
@@ -256,6 +286,40 @@
             modal.classList.add('hidden');
             modal.classList.remove('flex', 'opacity-100');
             document.body.classList.remove('overflow-hidden');
+        }
+    </script>
+@endpush
+@push('scripts')
+    <script>
+        function enviarWhatsapp(event) {
+            event.preventDefault();
+
+            // Obtener valores
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+            const terminos = document.getElementById('terminos').checked;
+
+            // Validación
+            if (!nombre || !telefono || !terminos) {
+                alert('Por favor completa los campos obligatorios y acepta los términos.');
+                return;
+            }
+
+            // Número de WhatsApp destino (cambia por el tuyo)
+            const numero = '59175026366';
+
+            // Construir mensaje
+            let texto = `Hola, soy ${nombre}.\nTeléfono: ${telefono}`;
+            if (email) texto += `\nEmail: ${email}`;
+            texto += `\n${mensaje}`;
+
+            // Enlace WhatsApp
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+
+            // Abrir WhatsApp
+            window.open(url, '_blank');
         }
     </script>
 @endpush

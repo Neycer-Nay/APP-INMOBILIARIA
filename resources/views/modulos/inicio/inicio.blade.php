@@ -5,8 +5,8 @@
     <div class="relative w-full h-[600px] flex items-center justify-center"
         style="background-image: url('{{ asset($imagenFondo) }}'); background-size: cover; background-position: center;">
 
-        <div class="relative z-10 text-center text-[#19191a]">
-            <h1 class="text-3xl md:text-6xl font-bold titulo-poppins mb-6 leading-tight">Encuentra El Hogar De Tus Sueños
+        <div class="relative z-10 text-center text-[#404656]">
+            <h1 class="text-3xl md:text-6xl text-[#e09129] font-bold titulo-poppins mb-6 leading-tight">Encuentra El Hogar De Tus Sueños
             </h1>
             <form
                 class="bg-white bg-opacity-80 rounded-xl font-bold p-4 flex flex-col md:flex-row justify-between items-center gap-4 max-w-lg md:max-w-4xl mx-4 md:mx-auto shadow-sm"
@@ -103,8 +103,9 @@
                     </div>
 
                     <!-- Precio -->
-                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} Bs <span
-                            class="text-base font-normal text-gray-500">/Mensual</span></div>
+                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }}
+                        {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}
+                    </span></div>
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
