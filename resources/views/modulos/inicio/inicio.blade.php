@@ -23,7 +23,7 @@
                 <select
                     class="w-full md:w-auto bg-transparent border-b border-[#00bfae] focus:border-[#404656] px-2 py-1 outline-none text-gray-700"
                     name="tipo_operacion">
-                    
+
                     <option value="venta">Comprar</option>
                     <option value="alquiler">Alquilar</option>
                     <option value="anticretico">Anticrético</option>
@@ -143,7 +143,8 @@
     <div class=" min-h-screen py-8 ">
         <h3 class="text-3xl text-center mb-0 mt-2 text-[#404656] titulo-poppins">Casas en Traspaso Recientes</h3>
         <span class="block text-base text-gray-500 text-center mb-8">
-    Descubre nuestros inmuebles en traspaso: con solo una cuota inicial te entregamos el inmueble y el saldo pagas al banco.</span>
+            Descubre nuestros inmuebles en traspaso: con solo una cuota inicial te entregamos el inmueble y el saldo pagas
+            al banco.</span>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             @foreach($casasTraspasoRecientes as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
@@ -222,31 +223,31 @@
             @endforeach
         </div>
     </div>
-    <div class="max-w-7xl mx-auto py-12 px-4">
-    <h3 class="text-3xl text-center mb-8 mt-2 text-[#404656] titulo-poppins">¿Por qué elegirnos?</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-            <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-award"></i></span>
-            <h4 class="font-bold text-lg mb-2 text-[#404656]">Más de 36 años de experiencia</h4>
-            <p class="text-gray-600 text-center">Confianza y trayectoria en el mercado inmobiliario.</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-            <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-user-friends"></i></span>
-            <h4 class="font-bold text-lg mb-2 text-[#404656]">Atención personalizada</h4>
-            <p class="text-gray-600 text-center">Te acompañamos en cada paso para encontrar tu inmueble ideal.</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-            <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-network-wired"></i></span>
-            <h4 class="font-bold text-lg mb-2 text-[#404656]">Amplia red de clientes y propiedades</h4>
-            <p class="text-gray-600 text-center">Acceso a las mejores opciones y oportunidades del mercado.</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
-            <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-bolt"></i></span>
-            <h4 class="font-bold text-lg mb-2 text-[#404656]">Trámites rápidos y transparentes</h4>
-            <p class="text-gray-600 text-center">Procesos ágiles y claros para tu tranquilidad.</p>
+    <div class="max-w-7xl mx-auto py-12 px-4 mb-12">
+        <h3 class="text-3xl text-center mb-8 mt-2 text-[#404656] titulo-poppins">¿Por qué elegirnos?</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center" data-aos="fade-right" data-aos-duration="1000">
+                <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-award"></i></span>
+                <h4 class="font-bold text-lg mb-2 text-[#404656] text-center">Más de 36 años de experiencia</h4>
+                <p class="text-gray-600 text-center">Confianza y trayectoria en el mercado inmobiliario.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center" data-aos="fade-up" data-aos-duration="1000">
+                <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-user-friends"></i></span>
+                <h4 class="font-bold text-lg mb-2 text-[#404656]">Atención personalizada</h4>
+                <p class="text-gray-600 text-center">Te acompañamos en cada paso para encontrar tu inmueble ideal.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center" data-aos="fade-up" data-aos-duration="1000">
+                <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-network-wired"></i></span>
+                <h4 class="font-bold text-lg mb-2 text-[#404656] text-center">Amplia red de clientes y propiedades</h4>
+                <p class="text-gray-600 text-center">Acceso a las mejores opciones y oportunidades del mercado.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center" data-aos="fade-left" data-aos-duration="1000">
+                <span class="text-4xl text-[#e09129] mb-2"><i class="fas fa-bolt"></i></span>
+                <h4 class="font-bold text-lg mb-2 text-[#404656]">Trámites agiles y rápidos</h4>
+                <p class="text-gray-600 text-center">Procesos ágiles y claros para tu tranquilidad.</p>
+            </div>
         </div>
     </div>
-</div>
 @endsection
 <style>
     .titulo-poppins {

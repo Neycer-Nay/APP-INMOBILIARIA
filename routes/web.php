@@ -11,6 +11,9 @@ Route::get('/inicio', [App\Http\Controllers\CasaController::class, 'inicio'])->n
 Route::get('/nosotros', function () {
     return view('modulos.nosotros.nosotros');
 })->name('nosotros');
+Route::get('/servicios', function () {
+    return view('modulos.servicios.servicios');
+})->name('servicios');
 
 Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
 Route::get('/casas/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
