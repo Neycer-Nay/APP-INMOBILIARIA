@@ -23,7 +23,7 @@
                 <select
                     class="w-full md:w-auto bg-transparent border-b border-[#00bfae] focus:border-[#404656] px-2 py-1 outline-none text-gray-700"
                     name="tipo_operacion">
-
+                    <option value="">Tipo de Operación</option>
                     <option value="venta">Comprar</option>
                     <option value="alquiler">Alquilar</option>
                     <option value="anticretico">Anticrético</option>
