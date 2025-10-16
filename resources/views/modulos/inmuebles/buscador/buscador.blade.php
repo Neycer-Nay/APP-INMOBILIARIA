@@ -22,7 +22,7 @@
                             <div class="w-full h-48 bg-gray-200 rounded-lg mb-3 flex items-center justify-center text-gray-400">Sin
                                 imagen</div>
                         @endif
-                    </a>
+                    
                     <!-- Etiqueta tipo -->
 
                     <span
@@ -34,7 +34,7 @@
                         {{ mb_strtoupper($casa->tipo) }}
                     </h3>
                     <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
-
+                    </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
                         <div class="flex items-center gap-2">

@@ -100,7 +100,7 @@
             @if(!empty($casa->caracteristicas))
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="font-bold text-lg mb-2 text-[#404656]">Características - Interior</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="fade-up" data-aos-duration="700">
                         @foreach($casa->caracteristicas as $caracteristica)
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-check-circle text-green-500"></i>
@@ -116,7 +116,7 @@
                     <h3 class="font-bold text-lg mb-2 text-[#404656]">Características - Exteriores</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach($casa->caracteristicasExternas as $caracteristica)
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700">
                                 <i class="fas fa-check-circle text-green-500"></i>
                                 <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
                             </div>
@@ -130,7 +130,7 @@
                     <h3 class="font-bold text-lg mb-2 text-[#404656]">Características - Servicios</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach ($casa->caracteristicasServicios as $caracteristica)
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700">
                                 <i class="fas fa-check-circle text-green-500"></i>
                                 <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
                             </div>
@@ -146,7 +146,7 @@
         <div class="space-y-6 lg:sticky lg:top-8">
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="font-bold text-lg mb-4 text-[#404656] text-center">¿Necesitas más información?</h3>
-                <div class="flex flex-col items-center mb-4">
+                <div class="flex flex-col items-center mb-4" >
                     <img src="{{ asset('recursos/img/casaperfil.jpg') }}" alt="perfil"
                         class="w-54 h-54 rounded-full object-cover mb-2 border">
                     <span class="font-semibold text-[#404656]">Casa y Chalet Bienes Raices</span>
@@ -174,11 +174,11 @@
                     <div>
                         <textarea name="mensaje" id="mensaje" rows="3"
                             class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]"
-                            placeholder="Mensaje">Hola, estoy interesado en la propiedad con COD: {{ $casa->codigo }} En {{ $casa->direccion }} {{ $casa->zona }} Con precio de :{{ number_format($casa->precio, 0, ',', '.') }} {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}</textarea>
+                            placeholder="Mensaje">Estoy interesado en la propiedad con COD: {{ $casa->codigo }} En {{ $casa->direccion }} {{ $casa->zona }} Con precio de :{{ number_format($casa->precio, 0, ',', '.') }} {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}</textarea>
                     </div>
                     
                     <button type="submit"
-                        class="w-full bg-[#e09129] text-white font-bold py-2 rounded mt-2 hover:bg-[#293F5D] transition-colors">
+                        class="w-full bg-[#e09129] text-white font-bold py-2 rounded mt-2 hover:bg-[#293F5D] transition-colors cursor-pointer">
                         Contactar
                     </button>
                 </form>
@@ -299,10 +299,10 @@
             const telefono = document.getElementById('telefono').value.trim();
             const email = document.getElementById('email').value.trim();
             const mensaje = document.getElementById('mensaje').value.trim();
-            const terminos = document.getElementById('terminos').checked;
+            
 
             // Validación
-            if (!nombre || !telefono || !terminos) {
+            if (!nombre || !telefono) {
                 alert('Por favor completa los campos obligatorios y acepta los términos.');
                 return;
             }
@@ -311,7 +311,7 @@
             const numero = '59175026366';
 
             // Construir mensaje
-            let texto = `Hola, soy ${nombre}.\nTeléfono: ${telefono}`;
+            let texto = `Hola, mi nombre es ${nombre}.\n Y mi teléfono es: ${telefono}`;
             if (email) texto += `\nEmail: ${email}`;
             texto += `\n${mensaje}`;
 
