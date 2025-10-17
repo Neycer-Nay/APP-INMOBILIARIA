@@ -29,7 +29,7 @@
             <li><a href="{{ route('venta') }}" class="block px-4 py-2 hover:bg-gray-100">Venta</a></li>
             <li><a href="{{ route('alquiler') }}" class="block px-4 py-2 hover:bg-gray-100">Alquiler</a></li>
             <li><a href="{{ route('anticretico') }}" class="block px-4 py-2 hover:bg-gray-100">Anticrético</a></li>
-            <li><a href="{{ route('traspaso') }}" class="block px-4 py-2 hover:bg-gray-100">Traspaso</a></li>
+            <li><a href="{{ route('traspaso') }}" class="block px-4 py-2 hover:bg-gray-100">Crédito</a></li>
           </ul>
         </li>
         <li class="px-3 group relative">

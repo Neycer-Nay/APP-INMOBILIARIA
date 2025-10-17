@@ -21,7 +21,7 @@
                     </a>
                     <!-- Etiqueta tipo -->
 
-                    <span class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded mb-2">En
+                    <span class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded-full mb-2">En
                         {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->

@@ -21,7 +21,7 @@
                     </a>
                     <!-- Etiqueta tipo -->
                     <a href="{{ route('casas.show', $casa->id) }}">
-                        <span class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 font-bold rounded mb-2">En
+                        <span class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 font-bold rounded-full mb-2">En
                             {{ ucfirst($casa->tipo) }}</span>
 
                         <!-- Título y dirección -->
