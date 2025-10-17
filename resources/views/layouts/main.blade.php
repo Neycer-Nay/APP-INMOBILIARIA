@@ -47,7 +47,51 @@
     <!-- AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-        AOS.init();
+        document.addEventListener('DOMContentLoaded', function () {
+            const BREAKPOINT = 768; // <= este ancho = móvil (ajusta si hace falta)
+            const elems = Array.from(document.querySelectorAll('[data-aos]'));
+
+            // Guardar animación original para poder restaurarla al salir de móvil
+            elems.forEach(el => {
+                if (!el.dataset.aosOriginal) {
+                    el.dataset.aosOriginal = el.getAttribute('data-aos') || 'fade-up';
+                }
+            });
+
+            function applyMobileAos() {
+                const isMobile = window.innerWidth <= BREAKPOINT;
+                elems.forEach(el => {
+                    if (isMobile) {
+                        el.setAttribute('data-aos', 'fade-up'); // siempre desde abajo
+                        el.setAttribute('data-aos-anchor-placement', 'bottom-bottom');
+                    } else {
+                        // restaurar animación original en escritorio
+                        el.setAttribute('data-aos', el.dataset.aosOriginal);
+                        el.removeAttribute('data-aos-anchor-placement');
+                    }
+                });
+            }
+
+            // aplicar antes de inicializar AOS para que lea los atributos correctos
+            applyMobileAos();
+
+            AOS.init({
+                once: false,
+                duration: 700,
+                easing: 'ease',
+                offset: 120
+            });
+
+            // al cambiar tamaño, reaplicar y refrescar AOS (debounce)
+            let resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () {
+                    applyMobileAos();
+                    AOS.refresh();
+                }, 150);
+            });
+        });
     </script>
 </body>
 

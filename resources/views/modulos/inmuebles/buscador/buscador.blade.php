@@ -26,7 +26,7 @@
                     <!-- Etiqueta tipo -->
 
                     <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded mb-2">En {{ ucfirst($casa->tipo) }}</span>
+                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded-full mb-2">En {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
                     <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper(str_replace('_', ' ', $casa->titulo)) }}

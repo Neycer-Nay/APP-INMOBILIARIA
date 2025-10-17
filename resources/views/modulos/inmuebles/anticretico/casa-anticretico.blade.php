@@ -4,7 +4,7 @@
     <div class=" min-h-screen py-8 ">
         <h3 class="text-3xl  text-center mb-0 mt-2 text-[#404656] titulo-poppins">Inmuebles En
             anticretico</h3>
-            <span class="block text-base text-gray-500 text-center mb-8">
+        <span class="block text-base text-gray-500 text-center mb-8">
             ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles para anticretico!
         </span>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
@@ -22,16 +22,16 @@
                     </a>
 
                     <!-- Etiqueta tipo -->
-<a href="{{ route('casas.show', $casa->id) }}">
-                    <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 font-bold rounded mb-2">En {{ ucfirst($casa->tipo) }}</span>
+                    <a href="{{ route('casas.show', $casa->id) }}">
+                        <span class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 font-bold rounded-full mb-2">En
+                            {{ ucfirst($casa->tipo) }}</span>
 
-                    <!-- Título y dirección -->
-                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
-                        {{ mb_strtoupper($casa->tipo) }}
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
-</a>
+                        <!-- Título y dirección -->
+                        <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
+                            {{ mb_strtoupper($casa->tipo) }}
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
+                    </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
                         <div class="flex items-center gap-2">
@@ -58,7 +58,8 @@
 
                     <!-- Precio -->
                     <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us
-                        <span class="text-base font-normal text-gray-500">T.C. 7 Bs</span></div>
+                        <span class="text-base font-normal text-gray-500">T.C. 7 Bs</span>
+                    </div>
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
@@ -85,7 +86,7 @@
     </div>
 @endsection
 <style>
- .titulo-poppins {
-    font-family: 'Poppins', Arial, sans-serif;
-}
+    .titulo-poppins {
+        font-family: 'Poppins', Arial, sans-serif;
+    }
 </style>
