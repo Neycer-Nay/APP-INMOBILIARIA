@@ -1,6 +1,12 @@
 @extends('layouts.main')
 
 @section('contenido')
+<form action="{{ route('logout') }}" method="POST" class="inline">
+        @csrf
+        <button type="submit" class="text-red-500 hover:underline bg-transparent border-0 p-0">
+            Cerrar sesión
+        </button>
+    </form>
     <div class="max-w-7xl mx-auto py-8 px-2">
         <h2 class="text-2xl font-bold text-[#404656] mb-6 text-center">Listado de Casas</h2>
         <div class="overflow-x-auto">

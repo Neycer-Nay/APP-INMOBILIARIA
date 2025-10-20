@@ -163,7 +163,7 @@
                                 class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
                         </div>
                         <div>
-                            <input type="text" name="telefono" id="telefono" placeholder="Teléfono" required
+                            <input type="number" name="telefono" id="telefono" placeholder="Teléfono" required
                                 class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
                         </div>
                     </div>
