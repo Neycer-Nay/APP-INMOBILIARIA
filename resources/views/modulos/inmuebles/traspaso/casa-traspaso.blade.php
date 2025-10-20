@@ -10,31 +10,42 @@
             @foreach($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                     <!-- Imagen principal -->
-                    <a href="{{ route('casas.show', $casa->id) }}">
-                    @if($casa->fotos->first())
-                        <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
-                            class="w-full h-68 object-cover rounded-lg mb-3">
-                    @else
-                        <div class="w-full h-48 bg-gray-200 rounded-lg mb-3 flex items-center justify-center text-gray-400">Sin
-                            imagen</div>
-                    @endif
-                    </a>
+                    <div class="relative rounded-lg mb-3 overflow-hidden titulo-poppins">
+                        @if($casa->fotos->first())
+                            <a href="{{ route('casas.show', $casa->id) }}" class="block">
+                                <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
+                                    class="w-full h-68 object-cover rounded-lg">
+                            </a>
+                        @else
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">Sin imagen</div>
+                        @endif
+
+                        @if(strtolower($casa->estado) !== 'disponible')
+                            <div class="estado-badge">
+                                {{ mb_strtoupper($casa->estado) }}
+                            </div>
+                        @else
+                            <div class="estado-badge2">
+                                DISPONIBLE
+                            </div>
+                        @endif
+                    </div>
                     <!-- Etiqueta tipo -->
                     <a href="{{ route('casas.show', $casa->id) }}">
-                    <span
-                        class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded-full mb-2">En {{ ucfirst($casa->tipo) }}</span>
+                        <span class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded-full mb-2">En
+                            {{ ucfirst($casa->tipo) }}</span>
 
-                    <!-- Título y dirección -->
-                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
-                        {{ mb_strtoupper($casa->tipo) }}
-                    </h3>
-                    <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
+                        <!-- Título y dirección -->
+                        <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
+                            {{ mb_strtoupper($casa->tipo) }}
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-2"><i class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
                     </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
                         <div class="flex items-center gap-2">
-                            
-                        <span class="font-semibold text-[#404656]">Código:</span>
+
+                            <span class="font-semibold text-[#404656]">Código:</span>
                             <span>{{ $casa->codigo }}</span>
                         </div>
                         <div class="flex items-center gap-2">
@@ -55,8 +66,8 @@
                     </div>
 
                     <!-- Precio -->
-                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us <span
-                            class="text-base font-normal text-gray-500">Cuota Inicial</span></div>
+                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us
+                        <span class="text-base font-normal text-gray-500">Cuota Inicial</span></div>
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
@@ -84,6 +95,60 @@
 @endsection
 <style>
     .titulo-poppins {
-    font-family: 'Poppins', Arial, sans-serif;
-}
+        font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    .text-overlay {
+        background: rgba(0, 0, 0, 0.35);
+        padding: .4rem .8rem;
+        border-radius: .35rem;
+        max-width: 90%;
+        pointer-events: none;
+    }
+
+    .estado-badge2 {
+        position: absolute;
+        top: 32px;
+        right: -68px;
+        z-index: 30;
+        transform: rotate(30deg);
+        background: #e09129;
+        color: #fff;
+        font-weight: 800;
+        padding: 8px 110px;
+        font-size: 1.05rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+        letter-spacing: 1px;
+        pointer-events: none;
+    }
+
+    .estado-badge {
+        position: absolute;
+        top: 32px;
+        right: -68px;
+        z-index: 30;
+        transform: rotate(30deg);
+        background: #e11d48;
+        /* rojo */
+        color: #fff;
+        font-weight: 800;
+        padding: 8px 110px;
+        font-size: 1.05rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+        letter-spacing: 1px;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+        .estado-badge {
+            right: -36px;
+            padding: 6px 80px;
+            font-size: 0.9rem;
+            transform: rotate(28deg);
+        }
+
+        .text-overlay .text-xl {
+            font-size: 1rem;
+        }
+    }
 </style>

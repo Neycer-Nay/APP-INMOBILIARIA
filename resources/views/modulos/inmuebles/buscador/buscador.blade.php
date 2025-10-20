@@ -14,16 +14,23 @@
             @forelse($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                     <!-- Imagen principal -->
-                    <a href="{{ route('casas.show', $casa->id) }}">
+                    <div class="relative rounded-lg mb-3 overflow-hidden">
                         @if($casa->fotos->first())
-                            <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
-                                class="w-full h-68 object-cover rounded-lg mb-3">
+                            <a href="{{ route('casas.show', $casa->id) }}" class="block">
+                                <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}"
+                                     alt="Foto casa"
+                                     class="w-full h-68 object-cover rounded-lg">
+                            </a>
                         @else
-                            <div class="w-full h-48 bg-gray-200 rounded-lg mb-3 flex items-center justify-center text-gray-400">Sin
-                                imagen</div>
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">Sin imagen</div>
                         @endif
-                    
-                    <!-- Etiqueta tipo -->
+
+                        @if( strtolower($casa->estado) == 'disponible' )
+                            <div class="estado-badge">
+                                DISPONIBLE
+                            </div>
+                        @endif
+                    </div>
 
                     <span
                         class="inline-block bg-[#f09e02] text-white text-xs px-3 py-1 rounded-full mb-2">En {{ ucfirst($casa->tipo) }}</span>
@@ -33,7 +40,7 @@
                         EN
                         {{ mb_strtoupper($casa->tipo) }}
                     </h3>
-                    <p class="text-sm text-gray-500 mb-2">{{ mb_strtoupper($casa->direccion) }}</p>
+                    <p class="text-sm text-gray-500 mb-2"><i class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
                     </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
@@ -95,5 +102,39 @@
 <style>
     .titulo-poppins {
         font-family: 'Poppins', Arial, sans-serif;
+    }
+    .text-overlay {
+        background: rgba(0,0,0,0.35); 
+        padding: .4rem .8rem;
+        border-radius: .35rem;
+        max-width: 90%;
+        pointer-events: none; 
+    }
+
+    
+    .estado-badge {
+        position: absolute;
+        top: 32px;
+        right: -68px;
+        z-index: 30;
+        transform: rotate(30deg);
+        background: #e09129;
+        color: #fff;
+        font-weight: 800;
+        padding: 8px 110px;
+        font-size: 1.05rem;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+        letter-spacing: 1px;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+        .estado-badge {
+            right: -36px;
+            padding: 6px 80px;
+            font-size: 0.9rem;
+            transform: rotate(28deg);
+        }
+        .text-overlay .text-xl { font-size: 1rem; }
     }
 </style>

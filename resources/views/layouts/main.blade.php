@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('recursos/img/LOGO-BLANCO.png') }}">
     <title>Casa y chalet</title>
     @vite('resources/css/app.css')
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700&display=swap" rel="stylesheet">
@@ -17,18 +18,15 @@
     <!-- Choices.js JS -->
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
-    <!-- Toastr CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- Toastr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  
 
-    <!-- Swiper CSS -->
+    <!-- Swiper CSS PARA LA GALERIA DE FOTOS DE LAS CASAS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- Swiper JS -->
+    <!-- Swiper JS PARA LA GALERIA DE FOTOS DE LAS CASAS-->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 
-    <!-- AOS CSS -->
+    <!-- AOS CSS PARA LAS ANIMACIONES DE ENTRADA DEL SITIO WEB-->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     
