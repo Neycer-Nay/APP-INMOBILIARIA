@@ -1,10 +1,10 @@
+<!-- From Uiverse.io by themrsami --> 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('recursos/img/LOGO-BLANCO.png') }}">
     <title>Casa y chalet</title>
     @vite('resources/css/app.css')
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700&display=swap" rel="stylesheet">
@@ -18,28 +18,46 @@
     <!-- Choices.js JS -->
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
-  
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <!-- Swiper CSS PARA LA GALERIA DE FOTOS DE LAS CASAS-->
+    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- Swiper JS PARA LA GALERIA DE FOTOS DE LAS CASAS-->
+    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 
-    <!-- AOS CSS PARA LAS ANIMACIONES DE ENTRADA DEL SITIO WEB-->
+    <!-- AOS CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     
 </head>
 
 <body fuente-gral style='background-color: #fffaf3  ;'>
-    @include('shared.header')
+    
+    <div class="flex flex-col items-center justify-center h-screen">
+  <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Login</h2>
+    @if ($errors->any())
+          <div class="mb-4 text-red-600">
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
+    <form action="{{ route('login.submit') }}" method="POST" class="flex flex-col">
+      @csrf
+      <input type="email" name="email" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" placeholder="Usuario">
+      <input type="password" name="password" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" placeholder="Password">
 
-
-    @yield('contenido')
-
-
-    @include('shared.footer')
+      <button type="submit" class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150">Login</button>
+    </form>
+  </div>
+</div>
 
     @stack('scripts')
     <!-- AOS JS -->

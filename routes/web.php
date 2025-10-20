@@ -15,13 +15,29 @@ Route::get('/servicios', function () {
     return view('modulos.servicios.servicios');
 })->name('servicios');
 
-Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
-Route::get('/casas/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
-Route::get('/casas/index', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
-Route::get('/casas/{id}/edit', [App\Http\Controllers\CasaController::class, 'edit'])->name('casas.edit');
-Route::put('/casas/{id}', [App\Http\Controllers\CasaController::class, 'update'])->name('casas.update');
-Route::delete('/casas/{id}', [App\Http\Controllers\CasaController::class, 'destroy'])->name('casas.destroy');
+Route::get('/login', [App\Http\Controllers\UserController::class, 'index'])->name('login');
 
+Route::post('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login.submit');
+
+Route::post('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
+
+Route::get('/User', function () {
+    return app(App\Http\Controllers\UserController::class)->index();
+})->name('user.index');
+
+
+Route::get('/crear-admin', function () {
+    return app(App\Http\Controllers\UserController::class)->crearAdmin();
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
+    Route::get('/casas/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
+    Route::get('/casas/index', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
+    Route::get('/casas/{id}/edit', [App\Http\Controllers\CasaController::class, 'edit'])->name('casas.edit');
+    Route::put('/casas/{id}', [App\Http\Controllers\CasaController::class, 'update'])->name('casas.update');
+    Route::delete('/casas/{id}', [App\Http\Controllers\CasaController::class, 'destroy'])->name('casas.destroy');
+});
 
 Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');
 Route::get('/venta', [App\Http\Controllers\CasaController::class, 'casasVenta'])->name('venta');
