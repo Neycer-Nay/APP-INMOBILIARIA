@@ -114,7 +114,7 @@
             @foreach($casasRecientes as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                     <!-- Imagen principal -->
-                    <div class="relative rounded-lg mb-3 overflow-hidden">
+                    <div class="relative rounded-lg mb-3 overflow-hidden titulo-poppins">
                         @if($casa->fotos->first())
                             <a href="{{ route('casas.show', $casa->id) }}" class="block">
                                 <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}"
@@ -176,7 +176,7 @@
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
                         <div class="flex items-center gap-1">
                             <i class="fas fa-store mr-1 text-gray-600"></i>
-                            {{ $casa->tiendas }} Tiendas
+                            {{ $casa->tiendas }} {{ $casa->tiendas == 1 ? 'Tienda' : 'Tiendas' }}
                         </div>
                         <div class="flex items-center gap-1">
                             <i class="fas fa-bed mr-1 text-gray-600"></i>
@@ -184,7 +184,7 @@
                         </div>
                         <div class="flex items-center gap-1">
                             <i class="fas fa-shower mr-1 text-gray-600"></i>
-                            {{ $casa->banos }} Baño
+                            {{ $casa->banos }} {{ $casa->banos == 1 ? 'Baño' : 'Baños' }}
                         </div>
                         <div class="flex items-center gap-1">
                             <i class="fas fa-ruler-combined mr-2 text-[#404656]"></i>

@@ -19,9 +19,9 @@ class UserController extends Controller
 
         if (!$usuario) {
             User::create([
-                'name' => 'Administrador',
-                'email' => 'Admin@gmail.com',
-                'password' => Hash::make('Admin1234'), 
+                'name' => 'Admin-Neycer',
+                'email' => 'Neycer.dev@gmail.com',
+                'password' => Hash::make('Micaela69234558N'), 
                 
             ]);
 

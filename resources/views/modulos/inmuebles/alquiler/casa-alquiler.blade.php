@@ -2,7 +2,7 @@
 @section('contenido')
 
     <div class=" min-h-screen py-8 ">
-        <h3 class="text-3xl text-center mb-0 mt-2 text-[#404656] titulo-poppins">Inmuebles En Alquiler</h3>
+        <h3 class="text-3xl text-center mb-0 mt-2 text-[#404656] titulo-poppins">INMUEBLES EN ALQUILER</h3>
         <span class="block text-base text-gray-500 text-center mb-8">
             ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles para alquiler!
         </span>
@@ -77,9 +77,9 @@
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
                         <div class="flex items-center gap-1">
                             <i class="fas fa-store mr-1 text-gray-600"></i>
-                            {{ $casa->tiendas }} Tiendas
+                            {{ $casa->tiendas }} {{ $casa->tiendas == 1 ? 'Tienda' : 'Tiendas' }}
                         </div>
-                        <div class="flex items-center gap-1">
+                        <div class="flex items-center gap-1"> 
                             <i class="fas fa-bed mr-1 text-gray-600"></i>
                             {{ $casa->habitaciones }} Hab.
                         </div>

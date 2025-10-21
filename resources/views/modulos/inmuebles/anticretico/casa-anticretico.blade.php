@@ -2,8 +2,8 @@
 @section('contenido')
 
     <div class=" min-h-screen py-8 ">
-        <h3 class="text-3xl  text-center mb-0 mt-2 text-[#404656] titulo-poppins">Inmuebles En
-            anticretico</h3>
+        <h3 class="text-3xl  text-center mb-0 mt-2 text-[#404656] titulo-poppins">INMUBELES EN ANTICRETICO
+          </h3>
         <span class="block text-base text-gray-500 text-center mb-8">
             ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles para anticretico!
         </span>
@@ -11,7 +11,7 @@
             @foreach($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
                      
-                   <div class="relative rounded-lg mb-3 overflow-hidden">
+                   <div class="relative rounded-lg mb-3 overflow-hidden titulo-poppins">
                         @if($casa->fotos->first())
                             <a href="{{ route('casas.show', $casa->id) }}" class="block">
                                 <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}"
