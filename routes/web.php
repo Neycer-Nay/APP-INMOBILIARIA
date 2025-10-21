@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');
-Route::get('/venta', [App\Http\Controllers\CasaController::class, 'casasVenta'])->name('venta');
+Route::get('/venta', action: [App\Http\Controllers\CasaController::class, 'casasVenta'])->name('venta');
 Route::get('/anticretico', [App\Http\Controllers\CasaController::class, 'casasAnticretico'])->name('anticretico');
 Route::get('/traspaso', [App\Http\Controllers\CasaController::class, 'casasTraspaso'])->name('traspaso');
 

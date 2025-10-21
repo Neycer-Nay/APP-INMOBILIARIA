@@ -1,19 +1,19 @@
 @extends('layouts.main')
 
 @section('contenido')
-    <div >
-    <!-- Banner para escritorio -->
-    <img src="{{ asset('recursos/img/banner.png') }}" alt="Banner Servicios"
-        class="w-full h-94 object-cover  hidden -mb-8 md:block rounded-b-xl shadow-b-xl">
-    <!-- Banner para móvil -->
-    <img src="{{ asset('recursos/img/bannerMovil.png') }}" alt="Banner Servicios Móvil"
-        class="w-full h-44 object-cover  block md:hidden rounded-b-xl shadow-b-xl">
-</div>
-<section class="bg-gray-50 py-8 md:py-16 " id="servicios">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#000] mt-0 mb-10 md:mt-0 titulo-poppins">
-            Nuestros <span class="text-[#e09129]">Servicios</span>
-        </h2>
+    <div>
+        <!-- Banner para escritorio -->
+        <img src="{{ asset('recursos/img/banner.png') }}" alt="Banner Servicios"
+            class="w-full h-94 object-cover  hidden -mb-8 md:block rounded-b-xl shadow-b-xl">
+        <!-- Banner para móvil -->
+        <img src="{{ asset('recursos/img/bannerMovil.png') }}" alt="Banner Servicios Móvil"
+            class="w-full h-44 object-cover  block md:hidden rounded-b-xl shadow-b-xl">
+    </div>
+    <section class="bg-gray-50 py-8 md:py-16 " id="servicios">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#000] mt-0 mb-10 md:mt-0 titulo-poppins">
+                Nuestros <span class="text-[#e09129]">Servicios</span>
+            </h2>
 
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 <!-- Servicio 1 -->
@@ -63,7 +63,8 @@
     .titulo-poppins {
         font-family: 'Poppins', Arial, sans-serif;
     }
+
     .shadow-b-xl {
-    box-shadow: 0 12px 24px -8px rgba(0,0,0,0.25);
-}
+        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.25);
+    }
 </style>

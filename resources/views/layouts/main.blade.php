@@ -18,7 +18,7 @@
     <!-- Choices.js JS -->
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
-  
+
 
     <!-- Swiper CSS PARA LA GALERIA DE FOTOS DE LAS CASAS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -29,7 +29,7 @@
     <!-- AOS CSS PARA LAS ANIMACIONES DE ENTRADA DEL SITIO WEB-->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    
+
 </head>
 
 <body fuente-gral style='background-color: #fffaf3  ;'>

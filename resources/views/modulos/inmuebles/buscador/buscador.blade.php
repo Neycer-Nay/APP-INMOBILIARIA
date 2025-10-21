@@ -82,7 +82,7 @@
                             <i class="fas fa-bed mr-1 text-gray-600"></i>
                             {{ $casa->habitaciones }} Hab.
                         </div>
-                        <div class="flex items-center gap-1"> 
+                        <div class="flex items-center gap-1">
                             <i class="fas fa-shower mr-1 text-gray-600"></i>
                             {{ $casa->banos }} {{ $casa->banos == 1 ? 'Baño' : 'Baños' }}
                         </div>

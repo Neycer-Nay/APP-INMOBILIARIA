@@ -6,7 +6,8 @@
         style="background-image: url('{{ asset($imagenFondo) }}'); background-size: cover; background-position: center;">
         <div class="banner-overlay absolute inset-0" aria-hidden="true"></div>
         <div class="relative z-10 text-center text-[#404656]">
-            <h1 class="text-3xl md:text-6xl text-[#fff] font-bold titulo-poppins mb-6 leading-tight" data-aos="fade-up" data-aos-duration="1000">Encuentra El
+            <h1 class="text-3xl md:text-6xl text-[#fff] font-bold titulo-poppins mb-6 leading-tight" data-aos="fade-up"
+                data-aos-duration="1000">Encuentra El
                 Hogar
                 De Tus Sueños
             </h1>
@@ -59,7 +60,7 @@
         </div>
     </div>
     <!-- Carrusel vertical automático: derecha -> izquierda (loop infinito) -->
-    
+
     <div class="max-w-7xl mx-auto py-8 px-4">
         <h3 class="text-2xl md:text-3xl text-center text-[#404656] titulo-poppins font-bold mb-1">
             Encuentra tu próxima vivienda
@@ -117,15 +118,14 @@
                     <div class="relative rounded-lg mb-3 overflow-hidden titulo-poppins">
                         @if($casa->fotos->first())
                             <a href="{{ route('casas.show', $casa->id) }}" class="block">
-                                <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}"
-                                     alt="Foto casa"
-                                     class="w-full h-68 object-cover rounded-lg">
+                                <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
+                                    class="w-full h-68 object-cover rounded-lg">
                             </a>
                         @else
                             <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">Sin imagen</div>
                         @endif
 
-                        @if( strtolower($casa->estado) == 'disponible' )
+                        @if(strtolower($casa->estado) == 'disponible')
                             <div class="estado-badge">
                                 DISPONIBLE
                             </div>
@@ -136,11 +136,12 @@
                         {{ ucfirst($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
-                    
-                        <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
-                            {{ mb_strtoupper($casa->tipo) }}
-                        </h3>
-                        <p class="text-sm text-gray-500 mb-2"><i class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
+
+                    <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
+                        {{ mb_strtoupper($casa->tipo) }}
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-2"><i
+                            class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
                     </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
@@ -195,22 +196,20 @@
             @endforeach
         </div>
     </div>
-    
+
     <div class="max-w-7xl mx-auto py-20 px-4 bg-white ">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <!-- Título grande a la izquierda -->
             <div class="flex items-center justify-center lg:justify-start">
-                <h2
-                    class="text-6xl md:text-7xl font-extrabold text-[#404656] leading-tight titulo-poppins text-center lg:text-left" data-aos="fade-right"
-                data-aos-duration="1000">
+                <h2 class="text-6xl md:text-7xl font-extrabold text-[#404656] leading-tight titulo-poppins text-center lg:text-left"
+                    data-aos="fade-right" data-aos-duration="1000">
                     PROCESO<br />DE<br />COMPRA
                 </h2>
             </div>
 
             <!-- Pasos a la derecha -->
             <div class="space-y-12">
-                <div class="flex items-start gap-6" data-aos="fade-left"
-                data-aos-duration="1000">
+                <div class="flex items-start gap-6" data-aos="fade-left" data-aos-duration="1000">
                     <div class="text-7xl md:text-8xl font-extrabold text-[#404656] titulo-poppins leading-none">1</div>
                     <div>
                         <h3 class="font-bold text-xl text-[#404656] titulo-poppins mb-2">VISITA DE LA CASA</h3>
@@ -219,8 +218,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-start gap-6 " data-aos="fade-left"
-                data-aos-duration="1000">
+                <div class="flex items-start gap-6 " data-aos="fade-left" data-aos-duration="1000">
                     <div class="text-7xl md:text-8xl font-extrabold text-[#404656] titulo-poppins leading-none">2</div>
                     <div>
                         <h3 class="font-bold text-xl text-[#404656] titulo-poppins mb-2">TÉRMINOS DE NEGOCIACIÓN</h3>
@@ -230,8 +228,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-start gap-6" data-aos="fade-left"
-                data-aos-duration="1000">
+                <div class="flex items-start gap-6" data-aos="fade-left" data-aos-duration="1000">
                     <div class="text-7xl md:text-8xl font-extrabold text-[#404656] titulo-poppins leading-none">3</div>
                     <div>
                         <h3 class="font-bold text-xl text-[#404656] titulo-poppins mb-2">CIERRE SIN PREOCUPACIONES</h3>
@@ -245,7 +242,7 @@
 
     <div class="max-w-7xl mx-auto py-12 px-4 mb-12">
         <h3 class="text-3xl text-center mb-8 mt-2 text-[#404656] titulo-poppins" data-aos="fade-up"
-                data-aos-duration="1000">¿Por qué elegirnos?</h3>
+            data-aos-duration="1000">¿Por qué elegirnos?</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center" data-aos="fade-right"
                 data-aos-duration="1000">
@@ -380,12 +377,15 @@
     }
 
     .banner-overlay {
-        background: rgba(0,0,0,0.45); /* ajusta opacidad: 0.0 - 1.0 */
-        pointer-events: none; /* no bloquea interacciones */
-        z-index: 5; /* debe quedar entre fondo y el contenido (contenido tiene z-10) */
+        background: rgba(0, 0, 0, 0.45);
+        /* ajusta opacidad: 0.0 - 1.0 */
+        pointer-events: none;
+        /* no bloquea interacciones */
+        z-index: 5;
+        /* debe quedar entre fondo y el contenido (contenido tiene z-10) */
     }
 
-     
+
     .estado-badge {
         position: absolute;
         top: 32px;
@@ -397,7 +397,7 @@
         font-weight: 800;
         padding: 8px 110px;
         font-size: 1.05rem;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
         letter-spacing: 1px;
         pointer-events: none;
     }

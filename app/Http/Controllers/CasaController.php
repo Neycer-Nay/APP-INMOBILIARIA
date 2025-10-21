@@ -16,7 +16,7 @@ class CasaController extends Controller
 
         if ($request->filled('codigo')) {
             $query->where('codigo', 'like', '%' . $request->codigo . '%');
-        } 
+        }
 
         if ($request->filled('tipo_operacion')) {
             $query->where('tipo', $request->tipo_operacion);
@@ -241,13 +241,13 @@ class CasaController extends Controller
     {
         $casa = Casa::findOrFail($id);
 
-        foreach ($casa->fotos as $foto){
+        foreach ($casa->fotos as $foto) {
             Storage::disk('public')->delete($foto->ruta_imagen);
             $foto->delete();
         }
 
         $casa->delete();
-        
+
         return redirect()->route('casas.index')->with('success', 'Casa eliminada correctamente.');
     }
 

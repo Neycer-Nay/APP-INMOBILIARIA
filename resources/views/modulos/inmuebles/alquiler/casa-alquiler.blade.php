@@ -79,7 +79,7 @@
                             <i class="fas fa-store mr-1 text-gray-600"></i>
                             {{ $casa->tiendas }} {{ $casa->tiendas == 1 ? 'Tienda' : 'Tiendas' }}
                         </div>
-                        <div class="flex items-center gap-1"> 
+                        <div class="flex items-center gap-1">
                             <i class="fas fa-bed mr-1 text-gray-600"></i>
                             {{ $casa->habitaciones }} Hab.
                         </div>
