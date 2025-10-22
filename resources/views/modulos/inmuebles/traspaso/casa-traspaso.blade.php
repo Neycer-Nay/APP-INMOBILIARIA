@@ -2,7 +2,7 @@
 @section('contenido')
 
     <div class=" min-h-screen py-8 ">
-        <h3 class="text-3xl  text-center mb-0 mt-2 text-[#404656]  titulo-poppins">Inmuebles En Traspaso</h3>
+        <h3 class="text-3xl  text-center mb-0 mt-2 text-[#404656]  titulo-poppins">INMUEBLES CON CRÉDITO</h3>
         <span class="block text-base text-gray-500 text-center mb-8">
             ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles para traspaso!
         </span>
@@ -39,7 +39,8 @@
                         <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
                             {{ mb_strtoupper($casa->tipo) }}
                         </h3>
-                        <p class="text-sm text-gray-500 mb-2"><i class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
+                        <p class="text-sm text-gray-500 mb-2"><i
+                                class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
                     </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
@@ -67,13 +68,14 @@
 
                     <!-- Precio -->
                     <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us
-                        <span class="text-base font-normal text-gray-500">Cuota Inicial</span></div>
+                        <span class="text-base font-normal text-gray-500">Cuota Inicial</span>
+                    </div>
 
                     <!-- Características -->
                     <div class="flex items-center justify-between text-sm border-t border-t-[#404656] pt-3 mt-3">
                         <div class="flex items-center gap-1">
                             <i class="fas fa-store mr-1 text-gray-600"></i>
-                            {{ $casa->tiendas }} Tiendas
+                            {{ $casa->tiendas }} {{ $casa->tiendas == 1 ? 'Tienda' : 'Tiendas'}}
                         </div>
                         <div class="flex items-center gap-1">
                             <i class="fas fa-bed mr-1 text-gray-600"></i>
@@ -81,7 +83,7 @@
                         </div>
                         <div class="flex items-center gap-1">
                             <i class="fas fa-shower mr-1 text-gray-600"></i>
-                            {{ $casa->banos }} Baño
+                            {{ $casa->banos }} {{ $casa->banos == 1 ? 'Baño' : 'Baños' }}
                         </div>
                         <div class="flex items-center gap-1">
                             <i class="fas fa-ruler-combined mr-2 text-[#404656]"></i>

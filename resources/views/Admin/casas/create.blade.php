@@ -18,7 +18,7 @@
         </button>
     </form>
     <div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mt-8 mb-8 ">
-        
+
         <h2 class="text-xl font-semibold mb-6 text-[#404656]">REGISTRAR INMUEBLES</h2>
         <form action="{{ route('casas.store') }}" method="POST" enctype="multipart/form-data">
             @csrf

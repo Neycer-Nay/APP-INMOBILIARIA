@@ -11,7 +11,7 @@
         <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
       </svg>
     </button>
-    
+
     <!-- Menú centrado (desktop) -->
     <nav class="font-semibold text-sm menu-font hidden md:block">
       <ul class="flex items-center gap-x-8">
@@ -56,9 +56,11 @@
     </nav>
 
     <!-- Botón -->
-    <button class="hidden md:inline-flex bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition"
-        aria-label="Publicar Inmueble en WhatsApp">
-      <a href="https://wa.me/59175026366?text=Quiero%20vender%20mi%20casa" target="_blank" class="flex items-center gap-2">
+    <button
+      class="hidden md:inline-flex bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition"
+      aria-label="Publicar Inmueble en WhatsApp">
+      <a href="https://wa.me/59175026366?text=Quiero%20vender%20mi%20casa" target="_blank"
+        class="flex items-center gap-2">
         <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-5 h-5" />
         <span>Publicar Inmueble</span>
       </a>
@@ -90,11 +92,11 @@
       <li>
         <a href="" class="block py-2 px-2 nav-text">BLOG</a>
       </li>
-      
+
     </ul>
     <div class="mt-4">
       <a href="https://wa.me/59175026366?text=Quiero%20vender%20mi%20casa" target="_blank"
-         class="w-full inline-flex justify-center items-center gap-2 bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold py-3 px-4 rounded-full shadow-lg">
+        class="w-full inline-flex justify-center items-center gap-2 bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold py-3 px-4 rounded-full shadow-lg">
         <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-5 h-5" />
         <span>Publicar Inmueble</span>
       </a>

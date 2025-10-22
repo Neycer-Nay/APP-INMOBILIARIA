@@ -2,31 +2,30 @@
 @section('contenido')
 
     <div class=" min-h-screen py-8 ">
-        <h3 class="text-3xl  text-center mb-0 mt-2 text-[#404656] titulo-poppins">Inmuebles En
-            anticretico</h3>
+        <h3 class="text-3xl  text-center mb-0 mt-2 text-[#404656] titulo-poppins">INMUBELES EN ANTICRETICO
+        </h3>
         <span class="block text-base text-gray-500 text-center mb-8">
             ¡Explora y encuentra tu próximo hogar en nuestra lista de inmuebles disponibles para anticretico!
         </span>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
             @foreach($casas as $casa)
                 <div class="bg-[#ffffff] rounded-lg shadow p-3">
-                     
-                   <div class="relative rounded-lg mb-3 overflow-hidden">
+
+                    <div class="relative rounded-lg mb-3 overflow-hidden titulo-poppins">
                         @if($casa->fotos->first())
                             <a href="{{ route('casas.show', $casa->id) }}" class="block">
-                                <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}"
-                                     alt="Foto casa"
-                                     class="w-full h-68 object-cover rounded-lg">
+                                <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}" alt="Foto casa"
+                                    class="w-full h-68 object-cover rounded-lg">
                             </a>
                         @else
                             <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">Sin imagen</div>
                         @endif
 
-                        @if( strtolower($casa->estado) !== 'disponible' )
+                        @if(strtolower($casa->estado) !== 'disponible')
                             <div class="estado-badge">
                                 {{ mb_strtoupper($casa->estado) }}
                             </div>
-                            @else
+                        @else
                             <div class="estado-badge2">
                                 DISPONIBLE
                             </div>
@@ -42,7 +41,8 @@
                         <h3 class="font-bold text-lg text-[#404656] mb-1"> {{ mb_strtoupper($casa->titulo) }} EN
                             {{ mb_strtoupper($casa->tipo) }}
                         </h3>
-                        <p class="text-sm text-gray-500 mb-2"><i class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
+                        <p class="text-sm text-gray-500 mb-2"><i
+                                class="fas fa-map-marker-alt text-gray-600 mr-1"></i>{{ mb_strtoupper($casa->direccion) }}</p>
                     </a>
                     <!-- Datos principales -->
                     <div class="flex items-center justify-between text-sm mb-2">
@@ -101,13 +101,13 @@
     .titulo-poppins {
         font-family: 'Poppins', Arial, sans-serif;
     }
-    
+
     .text-overlay {
-        background: rgba(0,0,0,0.35); 
+        background: rgba(0, 0, 0, 0.35);
         padding: .4rem .8rem;
         border-radius: .35rem;
         max-width: 90%;
-        pointer-events: none; 
+        pointer-events: none;
     }
 
     .estado-badge2 {
@@ -125,18 +125,20 @@
         letter-spacing: 1px;
         pointer-events: none;
     }
+
     .estado-badge {
         position: absolute;
         top: 32px;
         right: -68px;
         z-index: 30;
         transform: rotate(30deg);
-        background: #e11d48; /* rojo */
+        background: #e11d48;
+        /* rojo */
         color: #fff;
         font-weight: 800;
         padding: 8px 110px;
         font-size: 1.05rem;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
         letter-spacing: 1px;
         pointer-events: none;
     }
@@ -148,6 +150,9 @@
             font-size: 0.9rem;
             transform: rotate(28deg);
         }
-        .text-overlay .text-xl { font-size: 1rem; }
+
+        .text-overlay .text-xl {
+            font-size: 1rem;
+        }
     }
 </style>

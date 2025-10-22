@@ -146,7 +146,7 @@
         <div class="space-y-6 lg:sticky lg:top-8">
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="font-bold text-lg mb-4 text-[#404656] text-center">¿Necesitas más información?</h3>
-                <div class="flex flex-col items-center mb-4" >
+                <div class="flex flex-col items-center mb-4">
                     <img src="{{ asset('recursos/img/casaperfil.jpg') }}" alt="perfil"
                         class="w-54 h-54 rounded-full object-cover mb-2 border">
                     <span class="font-semibold text-[#404656]">Casa y Chalet Bienes Raices</span>
@@ -176,7 +176,7 @@
                             class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]"
                             placeholder="Mensaje">Estoy interesado en la propiedad con COD: {{ $casa->codigo }} En {{ $casa->direccion }} {{ $casa->zona }} Con precio de :{{ number_format($casa->precio, 0, ',', '.') }} {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}</textarea>
                     </div>
-                    
+
                     <button type="submit"
                         class="w-full bg-[#e09129] text-white font-bold py-2 rounded mt-2 hover:bg-[#293F5D] transition-colors cursor-pointer">
                         Contactar
@@ -188,7 +188,7 @@
     </div>
     <!-- Modal para visualizar fotos completas -->
     <div id="modalFotos"
-        class="fixed inset-0 bg-black/80  items-center justify-center z-50 hidden  transition-opacity duration-300">
+        class="fixed inset-0 bg-black/80 items-center justify-center z-50 hidden transition-opacity duration-300">
         <button id="cerrarModal" class="absolute top-2 right-2 text-white text-4xl cursor-pointer">&times;</button>
         <div id="modalContent" class=" rounded-lg shadow-lg p-4 relative max-w-5xl w-full">
             <div class="swiper modalSwiper">
@@ -200,24 +200,90 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <!-- Cambié las clases para que no choquen con el swiper principal -->
+                <div class="swiper-button-next modal-next"></div>
+                <div class="swiper-button-prev modal-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
     </div>
 
-    <style>
-        #modalFotos {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
 
-        #modalFotos.opacity-100 {
-            opacity: 1;
-        }
-    </style>
 @endsection
+<style>
+    /* No forzar display aquí para que Tailwind .hidden funcione correctamente */
+    #modalFotos {
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+    }
+
+    /* Cuando NO tenga .hidden, lo mostramos como flex (respeta la clase hidden de Tailwind) */
+    #modalFotos:not(.hidden) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    #modalContent {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
+    }
+
+    .modalSwiper .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+    }
+
+    .modalSwiper img {
+        max-height: 70vh;
+        max-width: 90vw;
+        object-fit: contain;
+        margin: auto;
+        display: block;
+    }
+
+    /* Botones personalizados del modal (clases únicas) */
+    .modalSwiper .modal-next,
+    .modalSwiper .modal-prev {
+        color: #f3f4f6;
+        /* blanco/gris */
+        background: rgba(40, 40, 40, 0.5);
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: background 0.2s;
+    }
+
+    .modalSwiper .modal-next:hover,
+    .modalSwiper .modal-prev:hover {
+        background: rgba(80, 80, 80, 0.7);
+        color: #fff;
+    }
+
+    /* Usa contenido con Font Awesome si lo tienes cargado */
+    .modalSwiper .modal-next:after {
+        content: "\f105";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+    }
+
+    .modalSwiper .modal-prev:after {
+        content: "\f104";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+    }
+</style>
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -255,8 +321,8 @@
                 modalSwiper = new Swiper('.modalSwiper', {
                     loop: true,
                     navigation: {
-                        nextEl: '.modalSwiper .swiper-button-next',
-                        prevEl: '.modalSwiper .swiper-button-prev',
+                        nextEl: '.modalSwiper .modal-next',
+                        prevEl: '.modalSwiper .modal-prev',
                     },
                     pagination: {
                         el: '.modalSwiper .swiper-pagination',
@@ -265,6 +331,10 @@
                     effect: 'fade',
                     fadeEffect: { crossFade: true },
                     slidesPerView: 1,
+                    keyboard: {
+                        enabled: true,
+                        onlyInViewport: false // permite usar teclado aunque el modal esté encima
+                    }
                 });
             }
             modalSwiper.slideToLoop(index, 0);
@@ -299,7 +369,7 @@
             const telefono = document.getElementById('telefono').value.trim();
             const email = document.getElementById('email').value.trim();
             const mensaje = document.getElementById('mensaje').value.trim();
-            
+
 
             // Validación
             if (!nombre || !telefono) {

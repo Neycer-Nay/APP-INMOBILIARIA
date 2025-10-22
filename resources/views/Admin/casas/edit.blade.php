@@ -27,13 +27,13 @@
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Código</label>
                     <input type="text" name="codigo" value="{{ $casa->codigo }}"
-    class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
+                        class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
                 </div>
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Título</label>
                     <input type="text" name="titulo" value="{{ $casa->titulo }}"
-    class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
+                        class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
                 </div>
 
                 <div>
@@ -65,20 +65,24 @@
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                         <option value="">Categoría</option>
                         <option value="casa" {{ $casa->categoria == 'casa' ? 'selected' : '' }}>Casa</option>
-                        <option value="departamento" {{ $casa->categoria == 'departamento' ? 'selected' : '' }}>Departamento</option>
-                        <option value="casa_comercial" {{ $casa->categoria == 'casa_comercial' ? 'selected' : '' }}>Casa Comercial</option>
+                        <option value="departamento" {{ $casa->categoria == 'departamento' ? 'selected' : '' }}>Departamento
+                        </option>
+                        <option value="casa_comercial" {{ $casa->categoria == 'casa_comercial' ? 'selected' : '' }}>Casa
+                            Comercial</option>
                         <option value="quinta" {{ $casa->categoria == 'quinta' ? 'selected' : '' }}>Quinta</option>
                         <option value="terreno" {{ $casa->categoria == 'terreno' ? 'selected' : '' }}>Terreno</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Superficie Terreno (m²)</label>
-                    <input type="number" step="0.01" name="superficieTerreno" value="{{ old('superficieTerreno', $casa->superficieTerreno) }}"
+                    <input type="number" step="0.01" name="superficieTerreno"
+                        value="{{ old('superficieTerreno', $casa->superficieTerreno) }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Superficie Construida (m²)</label>
-                    <input type="number" step="0.01" name="superficieConstruida" value="{{ old('superficieConstruida', $casa->superficieConstruida) }}"
+                    <input type="number" step="0.01" name="superficieConstruida"
+                        value="{{ old('superficieConstruida', $casa->superficieConstruida) }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
@@ -94,12 +98,12 @@
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Ciudad</label>
                     <input type="text" name="ciudad" value="{{ $casa->ciudad }}"
-    class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
+                        class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Descripción</label>
-                    <textarea name="descripcion" rows="2"
-    class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>{{ $casa->descripcion }}</textarea>
+                    <textarea name="descripcion" rows="2" class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100"
+                        readonly>{{ $casa->descripcion }}</textarea>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Tiendas</label>
@@ -137,20 +141,26 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Características Interior (separadas por coma)</label>
-                    <input type="text" name="caracteristicas" value="{{ old('caracteristicas', is_array($casa->caracteristicas) ? implode(', ', $casa->caracteristicas) : $casa->caracteristicas) }}"
+                    <label class="block text-gray-700 font-semibold mb-2">Características Interior (separadas por
+                        coma)</label>
+                    <input type="text" name="caracteristicas"
+                        value="{{ old('caracteristicas', is_array($casa->caracteristicas) ? implode(', ', $casa->caracteristicas) : $casa->caracteristicas) }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="Piscina, Jardín, Seguridad...">
                 </div>
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Características Externas (separadas por coma)</label>
-                    <input type="text" name="caracteristicasExternas" value="{{ old('caracteristicasExternas', is_array($casa->caracteristicasExternas) ? implode(', ', $casa->caracteristicasExternas) : $casa->caracteristicasExternas) }}"
+                    <label class="block text-gray-700 font-semibold mb-2">Características Externas (separadas por
+                        coma)</label>
+                    <input type="text" name="caracteristicasExternas"
+                        value="{{ old('caracteristicasExternas', is_array($casa->caracteristicasExternas) ? implode(', ', $casa->caracteristicasExternas) : $casa->caracteristicasExternas) }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="Colegios, Parques, Mercados, Transporte...">
                 </div>
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Características Servicios (separadas por coma)</label>
-                    <input type="text" name="caracteristicasServicios" value="{{ old('caracteristicasServicios', is_array($casa->caracteristicasServicios) ? implode(', ', $casa->caracteristicasServicios) : $casa->caracteristicasServicios) }}"
+                    <label class="block text-gray-700 font-semibold mb-2">Características Servicios (separadas por
+                        coma)</label>
+                    <input type="text" name="caracteristicasServicios"
+                        value="{{ old('caracteristicasServicios', is_array($casa->caracteristicasServicios) ? implode(', ', $casa->caracteristicasServicios) : $casa->caracteristicasServicios) }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="agua, luz, internet, etc....">
                 </div>
@@ -161,7 +171,8 @@
                 <div class="flex flex-wrap gap-2 mb-2">
                     @forelse($casa->fotos as $foto)
                         <div class="relative flex flex-col items-center">
-                            <img src="{{ asset('storage/' . ltrim($foto->ruta_imagen, '/')) }}" class="h-20 w-20 object-cover rounded border mb-1" alt="Foto casa">
+                            <img src="{{ asset('storage/' . ltrim($foto->ruta_imagen, '/')) }}"
+                                class="h-20 w-20 object-cover rounded border mb-1" alt="Foto casa">
                             @if($foto->foto_principal)
                                 <span class="text-xs text-blue-600 font-bold">Principal</span>
                             @endif

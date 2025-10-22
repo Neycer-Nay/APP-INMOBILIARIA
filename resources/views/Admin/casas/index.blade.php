@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('contenido')
-<form action="{{ route('logout') }}" method="POST" class="inline">
+    <form action="{{ route('logout') }}" method="POST" class="inline">
         @csrf
         <button type="submit" class="text-red-500 hover:underline bg-transparent border-0 p-0">
             Cerrar sesión
@@ -20,7 +20,7 @@
                         <th class="py-3 px-4 text-left">Dirección</th>
                         <th class="py-3 px-4 text-left">Código</th>
                         <th class="py-3 px-4 text-left">Precio</th>
-                        
+
                         <th class="py-3 px-4 text-left">Estado</th>
                         <th class="py-3 px-4 text-left">Acciones</th>
                     </tr>
@@ -47,11 +47,12 @@
                                 {{ number_format($casa->precio, 0, ',', '.') }}
                                 {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}
                             </td>
-                            
+
                             <td class="py-2 px-4">{{ $casa->estado }}</td>
                             <td class="py-2 px-4">
                                 <a href="{{ route('casas.show', $casa->id) }}"
-                                    class="bg-[#404656] text-white py-1 px-3 rounded hover:bg-[#2c3240] text-sm" title="Ver detalles">
+                                    class="bg-[#404656] text-white py-1 px-3 rounded hover:bg-[#2c3240] text-sm"
+                                    title="Ver detalles">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="{{ route('casas.edit', $casa->id) }}"
@@ -63,8 +64,9 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 text-sm" title="Eliminar"
-                                        title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar esta casa?')">
+                                        class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 text-sm"
+                                        title="Eliminar" title="Eliminar"
+                                        onclick="return confirm('¿Estás seguro de eliminar esta casa?')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
@@ -81,7 +83,7 @@
             </table>
         </div>
     </div>
-    
+
 @endsection
 @push('scripts')
     @if(session('success'))
