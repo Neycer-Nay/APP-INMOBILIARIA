@@ -35,6 +35,9 @@ return new class extends Migration
             $table->json('caracteristicas')->nullable(); // piscina, jardin, seguridad, etc.
             $table->json('caracteristicasExternas')->nullable(); // colegios, parques, mercados, transporte, etc.
             $table->json('caracteristicasServicios')->nullable(); // agua, luz, internet, etc.
+
+            $table->string('videoUrl')->nullable();
+            
             $table->timestamps();
         });
     }

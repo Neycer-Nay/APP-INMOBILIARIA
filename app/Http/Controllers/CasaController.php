@@ -104,7 +104,8 @@ class CasaController extends Controller
             'caracteristicas' => 'nullable|string',
             'caracteristicasExternas' => 'nullable|string',
             'caracteristicasServicios' => 'nullable|string',
-            'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:8048'
+            'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:8048',
+            'videoUrl' => 'nullable|url',
         ]);
 
         // Procesar características (de texto a array)
@@ -144,6 +145,7 @@ class CasaController extends Controller
             'caracteristicas' => $caracteristicas,
             'caracteristicasExternas' => $caracteristicasExternas,
             'caracteristicasServicios' => $caracteristicasServicios,
+            'videoUrl' => $validatedData['videoUrl'] ?? null,
         ]);
 
         // Guardar fotos
@@ -199,6 +201,7 @@ class CasaController extends Controller
             'caracteristicas' => 'nullable|string',
             'caracteristicasExternas' => 'nullable|string',
             'caracteristicasServicios' => 'nullable|string',
+                'videoUrl' => 'nullable|url',
             // Puedes agregar validación para fotos si permites editar imágenes
         ]);
 
@@ -230,6 +233,7 @@ class CasaController extends Controller
             'caracteristicas' => $caracteristicas,
             'caracteristicasExternas' => $caracteristicasExternas,
             'caracteristicasServicios' => $caracteristicasServicios,
+            'videoUrl' => $validatedData['videoUrl'] ?? null,
         ]);
 
         // Si quieres permitir editar fotos, agrega lógica aquí
