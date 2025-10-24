@@ -309,9 +309,9 @@
 
                             <div class="mb-4">
                                 <button id="btnEnviar"
-                                    class="w-full bg-[#e09129] text-gray-700 font-semibold p-2 rounded transition-all hover:bg-[#FFC857]"
+                                    class="w-full bg-[#e09129] text-white font-semibold p-2 rounded transition-all hover:bg-[#FFC857] titulo-poppins"
                                     type="submit">
-                                    Enviar consulta
+                                    ENVIAR CONSULTA
                                 </button>
                             </div>
                         </form>
@@ -323,7 +323,7 @@
                     <h4 class="text-2xl md:text-3xl font-bold text-[#404656] mb-4 titulo-poppins text-center">Ubicación de
                         la oficina</h4>
 
-                    <div class="w-full rounded-lg overflow-hidden bg-white shadow border">
+                    <div class="w-full rounded-lg overflow-hidden bg-white shadow ">
                         <div class="w-full h-[420px] md:h-[640px] lg:h-[460px]">
                             <!-- Reemplaza el src por la ubicación exacta de tu oficina si es necesario -->
                             <div class="w-full map-container">
@@ -335,7 +335,15 @@
                                 <button type="button" class="map-fullscreen-btn"
                                     aria-label="Ver mapa en pantalla completa">⤢</button>
                             </div>
+
                         </div>
+                    </div>
+                    <div class="flex justify-center mt-6">
+                        <a href="https://www.google.com/maps/place/Casa+y+Chalet/@-17.7732507,-63.1751439,17z/data=!3m1!4b1!4m6!3m5!1s0x93f1e7df4d895fab:0x9b482fbb9002b695!8m2!3d-17.7732507!4d-63.1729552!16s%2Fg%2F11b6z5x5q8"
+                            target="_blank"
+                            class="bg-[#e09129] text-white font-semibold p-2 rounded transition-all hover:bg-[#FFC857] titulo-poppins">
+                            VER EN GOOGLE MAPS
+                        </a>
                     </div>
                 </div>
 
