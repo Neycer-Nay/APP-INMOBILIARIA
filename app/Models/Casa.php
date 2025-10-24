@@ -26,7 +26,8 @@ class Casa extends Model
         'estado',
         'caracteristicas',
         'caracteristicasExternas',
-        'caracteristicasServicios'
+        'caracteristicasServicios',
+        'videoUrl',
     ];
 
     protected $casts = [

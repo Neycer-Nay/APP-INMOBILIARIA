@@ -157,6 +157,12 @@
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="agua, luz, internet, etc....">
                 </div>
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Insertar enlace del video</label>
+                    <input type="text" name="videoUrl"
+                        class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
+                        placeholder="https://www.youtube.com/watch?v=...">
+                </div>
 
             </div>
 

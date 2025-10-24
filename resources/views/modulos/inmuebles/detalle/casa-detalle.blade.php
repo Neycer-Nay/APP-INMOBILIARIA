@@ -140,6 +140,21 @@
 
             @endif
 
+            <!-- Tarjeta: Video -->
+            @if (!empty($casa->videoUrl))
+    <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="font-bold text-lg mb-2 text-[#404656]">Video de la Propiedad</h3>
+        <div class="aspect-w-16 aspect-h-9">
+            <iframe 
+                src="{{ str_replace('watch?v=', 'embed/', $casa->videoUrl) }}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                class="w-full h-64 md:h-[400px] rounded-lg">
+            </iframe>
+        </div>
+    </div>
+@endif
         </div>
 
         <!-- Columna derecha: Tarjeta de contacto -->
