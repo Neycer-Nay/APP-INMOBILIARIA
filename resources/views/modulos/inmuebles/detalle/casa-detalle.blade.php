@@ -142,19 +142,16 @@
 
             <!-- Tarjeta: Video -->
             @if (!empty($casa->videoUrl))
-    <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="font-bold text-lg mb-2 text-[#404656]">Video de la Propiedad</h3>
-        <div class="aspect-w-16 aspect-h-9">
-            <iframe 
-                src="{{ str_replace('watch?v=', 'embed/', $casa->videoUrl) }}" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen 
-                class="w-full h-64 md:h-[400px] rounded-lg">
-            </iframe>
-        </div>
-    </div>
-@endif
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-2 text-[#404656]"></h3>
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe src="{{ str_replace('watch?v=', 'embed/', $casa->videoUrl) }}" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen class="w-full h-64 md:h-[400px] rounded-lg">
+                        </iframe>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <!-- Columna derecha: Tarjeta de contacto -->
@@ -171,27 +168,42 @@
                     <a href="casa_y_chalet@hotmail.com" target="blank"
                         class="text-[#404656] hover:underline  text-sm">casa_y_chalet@hotmail.com</a>
                 </div>
+
                 <form id="formContacto" class="space-y-4" onsubmit="enviarWhatsapp(event)">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <input type="text" name="nombre" id="nombre" placeholder="Nombre" required
-                                class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
+                        <div class="input flex flex-col w-full static">
+                            <label for="nombre"
+                                class="text-[#404656] text-sm font-semibold relative top-2 ml-[7px] px-[3px] bg-[#fff] w-fit">
+                                Nombre:
+                            </label>
+                            <input type="text" name="nombre" id="nombre" placeholder="Escribe tu nombre..." required
+                                class="border-[#e09129] input px-[10px] py-[11px] text-sm bg-[#fff] border-2 rounded-[5px] w-full focus:outline-none placeholder:text-black/25" />
                         </div>
-                        <div>
-                            <input type="number" name="telefono" id="telefono" placeholder="Teléfono" required
-                                class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
+                        <div class="input flex flex-col w-full static">
+                            <label for="telefono"
+                                class="text-[#404656] text-sm font-semibold relative top-2 ml-[7px] px-[3px] bg-[#fff] w-fit">
+                                Teléfono:
+                            </label>
+                            <input type="number" name="telefono" id="telefono" placeholder="Escribe tu teléfono..." required
+                                class="border-[#e09129] input px-[10px] py-[11px] text-sm bg-[#fff] border-2 rounded-[5px] w-full focus:outline-none placeholder:text-black/25" />
                         </div>
                     </div>
-                    <div>
-                        <input type="email" name="email" id="email" placeholder="Correo (opcional)"
-                            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]">
+                    <div class="input flex flex-col w-full">
+                        <label for="email"
+                            class="text-[#404656] text-sm font-semibold relative top-2 ml-[7px] px-[3px] bg-[#fff] w-fit">
+                            Correo (opcional):
+                        </label>
+                        <input type="email" name="email" id="email" placeholder="Escribe tu correo..."
+                            class="border-[#e09129] input px-4 py-3 text-sm md:text-base bg-[#fff] border-2 rounded-md w-full focus:outline-none placeholder:text-black/50" />
                     </div>
-                    <div>
-                        <textarea name="mensaje" id="mensaje" rows="3"
-                            class="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#404656]"
-                            placeholder="Mensaje">Estoy interesado en la propiedad con COD: {{ $casa->codigo }} En {{ $casa->direccion }} {{ $casa->zona }} Con precio de :{{ number_format($casa->precio, 0, ',', '.') }} {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}</textarea>
+                    <div class="input flex flex-col w-full">
+                        <label for="mensaje"
+                            class="text-[#404656] text-sm font-semibold relative top-2 ml-[7px] px-[3px] bg-[#fff] w-fit">
+                            Mensaje:
+                        </label>
+                        <textarea name="mensaje" id="mensaje" rows="3" placeholder="Escribe tu mensaje..."
+                            class="border-[#e09129] input px-4 py-3 text-sm md:text-base bg-[#fff] border-2 rounded-md w-full focus:outline-none placeholder:text-black/50">Estoy interesado en la propiedad con COD: {{ $casa->codigo }} En {{ $casa->direccion }} {{ $casa->zona }} Con precio de :{{ number_format($casa->precio, 0, ',', '.') }} {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}</textarea>
                     </div>
-
                     <button type="submit"
                         class="w-full bg-[#e09129] text-white font-bold py-2 rounded mt-2 hover:bg-[#293F5D] transition-colors cursor-pointer">
                         Contactar
