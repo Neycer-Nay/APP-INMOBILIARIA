@@ -143,7 +143,7 @@
             <!-- Tarjeta: Video -->
             @if (!empty($casa->videoUrl))
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h3 class="font-bold text-lg mb-2 text-[#404656]">Video de la Propiedad</h3>
+                    <h3 class="font-bold text-lg mb-2 text-[#404656]"></h3>
                     <div class="aspect-w-16 aspect-h-9">
                         <iframe src="{{ str_replace('watch?v=', 'embed/', $casa->videoUrl) }}" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
