@@ -70,8 +70,16 @@
 
                     </div>
 
-                    <!-- Precio -->
-                    <div class="text-2xl font-bold text-[#404656] mb-2">{{ number_format($casa->precio, 0, ',', '.') }} $us
+                    <!-- Precio anterior -->
+                    @if ($casa->precioAnterior && $casa->precioAnterior > $casa->precio)
+                        <p class="text-sm text-gray-500 line-through mb-1">
+                            Antes: <span class="font-bold">${{ number_format($casa->precioAnterior, 0, ',', '.') }}</span>
+                        </p>
+                    @endif
+
+                    <!-- Precio actual -->
+                    <div class="text-2xl font-bold text-[#404656] mb-2">
+                        {{ number_format($casa->precio, 0, ',', '.') }} $us
                         <span class="text-base font-normal text-gray-500">T.C. 7 Bs</span>
                     </div>
 

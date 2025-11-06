@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Casa;
 use App\Models\FotoCasa;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CasaController extends Controller
 {
 
-    public function buscar(Request $request)
+    public function buscar(Request $request): View
     {
         $query = Casa::query();
 
@@ -81,7 +83,7 @@ class CasaController extends Controller
         return view('Admin.casas.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
             'codigo' => 'required|string|unique:casas,codigo',
@@ -206,12 +208,13 @@ class CasaController extends Controller
         ]);
 
         $casa = Casa::findOrFail($id);
-
+        
+        
         // Procesar características
         $caracteristicas = !empty($validatedData['caracteristicas']) ? array_map('trim', explode(',', $validatedData['caracteristicas'])) : [];
         $caracteristicasExternas = !empty($validatedData['caracteristicasExternas']) ? array_map('trim', explode(',', $validatedData['caracteristicasExternas'])) : [];
         $caracteristicasServicios = !empty($validatedData['caracteristicasServicios']) ? array_map('trim', explode(',', $validatedData['caracteristicasServicios'])) : [];
-
+        $precioAnterior = $casa->precio;
         $casa->update([
             'codigo' => $validatedData['codigo'],
             'titulo' => $validatedData['titulo'],
@@ -220,6 +223,7 @@ class CasaController extends Controller
             'categoria' => $validatedData['categoria'],
             'superficieTerreno' => $validatedData['superficieTerreno'],
             'superficieConstruida' => $validatedData['superficieConstruida'],
+            'precioAnterior' => $precioAnterior, // Precio anterior
             'precio' => $validatedData['precio'],
             'direccion' => $validatedData['direccion'],
             'ciudad' => $validatedData['ciudad'],

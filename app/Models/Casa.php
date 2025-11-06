@@ -14,6 +14,7 @@ class Casa extends Model
         'categoria',
         'superficieTerreno',
         'superficieConstruida',
+        'precioAnterior',
         'precio',
         'direccion',
         'ciudad',

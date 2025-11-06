@@ -38,13 +38,23 @@
                     </div>
                     <div class="bg-[#e09129] bg-opacity-10 rounded-lg p-6 shadow-md">
                         <h3 class="text-xl font-bold mb-2 text-white titulo-poppins">Valores</h3>
-                        <ul class="list-disc list-inside text-[#000] font-bold italic">
-                            <li>Integridad</li>
-                            <li>Transparencia</li>
-                            <li>Compromiso</li>
-                            <li>Respeto</li>
-                            <li>Innovación</li>
-                        </ul>
+                         <ul class="space-y-2">
+        <li class="flex items-center text-[#000] font-bold italic">
+            <span class="text-white mr-2">✔</span> Integridad
+        </li>
+        <li class="flex items-center text-[#000] font-bold italic">
+            <span class="text-white mr-2">✔</span> Transparencia
+        </li>
+        <li class="flex items-center text-[#000] font-bold italic">
+            <span class="text-white mr-2">✔</span> Compromiso
+        </li>
+        <li class="flex items-center text-[#000] font-bold italic">
+            <span class="text-white mr-2">✔</span> Respeto
+        </li>
+        <li class="flex items-center text-[#000] font-bold italic">
+            <span class="text-white mr-2">✔</span> Innovación
+        </li>
+    </ul>
                     </div>
                 </div>
             </div>

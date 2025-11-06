@@ -104,7 +104,7 @@
                         @foreach($casa->caracteristicas as $caracteristica)
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-check-circle text-green-500"></i>
-                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                                <span class="text-gray-700">{{ ucwords(string: strtolower(string: $caracteristica)) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -118,7 +118,7 @@
                         @foreach($casa->caracteristicasExternas as $caracteristica)
                             <div class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700">
                                 <i class="fas fa-check-circle text-green-500"></i>
-                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                                <span class="text-gray-700">{{ ucwords(string: strtolower(string: $caracteristica)) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -132,7 +132,7 @@
                         @foreach ($casa->caracteristicasServicios as $caracteristica)
                             <div class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700">
                                 <i class="fas fa-check-circle text-green-500"></i>
-                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                                <span class="text-gray-700">{{ ucwords(string: strtolower(string: $caracteristica)) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -145,7 +145,11 @@
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="font-bold text-lg mb-2 text-[#404656]"></h3>
                     <div class="aspect-w-16 aspect-h-9">
-                        <iframe src="{{ str_replace('watch?v=', 'embed/', $casa->videoUrl) }}" frameborder="0"
+                        <iframe src="{{ 
+                            strpos($casa->videoUrl, 'youtu.be') !== false
+                ? str_replace('youtu.be/', 'www.youtube.com/embed/', explode('?', $casa->videoUrl)[0])
+                : str_replace('watch?v=', 'embed/', $casa->videoUrl) 
+                        }}" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen class="w-full h-64 md:h-[400px] rounded-lg">
                         </iframe>
@@ -246,7 +250,7 @@
         }
     }
 
-    
+
 
     @media (max-width: 769px) {
         .swiper {
