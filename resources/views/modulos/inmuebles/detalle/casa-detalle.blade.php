@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('contenido')
     <!-- Galería de fotos -->
-    <div class="mb-6">
+    <div class="mb-2">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 @foreach($casa->fotos as $index => $foto)
@@ -16,11 +16,11 @@
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <!-- Paginación -->
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination "></div>
         </div>
 
     </div>
-    <div class="max-w-7xl mx-auto py-8 px-2 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+    <div class="max-w-7xl mx-auto py-4 px-2 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
         <!-- Columna principal (2/3) -->
         <div class="lg:col-span-2 space-y-6">
@@ -104,7 +104,7 @@
                         @foreach($casa->caracteristicas as $caracteristica)
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-check-circle text-green-500"></i>
-                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                                <span class="text-gray-700">{{ ucwords(string: strtolower(string: $caracteristica)) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -118,7 +118,7 @@
                         @foreach($casa->caracteristicasExternas as $caracteristica)
                             <div class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700">
                                 <i class="fas fa-check-circle text-green-500"></i>
-                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                                <span class="text-gray-700">{{ ucwords(string: strtolower(string: $caracteristica)) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -132,7 +132,7 @@
                         @foreach ($casa->caracteristicasServicios as $caracteristica)
                             <div class="flex items-center gap-2" data-aos="fade-up" data-aos-duration="700">
                                 <i class="fas fa-check-circle text-green-500"></i>
-                                <span class="text-gray-700">{{ ucfirst($caracteristica) }}</span>
+                                <span class="text-gray-700">{{ ucwords(string: strtolower(string: $caracteristica)) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -145,7 +145,11 @@
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="font-bold text-lg mb-2 text-[#404656]"></h3>
                     <div class="aspect-w-16 aspect-h-9">
-                        <iframe src="{{ str_replace('watch?v=', 'embed/', $casa->videoUrl) }}" frameborder="0"
+                        <iframe src="{{ 
+                            strpos($casa->videoUrl, 'youtu.be') !== false
+                ? str_replace('youtu.be/', 'www.youtube.com/embed/', explode('?', $casa->videoUrl)[0])
+                : str_replace('watch?v=', 'embed/', $casa->videoUrl) 
+                        }}" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen class="w-full h-64 md:h-[400px] rounded-lg">
                         </iframe>
@@ -238,6 +242,41 @@
 
 @endsection
 <style>
+    @media (min-width: 1024px) {
+        .swiper-pagination {
+            margin-bottom: 4rem;
+            /* Reducir el margen inferior de la galería */
+
+        }
+    }
+
+
+
+    @media (max-width: 769px) {
+        .swiper {
+            margin-bottom: -8rem;
+            /* Reducir el margen inferior de la galería */
+        }
+
+        .swiper-pagination {
+            margin-bottom: 8rem;
+            /* Reducir el margen inferior de la galería */
+        }
+
+        .swiper-slide img {
+            height: 30rem;
+            /* Ajustar la altura de las imágenes en móviles */
+        }
+
+        .max-w-7xl {
+            padding-top: 0rem;
+            /* Reducir el padding superior del contenedor de datos */
+            gap: 1rem;
+            /* Reducir el espacio entre columnas */
+        }
+    }
+
+
     /* No forzar display aquí para que Tailwind .hidden funcione correctamente */
     #modalFotos {
         opacity: 0;
