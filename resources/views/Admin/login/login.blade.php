@@ -39,7 +39,7 @@
 
     <div class="flex flex-col items-center justify-center h-screen">
         <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">Login</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Inicio de Sesión</h2>
             @if ($errors->any())
                 <div class="mb-4 text-red-600">
                     <ul>

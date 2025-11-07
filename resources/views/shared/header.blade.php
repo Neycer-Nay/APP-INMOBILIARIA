@@ -48,7 +48,7 @@
           </a>
         </li>
         <li class="px-3">
-          <a href="#">
+          <a href="{{ route('blog') }}">
             <span class="nav-text">BLOG</span>
           </a>
         </li>

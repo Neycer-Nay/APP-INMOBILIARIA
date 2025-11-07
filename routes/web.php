@@ -14,6 +14,9 @@ Route::get('/nosotros', function () {
 Route::get('/servicios', function () {
     return view('modulos.servicios.servicios');
 })->name('servicios');
+Route::get('/blog', function () {
+    return view('modulos.blog.blog');
+})->name('blog');
 
 Route::get('/login', [App\Http\Controllers\UserController::class, 'index'])->name('login');
 
