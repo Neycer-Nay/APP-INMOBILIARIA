@@ -145,13 +145,18 @@
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="font-bold text-lg mb-2 text-[#404656]"></h3>
                     <div class="aspect-w-16 aspect-h-9">
-                        <iframe src="{{ 
-                            strpos($casa->videoUrl, 'youtu.be') !== false
-                ? str_replace('youtu.be/', 'www.youtube.com/embed/', explode('?', $casa->videoUrl)[0])
-                : str_replace('watch?v=', 'embed/', $casa->videoUrl) 
-                        }}" frameborder="0"
+                        <iframe 
+                            src="{{ 
+                                strpos($casa->videoUrl, 'youtu.be') !== false 
+                                    ? str_replace('youtu.be/', 'www.youtube.com/embed/', explode('?', $casa->videoUrl)[0]) 
+                                    : (strpos($casa->videoUrl, 'facebook.com') !== false 
+                                        ? 'https://www.facebook.com/plugins/video.php?href=' . urlencode($casa->videoUrl) 
+                                        : str_replace('watch?v=', 'embed/', $casa->videoUrl)) 
+                            }}" 
+                            frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen class="w-full h-64 md:h-[400px] rounded-lg">
+                            allowfullscreen 
+                            class="w-full h-64 md:h-[500px] rounded-lg">
                         </iframe>
                     </div>
                 </div>

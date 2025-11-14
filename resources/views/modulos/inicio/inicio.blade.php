@@ -355,6 +355,25 @@
 
 
 @endsection
+<!--- estilos para los select del buscador --->
+<style>
+select, ::picker(select){
+    appearance: base-select;
+    overflow: hidden;
+    border-radius: 5px;
+    width: auto;
+    
+}
+::picker(select){
+    border: navy;
+    background-color: #fff;
+    margin: .4rem 0;
+}
+option:checked{
+    background-color: #00bfae;
+    color: #fff;
+}
+</style>
 
 <style>
     .titulo-poppins {
