@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Insertar enlace del video</label>
+                    <label class="block text-gray-700 font-semibold mb-2">Actualizar enlace del video de FB YT</label>
                     <input type="text" name="videoUrl" value="{{ old('videoUrl', $casa->videoUrl) }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="https://www.youtube.com/watch?v=...">
