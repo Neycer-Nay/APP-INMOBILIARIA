@@ -12,7 +12,7 @@
     </div>
 
     <!-- Buscador del Blog -->
-    
+
 
     <div class="max-w-7xl mx-auto px-4 py-12">
         <!-- Sección Programa de Radio -->
@@ -25,8 +25,9 @@
                             <i class="fas fa-microphone text-4xl mr-4"></i>
                             <h2 class="text-3xl lg:text-4xl font-bold titulo-poppins">NEGOCIO REDONDO</h2>
                         </div>
-                        <h3 class="text-2xl lg:text-3xl font-bold mb-4 text-yellow-300">"Las mejores ofertas inmobiliarias"</h3>
-                        
+                        <h3 class="text-2xl lg:text-3xl font-bold mb-4 text-yellow-300">"Escucha las mejores ofertas
+                            inmobiliarias"</h3>
+
                         <div class="space-y-4 mb-8">
                             <div class="flex items-center">
                                 <i class="fas fa-calendar-alt mr-3 text-yellow-300"></i>
@@ -43,16 +44,12 @@
                         </div>
 
                         <p class="text-lg mb-8 leading-relaxed">
-                            Durante una hora completa hablamos sobre bienes inmuebles, trámites, regularización, tendencias del mercado, 
+                            Durante una hora completa hablamos sobre bienes inmuebles, trámites, regularización, tendencias
+                            del mercado,
                             y presentamos las mejores ofertas de casas en venta, alquiler y anticrético.
                         </p>
 
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="bg-yellow-400 text-red-800 px-6 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
-                                <a href="https://sites.google.com/view/radiocomercio904" target="_blank"><i class="fas fa-play mr-2"></i>Escuchar Programa</a>
-                            </button>
-                            
-                        </div>
+                       
                     </div>
 
                     <!-- Banner/Imagen -->
@@ -61,13 +58,51 @@
                         <div class="h-full bg-red-900 flex items-center justify-center">
                             <div class="text-center text-white">
                                 <i class="fas fa-broadcast-tower text-6xl mb-4 opacity-50"></i>
-                                <p class="text-xl font-bold">En Vivo</p>
+                                <p class="text-xl font-bold">NEGOCIO REDONDO</p>
                                 <p class="text-lg">90.4 FM</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- Reproductor Directo de Radio -->
+                <div class="mt-4  rounded-xl p-4" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div class="text-center mb-2">
+                        <h3 class="text-xl font-bold text-white titulo-poppins mb-1">
+                            <i class="fas fa-play-circle mr-2"></i>Reproductor en Vivo
+                        </h3>
+                        <p class="text-white text-sm font-medium">Escucha Negocio Redondo por la 90.4 FM en tiempo real</p>
+                    </div>
+
+                    <!-- Iframe del reproductor -->
+                    <div class="rounded-lg">
+                        <iframe
+                            src="https://cp.usastreams.com/pr2g/APPlayerRadioHTML5.aspx?stream=https://stream.zeno.fm/zcax2fkgam8uv&fondo=05&formato=mpeg&color=14&titulo=2&autoStart=1&vol=5&tipo=14&nombre=comercio&imagen=https://cp.usastreams.com/playerHTML5/img/cover.png"
+                            width="100%" height="80" frameborder="0" scrolling="no" allow="autoplay"
+                            style="border-radius: 6px;">
+                        </iframe>
+                    </div>
+
+                    <!-- Información adicional -->
+                    <div class="mt-2 text-center">
+                        <div class="flex justify-center items-center space-x-4 text-white text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-signal mr-1"></i>
+                                <span class="font-medium">En Vivo</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-volume-up mr-1"></i>
+                                <span class="font-medium">90.4 FM</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-headphones mr-1"></i>
+                                <span class="font-medium">Radio Comercio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -90,7 +125,8 @@
                             <span>15 Nov 2024</span>
                         </div>
                         <h3 class="text-xl font-bold text-[#404656] mb-3">Tendencias del Mercado Inmobiliario 2024</h3>
-                        <p class="text-gray-600 mb-4">Análisis completo de las tendencias que están marcando el mercado inmobiliario este año y proyecciones para 2025.</p>
+                        <p class="text-gray-600 mb-4">Análisis completo de las tendencias que están marcando el mercado
+                            inmobiliario este año y proyecciones para 2025.</p>
                         <a href="#" class="text-[#404656] font-medium hover:text-[#2c3e50] transition-colors">
                             Leer más <i class="fas fa-arrow-right ml-1"></i>
                         </a>
@@ -108,7 +144,8 @@
                             <span>12 Nov 2024</span>
                         </div>
                         <h3 class="text-xl font-bold text-[#404656] mb-3">Nuevas Regulaciones para Propiedades</h3>
-                        <p class="text-gray-600 mb-4">Conoce las nuevas regulaciones gubernamentales que afectan la compra y venta de propiedades inmobiliarias.</p>
+                        <p class="text-gray-600 mb-4">Conoce las nuevas regulaciones gubernamentales que afectan la compra y
+                            venta de propiedades inmobiliarias.</p>
                         <a href="#" class="text-[#404656] font-medium hover:text-[#2c3e50] transition-colors">
                             Leer más <i class="fas fa-arrow-right ml-1"></i>
                         </a>
@@ -126,7 +163,8 @@
                             <span>10 Nov 2024</span>
                         </div>
                         <h3 class="text-xl font-bold text-[#404656] mb-3">Financiamiento Inmobiliario: Nuevas Opciones</h3>
-                        <p class="text-gray-600 mb-4">Descubre las nuevas opciones de financiamiento disponibles para la compra de tu primera vivienda.</p>
+                        <p class="text-gray-600 mb-4">Descubre las nuevas opciones de financiamiento disponibles para la
+                            compra de tu primera vivienda.</p>
                         <a href="#" class="text-[#404656] font-medium hover:text-[#2c3e50] transition-colors">
                             Leer más <i class="fas fa-arrow-right ml-1"></i>
                         </a>
@@ -155,15 +193,18 @@
                     <div class="space-y-4">
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                             <h4 class="font-bold text-[#404656] mb-2">1. Define tu presupuesto</h4>
-                            <p class="text-gray-600">Calcula cuánto puedes invertir considerando el enganche, gastos notariales y costos de mantenimiento.</p>
+                            <p class="text-gray-600">Calcula cuánto puedes invertir considerando el enganche, gastos
+                                notariales y costos de mantenimiento.</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                             <h4 class="font-bold text-[#404656] mb-2">2. Investiga la zona</h4>
-                            <p class="text-gray-600">Conoce el vecindario, servicios cercanos, transporte público y proyecciones de crecimiento.</p>
+                            <p class="text-gray-600">Conoce el vecindario, servicios cercanos, transporte público y
+                                proyecciones de crecimiento.</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                             <h4 class="font-bold text-[#404656] mb-2">3. Verifica documentos</h4>
-                            <p class="text-gray-600">Asegúrate de que la propiedad tenga todos sus papeles en regla antes de firmar.</p>
+                            <p class="text-gray-600">Asegúrate de que la propiedad tenga todos sus papeles en regla antes de
+                                firmar.</p>
                         </div>
                     </div>
                 </div>
@@ -180,15 +221,18 @@
                     <div class="space-y-4">
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                             <h4 class="font-bold text-[#404656] mb-2">1. Prepara tu propiedad</h4>
-                            <p class="text-gray-600">Realiza reparaciones menores y mejora la presentación para aumentar el valor percibido.</p>
+                            <p class="text-gray-600">Realiza reparaciones menores y mejora la presentación para aumentar el
+                                valor percibido.</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                             <h4 class="font-bold text-[#404656] mb-2">2. Precio competitivo</h4>
-                            <p class="text-gray-600">Investiga precios similares en la zona para establecer un precio justo y atractivo.</p>
+                            <p class="text-gray-600">Investiga precios similares en la zona para establecer un precio justo
+                                y atractivo.</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-sm">
                             <h4 class="font-bold text-[#404656] mb-2">3. Marketing efectivo</h4>
-                            <p class="text-gray-600">Usa fotografías profesionales y descripciones detalladas para destacar tu propiedad.</p>
+                            <p class="text-gray-600">Usa fotografías profesionales y descripciones detalladas para destacar
+                                tu propiedad.</p>
                         </div>
                     </div>
                 </div>
@@ -254,7 +298,7 @@
         </section>
 
         <!-- Ofertas Destacadas de la Semana -->
-        
+
 
         <!-- Historias y Casos de Éxito -->
         <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
@@ -267,7 +311,8 @@
                 <!-- Testimonio 1 -->
                 <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8">
                     <div class="flex items-start mb-6">
-                        <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <div
+                            class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                             <i class="fas fa-user"></i>
                         </div>
                         <div>
@@ -276,7 +321,8 @@
                         </div>
                     </div>
                     <blockquote class="text-gray-700 italic mb-6">
-                        "Gracias al equipo de Casa y Chalet pude comprar mi primera vivienda. Me acompañaron durante todo el proceso, 
+                        "Gracias al equipo de Casa y Chalet pude comprar mi primera vivienda. Me acompañaron durante todo el
+                        proceso,
                         desde la búsqueda hasta la firma final. Su profesionalismo y dedicación fueron excepcionales."
                     </blockquote>
                     <div class="flex items-center text-sm text-gray-600">
@@ -290,7 +336,8 @@
                 <!-- Testimonio 2 -->
                 <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8">
                     <div class="flex items-start mb-6">
-                        <div class="bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <div
+                            class="bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                             <i class="fas fa-user"></i>
                         </div>
                         <div>
@@ -299,7 +346,7 @@
                         </div>
                     </div>
                     <blockquote class="text-gray-700 italic mb-6">
-                        "Necesitaba vender rápido mi departamento y Casa y Chalet lo logró en menos de 2 meses. 
+                        "Necesitaba vender rápido mi departamento y Casa y Chalet lo logró en menos de 2 meses.
                         Su estrategia de marketing y su red de contactos hicieron la diferencia. Muy recomendados."
                     </blockquote>
                     <div class="flex items-center text-sm text-gray-600">
@@ -338,12 +385,14 @@
                     </div>
                     <div class="p-6">
                         <p class="text-gray-600 mb-4">
-                            Aprende estrategias para invertir en bienes raíces de manera inteligente y rentable. 
+                            Aprende estrategias para invertir en bienes raíces de manera inteligente y rentable.
                             Dirigido a inversores principiantes y experimentados.
                         </p>
                         <div class="flex items-center justify-between">
-                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Gratuito</span>
-                            <button class="bg-[#404656] text-white px-4 py-2 rounded-lg hover:bg-[#2c3e50] transition-colors">
+                            <span
+                                class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Gratuito</span>
+                            <button
+                                class="bg-[#404656] text-white px-4 py-2 rounded-lg hover:bg-[#2c3e50] transition-colors">
                                 Inscribirse
                             </button>
                         </div>
@@ -368,7 +417,7 @@
                     </div>
                     <div class="p-6">
                         <p class="text-gray-600 mb-4">
-                            Únete a nuestro programa especial de los viernes donde respondemos preguntas en vivo 
+                            Únete a nuestro programa especial de los viernes donde respondemos preguntas en vivo
                             y presentamos las mejores ofertas de la semana.
                         </p>
                         <div class="flex items-center justify-between">
@@ -389,19 +438,19 @@
                     <i class="fas fa-envelope text-4xl mb-6"></i>
                     <h2 class="text-3xl lg:text-4xl font-bold titulo-poppins mb-4">Mantente Informado</h2>
                     <p class="text-xl mb-8">
-                        Suscríbete a nuestro boletín y recibe las mejores ofertas, noticias del mercado y consejos expertos 
+                        Suscríbete a nuestro boletín y recibe las mejores ofertas, noticias del mercado y consejos expertos
                         directamente en tu correo electrónico.
                     </p>
-                    
+
                     <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                         <input type="email" placeholder="Tu correo electrónico" required
-                               class="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-                        <button type="submit" 
-                                class="bg-yellow-400 text-[#404656] px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
+                            class="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                        <button type="submit"
+                            class="bg-yellow-400 text-[#404656] px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
                             Suscribirse
                         </button>
                     </form>
-                    
+
                     <p class="text-sm mt-4 opacity-80">
                         No spam. Puedes cancelar tu suscripción en cualquier momento.
                     </p>
@@ -416,8 +465,10 @@
             </button>
             <div class="flex space-x-2">
                 <button class="bg-[#404656] text-white w-10 h-10 rounded-lg font-bold">1</button>
-                <button class="bg-gray-200 text-gray-600 w-10 h-10 rounded-lg hover:bg-gray-300 transition-colors">2</button>
-                <button class="bg-gray-200 text-gray-600 w-10 h-10 rounded-lg hover:bg-gray-300 transition-colors">3</button>
+                <button
+                    class="bg-gray-200 text-gray-600 w-10 h-10 rounded-lg hover:bg-gray-300 transition-colors">2</button>
+                <button
+                    class="bg-gray-200 text-gray-600 w-10 h-10 rounded-lg hover:bg-gray-300 transition-colors">3</button>
             </div>
             <button class="bg-[#404656] text-white px-4 py-2 rounded-lg hover:bg-[#2c3e50] transition-colors">
                 Siguiente<i class="fas fa-chevron-right ml-2"></i>
@@ -437,8 +488,15 @@
 
     /* Animaciones personalizadas */
     @keyframes pulse-slow {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.7;
+        }
     }
 
     .animate-pulse-slow {
@@ -457,9 +515,17 @@
 
     /* Responsive mejorado */
     @media (max-width: 768px) {
-        .text-5xl { font-size: 2.5rem; }
-        .text-6xl { font-size: 3rem; }
-        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .text-5xl {
+            font-size: 2.5rem;
+        }
+
+        .text-6xl {
+            font-size: 3rem;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
     }
 
     /* Efectos de gradiente */
@@ -472,54 +538,5 @@
 </style>
 
 @push('scripts')
-<script>
-    // Funcionalidad del buscador
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.querySelector('input[placeholder="Buscar en el blog..."]');
-        const searchButton = document.querySelector('button:contains("Buscar")');
-        
-        if (searchInput && searchButton) {
-            searchButton.addEventListener('click', function() {
-                const searchTerm = searchInput.value.trim();
-                if (searchTerm) {
-                    // Aquí puedes implementar la lógica de búsqueda
-                    console.log('Buscando:', searchTerm);
-                }
-            });
-
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchButton.click();
-                }
-            });
-        }
-
-        // Funcionalidad del reproductor de audio
-        const playButton = document.querySelector('.bg-yellow-400 .fa-play');
-        if (playButton) {
-            playButton.parentElement.addEventListener('click', function() {
-                if (playButton.classList.contains('fa-play')) {
-                    playButton.classList.remove('fa-play');
-                    playButton.classList.add('fa-pause');
-                } else {
-                    playButton.classList.remove('fa-pause');
-                    playButton.classList.add('fa-play');
-                }
-            });
-        }
-
-        // Formulario de suscripción
-        const subscriptionForm = document.querySelector('form');
-        if (subscriptionForm) {
-            subscriptionForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = this.querySelector('input[type="email"]').value;
-                
-                // Aquí puedes implementar la lógica de suscripción
-                alert('¡Gracias por suscribirte! Te hemos enviado un correo de confirmación.');
-                this.reset();
-            });
-        }
-    });
-</script>
+    
 @endpush
