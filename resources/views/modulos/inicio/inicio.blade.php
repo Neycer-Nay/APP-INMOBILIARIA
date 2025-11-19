@@ -197,6 +197,99 @@
         </div>
     </div>
 
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Sección Programa de Radio -->
+        <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
+            <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl overflow-hidden shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                    <!-- Contenido del programa -->
+                    <div class="p-8 lg:p-12 text-white">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-microphone text-4xl mr-4"></i>
+                            <h2 class="text-3xl lg:text-4xl font-bold titulo-poppins">NEGOCIO REDONDO</h2>
+                        </div>
+                        <h3 class="text-2xl lg:text-3xl font-bold mb-4 text-yellow-300">"Escucha las mejores ofertas
+                            inmobiliarias"</h3>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt mr-3 text-yellow-300"></i>
+                                <span class="text-lg">Lunes a Viernes</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock mr-3 text-yellow-300"></i>
+                                <span class="text-lg">13:00 - 14:00</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-radio mr-3 text-yellow-300"></i>
+                                <span class="text-lg">90.4 FM Radio Comercio</span>
+                            </div>
+                        </div>
+
+                        <p class="text-lg mb-8 leading-relaxed">
+                            Durante una hora completa hablamos sobre bienes inmuebles, trámites, regularización, tendencias
+                            del mercado,
+                            y presentamos las mejores ofertas de casas en venta, alquiler y anticrético.
+                        </p>
+
+                       
+                    </div>
+
+                    <!-- Banner/Imagen -->
+                    <div class="relative min-h-[300px] lg:min-h-full">
+                        <div class="absolute inset-0 bg-gradient-to-r from-red-800/70 to-transparent"></div>
+                        <div class="h-full bg-red-900 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <i class="fas fa-broadcast-tower text-6xl mb-4 opacity-50"></i>
+                                <p class="text-xl font-bold">NEGOCIO REDONDO</p>
+                                <p class="text-lg">90.4 FM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reproductor Directo de Radio -->
+                <div class="mt-4  rounded-xl p-4" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div class="text-center mb-2">
+                        <h3 class="text-xl font-bold text-white titulo-poppins mb-1">
+                            <i class="fas fa-play-circle mr-2"></i>Reproductor en Vivo
+                        </h3>
+                        <p class="text-white text-sm font-medium">Escucha Negocio Redondo por la 90.4 FM en tiempo real</p>
+                    </div>
+
+                    <!-- Iframe del reproductor -->
+                    <div class="rounded-lg">
+                        <iframe
+                            src="https://cp.usastreams.com/pr2g/APPlayerRadioHTML5.aspx?stream=https://stream.zeno.fm/zcax2fkgam8uv&fondo=05&formato=mpeg&color=14&titulo=2&autoStart=1&vol=5&tipo=14&nombre=comercio&imagen=https://cp.usastreams.com/playerHTML5/img/cover.png"
+                            width="100%" height="80" frameborder="0" scrolling="no" allow="autoplay"
+                            style="border-radius: 6px;">
+                        </iframe>
+                    </div>
+
+                    <!-- Información adicional -->
+                    <div class="mt-2 text-center">
+                        <div class="flex justify-center items-center space-x-4 text-white text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-signal mr-1"></i>
+                                <span class="font-medium">En Vivo</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-volume-up mr-1"></i>
+                                <span class="font-medium">90.4 FM</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-headphones mr-1"></i>
+                                <span class="font-medium">Radio Comercio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
     <div class="max-w-7xl mx-auto py-20 px-4 bg-white ">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <!-- Título grande a la izquierda -->
