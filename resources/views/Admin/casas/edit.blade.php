@@ -19,7 +19,7 @@
     </form>
     <div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mt-8 mb-8 ">
         <h2 class="text-xl font-semibold mb-6 text-[#404656]">EDITAR INMUEBLE</h2>
-        <form action="{{ route('casas.update', $casa->id) }}" method="POST">
+        <form action="{{ route('casas.update', $casa->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -165,12 +165,40 @@
                         placeholder="agua, luz, internet, etc....">
                 </div>
             </div>
-            <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Actualizar enlace del video de FB YT</label>
-                    <input type="text" name="videoUrl" value="{{ old('videoUrl', $casa->videoUrl) }}"
-                        class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
-                        placeholder="https://www.youtube.com/watch?v=...">
+            
+            <div class="mt-6">
+                <label class="block text-gray-700 font-semibold mb-2">Actualizar enlace del video de FB YT</label>
+                <input type="text" name="videoUrl" value="{{ old('videoUrl', $casa->videoUrl) }}"
+                    class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
+                    placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+
+            <div class="mt-6">
+                <label class="block text-gray-700 font-semibold mb-2">Plano de Distribución Actual</label>
+                @if($casa->plano_distribucion)
+                    <div class="mb-4">
+                        <img src="{{ asset('storage/' . ltrim($casa->plano_distribucion, '/')) }}"
+                             alt="Plano de Distribución Actual"
+                             class="h-32 w-auto object-cover rounded border">
+                        <p class="text-xs text-gray-500 mt-1">Plano actual</p>
+                    </div>
+                @else
+                    <p class="text-gray-500 mb-4">No hay plano de distribución registrado.</p>
+                @endif
+                
+                <label class="block text-gray-700 font-semibold mb-2">Actualizar Plano de Distribución (JPG/PNG)</label>
+                <input type="file" id="plano_distribucion_edit" name="plano_distribucion" accept="image/jpeg,image/png,image/jpg" class="hidden"
+                    onchange="previewPlanoEdit(event)">
+                <div id="planoPreviewEdit" class="mb-2"></div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="document.getElementById('plano_distribucion_edit').click()"
+                        class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar
+                        Nuevo Plano</button>
+                    <button type="button" onclick="cancelarPlanoEdit()"
+                        class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-1 px-4 rounded shadow text-sm">Cancelar</button>
                 </div>
+                <small class="text-gray-500">Formatos permitidos: JPG, PNG (máximo 5MB). Deja vacío si no deseas cambiar el plano.</small>
+            </div>
 
             <div class="mt-6">
                 <label class="block text-gray-700 font-semibold mb-2">Fotos</label>
@@ -200,4 +228,51 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function previewPlanoEdit(event) {
+            const preview = document.getElementById('planoPreviewEdit');
+            preview.innerHTML = '';
+            const file = event.target.files[0];
+            
+            if (file) {
+                // Validar tamaño (máximo 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('El archivo es muy grande. Máximo 5MB permitido.');
+                    event.target.value = '';
+                    return;
+                }
+                
+                // Validar tipo de archivo
+                if (!['image/jpeg', 'image/png', 'image/jpg'].includes(file.type)) {
+                    alert('Solo se permiten archivos JPG y PNG.');
+                    event.target.value = '';
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const div = document.createElement('div');
+                    div.className = "relative flex flex-col items-center";
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = "h-32 w-auto object-cover rounded border mb-1";
+                    
+                    const label = document.createElement('label');
+                    label.innerText = 'Nuevo Plano de Distribución';
+                    label.className = "text-xs text-gray-600";
+                    
+                    div.appendChild(img);
+                    div.appendChild(label);
+                    preview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function cancelarPlanoEdit() {
+            document.getElementById('plano_distribucion_edit').value = '';
+            document.getElementById('planoPreviewEdit').innerHTML = '';
+        }
+    </script>
 @endsection

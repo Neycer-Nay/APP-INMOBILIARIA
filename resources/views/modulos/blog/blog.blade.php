@@ -2,7 +2,7 @@
 
 @section('contenido')
     <!-- Header del Blog -->
-    <div class="bg-gradient-to-r from-[#404656] to-[#2c3e50] text-white py-16">
+    <div class="bg-gradient-to-r from-[#293F5D] to-[#2c3e50] text-white py-16">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center" data-aos="fade-up" data-aos-duration="1000">
                 <h1 class="text-5xl md:text-6xl font-bold titulo-poppins mb-4">BLOG INMOBILIARIO</h1>
@@ -49,7 +49,7 @@
                             y presentamos las mejores ofertas de casas en venta, alquiler y anticrético.
                         </p>
 
-                       
+
                     </div>
 
                     <!-- Banner/Imagen -->
@@ -66,8 +66,7 @@
                 </div>
 
                 <!-- Reproductor Directo de Radio -->
-                <div class="mt-4  rounded-xl p-4" data-aos="fade-up"
-                    data-aos-delay="200">
+                <div class="mt-4  rounded-xl p-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="text-center mb-2">
                         <h3 class="text-xl font-bold text-white titulo-poppins mb-1">
                             <i class="fas fa-play-circle mr-2"></i>Reproductor en Vivo
@@ -106,374 +105,303 @@
             </div>
         </section>
 
-        <!-- Noticias del Mercado Inmobiliario -->
-        <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-[#404656] titulo-poppins mb-4">Noticias del Mercado</h2>
-                <p class="text-xl text-gray-600">Mantente al día con las últimas tendencias inmobiliarias</p>
-            </div>
+        {{-- Sección Principal - Tendencias Inmobiliarias Santa Cruz 2025 --}}
+        <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+            <div class="container mx-auto px-4 max-w-6xl">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Noticia 1 -->
-                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <i class="fas fa-calendar mr-2"></i>
-                            <span>15 Nov 2024</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#404656] mb-3">Tendencias del Mercado Inmobiliario 2024</h3>
-                        <p class="text-gray-600 mb-4">Análisis completo de las tendencias que están marcando el mercado
-                            inmobiliario este año y proyecciones para 2025.</p>
-                        <a href="#" class="text-[#404656] font-medium hover:text-[#2c3e50] transition-colors">
-                            Leer más <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Noticia 2 -->
-                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
-                        <i class="fas fa-home text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <i class="fas fa-calendar mr-2"></i>
-                            <span>12 Nov 2024</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#404656] mb-3">Nuevas Regulaciones para Propiedades</h3>
-                        <p class="text-gray-600 mb-4">Conoce las nuevas regulaciones gubernamentales que afectan la compra y
-                            venta de propiedades inmobiliarias.</p>
-                        <a href="#" class="text-[#404656] font-medium hover:text-[#2c3e50] transition-colors">
-                            Leer más <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Noticia 3 -->
-                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
-                        <i class="fas fa-coins text-white text-4xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <i class="fas fa-calendar mr-2"></i>
-                            <span>10 Nov 2024</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#404656] mb-3">Financiamiento Inmobiliario: Nuevas Opciones</h3>
-                        <p class="text-gray-600 mb-4">Descubre las nuevas opciones de financiamiento disponibles para la
-                            compra de tu primera vivienda.</p>
-                        <a href="#" class="text-[#404656] font-medium hover:text-[#2c3e50] transition-colors">
-                            Leer más <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Consejos para Compradores y Vendedores -->
-        <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-[#404656] titulo-poppins mb-4">Consejos Expertos</h2>
-                <p class="text-xl text-gray-600">Tips útiles para compradores y vendedores</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Consejos para Compradores -->
-                <div class="bg-blue-50 rounded-xl p-8">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-blue-600 text-white p-3 rounded-full mr-4">
-                            <i class="fas fa-shopping-cart text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-[#404656]">Para Compradores</h3>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-[#404656] mb-2">1. Define tu presupuesto</h4>
-                            <p class="text-gray-600">Calcula cuánto puedes invertir considerando el enganche, gastos
-                                notariales y costos de mantenimiento.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-[#404656] mb-2">2. Investiga la zona</h4>
-                            <p class="text-gray-600">Conoce el vecindario, servicios cercanos, transporte público y
-                                proyecciones de crecimiento.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-[#404656] mb-2">3. Verifica documentos</h4>
-                            <p class="text-gray-600">Asegúrate de que la propiedad tenga todos sus papeles en regla antes de
-                                firmar.</p>
-                        </div>
-                    </div>
+                {{-- Header Principal --}}
+                <div class="text-center mb-12">
+                    
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 titulo-poppins">
+                        Tendencias del Mercado Inmobiliario en <span class="text-green-600">Santa Cruz</span>
+                    </h1>
+                    
                 </div>
 
-                <!-- Consejos para Vendedores -->
-                <div class="bg-green-50 rounded-xl p-8">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-green-600 text-white p-3 rounded-full mr-4">
-                            <i class="fas fa-hand-holding-dollar text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-[#404656]">Para Vendedores</h3>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-[#404656] mb-2">1. Prepara tu propiedad</h4>
-                            <p class="text-gray-600">Realiza reparaciones menores y mejora la presentación para aumentar el
-                                valor percibido.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-[#404656] mb-2">2. Precio competitivo</h4>
-                            <p class="text-gray-600">Investiga precios similares en la zona para establecer un precio justo
-                                y atractivo.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-[#404656] mb-2">3. Marketing efectivo</h4>
-                            <p class="text-gray-600">Usa fotografías profesionales y descripciones detalladas para destacar
-                                tu propiedad.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Guías y Trámites Legales -->
-        <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-[#404656] titulo-poppins mb-4">Guías y Trámites Legales</h2>
-                <p class="text-xl text-gray-600">Todo lo que necesitas saber sobre documentación y procesos legales</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Guía 1 -->
-                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-                    <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-file-contract text-red-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-[#404656] mb-3">Regularización de Derecho Propietario</h3>
-                    <p class="text-gray-600 text-sm mb-4">Proceso completo para regularizar tu propiedad</p>
-                    <button class="text-red-600 font-medium hover:text-red-800 transition-colors">
-                        Ver Guía <i class="fas fa-arrow-right ml-1"></i>
-                    </button>
-                </div>
-
-                <!-- Guía 2 -->
-                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-balance-scale text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-[#404656] mb-3">Avalúos Comerciales</h3>
-                    <p class="text-gray-600 text-sm mb-4">Cómo obtener y entender un avalúo profesional</p>
-                    <button class="text-blue-600 font-medium hover:text-blue-800 transition-colors">
-                        Ver Guía <i class="fas fa-arrow-right ml-1"></i>
-                    </button>
-                </div>
-
-                <!-- Guía 3 -->
-                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-handshake text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-[#404656] mb-3">Contratos de Compraventa</h3>
-                    <p class="text-gray-600 text-sm mb-4">Elementos esenciales de un contrato seguro</p>
-                    <button class="text-green-600 font-medium hover:text-green-800 transition-colors">
-                        Ver Guía <i class="fas fa-arrow-right ml-1"></i>
-                    </button>
-                </div>
-
-                <!-- Guía 4 -->
-                <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-stamp text-purple-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-[#404656] mb-3">Trámites Notariales</h3>
-                    <p class="text-gray-600 text-sm mb-4">Documentos y requisitos para escrituración</p>
-                    <button class="text-purple-600 font-medium hover:text-purple-800 transition-colors">
-                        Ver Guía <i class="fas fa-arrow-right ml-1"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ofertas Destacadas de la Semana -->
-
-
-        <!-- Historias y Casos de Éxito -->
-        <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-[#404656] titulo-poppins mb-4">Casos de Éxito</h2>
-                <p class="text-xl text-gray-600">Experiencias reales de nuestros clientes</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Testimonio 1 -->
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8">
-                    <div class="flex items-start mb-6">
-                        <div
-                            class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-[#404656] mb-1">María González</h3>
-                            <p class="text-blue-600 font-medium">Compró su primera casa</p>
-                        </div>
-                    </div>
-                    <blockquote class="text-gray-700 italic mb-6">
-                        "Gracias al equipo de Casa y Chalet pude comprar mi primera vivienda. Me acompañaron durante todo el
-                        proceso,
-                        desde la búsqueda hasta la firma final. Su profesionalismo y dedicación fueron excepcionales."
-                    </blockquote>
-                    <div class="flex items-center text-sm text-gray-600">
-                        <i class="fas fa-calendar mr-2"></i>
-                        <span>Octubre 2024</span>
-                        <i class="fas fa-star ml-4 mr-1 text-yellow-500"></i>
-                        <span>5/5 estrellas</span>
-                    </div>
-                </div>
-
-                <!-- Testimonio 2 -->
-                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8">
-                    <div class="flex items-start mb-6">
-                        <div
-                            class="bg-green-600 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-[#404656] mb-1">Carlos Mendoza</h3>
-                            <p class="text-green-600 font-medium">Vendió su departamento</p>
-                        </div>
-                    </div>
-                    <blockquote class="text-gray-700 italic mb-6">
-                        "Necesitaba vender rápido mi departamento y Casa y Chalet lo logró en menos de 2 meses.
-                        Su estrategia de marketing y su red de contactos hicieron la diferencia. Muy recomendados."
-                    </blockquote>
-                    <div class="flex items-center text-sm text-gray-600">
-                        <i class="fas fa-calendar mr-2"></i>
-                        <span>Septiembre 2024</span>
-                        <i class="fas fa-star ml-4 mr-1 text-yellow-500"></i>
-                        <span>5/5 estrellas</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Eventos y Actividades -->
-        <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-[#404656] titulo-poppins mb-4">Eventos y Actividades</h2>
-                <p class="text-xl text-gray-600">Participa en nuestras charlas y actividades especiales</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Evento 1 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="bg-gradient-to-r from-[#404656] to-[#2c3e50] p-6 text-white">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="text-xl font-bold mb-2">Charla: "Inversión Inmobiliaria Inteligente"</h3>
-                                <div class="flex items-center text-sm">
-                                    <i class="fas fa-calendar mr-2"></i>
-                                    <span>25 Noviembre 2024</span>
-                                    <i class="fas fa-clock ml-4 mr-2"></i>
-                                    <span>19:00 hrs</span>
-                                </div>
+                {{-- Resumen Ejecutivo --}}
+                <div class="bg-white rounded-2xl shadow-xl p-8 mb-12 border-l-4 border-blue-500">
+                    <div class="flex flex-col md:flex-row items-start gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="p-4 bg-blue-100 rounded-xl">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
                             </div>
-                            <i class="fas fa-chalkboard-teacher text-3xl opacity-70"></i>
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-gray-600 mb-4">
-                            Aprende estrategias para invertir en bienes raíces de manera inteligente y rentable.
-                            Dirigido a inversores principiantes y experimentados.
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <span
-                                class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Gratuito</span>
-                            <button
-                                class="bg-[#404656] text-white px-4 py-2 rounded-lg hover:bg-[#2c3e50] transition-colors">
-                                Inscribirse
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Evento 2 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="bg-gradient-to-r from-red-600 to-red-800 p-6 text-white">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="text-xl font-bold mb-2">Programa Especial en Vivo</h3>
-                                <div class="flex items-center text-sm">
-                                    <i class="fas fa-calendar mr-2"></i>
-                                    <span>Todos los Viernes</span>
-                                    <i class="fas fa-clock ml-4 mr-2"></i>
-                                    <span>13:00 hrs</span>
-                                </div>
+                        <div class="flex-1">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-3 titulo-poppins">Refugio de valor ante la inflación</h2>
+                            <p class="text-gray-700 text-lg mb-4">
+                                Los bienes inmuebles se están consolidando como un refugio para capitales, especialmente en
+                                un escenario de inflación y escasez de dólares. Esta dinámica hace que muchas personas e
+                                inversores vean al ladrillo como una forma más segura de preservar su poder adquisitivo.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="bg-gray-100 px-3 py-1 rounded-full">Fuente: Hemeroteca La Razón</span>
                             </div>
-                            <i class="fas fa-microphone text-3xl opacity-70"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-gray-600 mb-4">
-                            Únete a nuestro programa especial de los viernes donde respondemos preguntas en vivo
-                            y presentamos las mejores ofertas de la semana.
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">90.4 FM</span>
-                            <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-800 transition-colors">
-                                Escuchar
-                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Suscripción al Boletín -->
-        <section class="mb-16" data-aos="fade-up" data-aos-duration="1000">
-            <div class="bg-gradient-to-r from-[#404656] to-[#2c3e50] rounded-2xl p-8 lg:p-12 text-white text-center">
-                <div class="max-w-2xl mx-auto">
-                    <i class="fas fa-envelope text-4xl mb-6"></i>
-                    <h2 class="text-3xl lg:text-4xl font-bold titulo-poppins mb-4">Mantente Informado</h2>
-                    <p class="text-xl mb-8">
-                        Suscríbete a nuestro boletín y recibe las mejores ofertas, noticias del mercado y consejos expertos
-                        directamente en tu correo electrónico.
-                    </p>
+                {{-- Grid de Tendencias Principales --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
 
-                    <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                        <input type="email" placeholder="Tu correo electrónico" required
-                            class="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-                        <button type="submit"
-                            class="bg-yellow-400 text-[#404656] px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
-                            Suscribirse
-                        </button>
-                    </form>
+                    {{-- Tendencia 1: Demanda y Precios --}}
+                    <div
+                        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border-t-4 border-green-500">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="p-3 bg-green-100 rounded-lg">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                            </div>
+                            
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 titulo-poppins">Demanda Fuerte y Precios al Alza</h3>
+                        <ul class="space-y-3 mb-4">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700">Velocidad de venta aumentada: <strong>13 meses → 7
+                                        meses</strong></span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700">Stock de inmuebles sin vender ha disminuido</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700">Tendencia de aumento de precios por demanda sostenida</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Citrino Capitales</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">IBCE</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Visión 360</span>
+                        </div>
+                    </div>
 
-                    <p class="text-sm mt-4 opacity-80">
-                        No spam. Puedes cancelar tu suscripción en cualquier momento.
-                    </p>
+                    {{-- Tendencia 2: Perfil de Compradores --}}
+                    <div
+                        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border-t-4 border-purple-500">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="p-3 bg-purple-100 rounded-lg">
+                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 titulo-poppins">Cambio en el Perfil de Compradores</h3>
+                        <ul class="space-y-3 mb-4">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700"><strong>Compradores del occidente</strong> (La Paz, Cochabamba,
+                                    etc.)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700">Preferencia por viviendas <strong>más económicas</strong>
+                                    (low-cost)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700">Muchas operaciones <strong>al contado (cash)</strong>, sin
+                                    crédito hipotecario</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">ATB</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Economy</span>
+                        </div>
+                    </div>
+
+                    {{-- Tendencia 3: Expansión Urbana --}}
+                    <div
+                        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border-t-4 border-orange-500">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="p-3 bg-orange-100 rounded-lg">
+                                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 titulo-poppins">Expansión Urbana y Construcción</h3>
+                        <ul class="space-y-3 mb-4">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700"><strong>Reactivación</strong> de proyectos inmobiliarios y
+                                    preventas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700">Enfoque en <strong>viviendas accesibles</strong> para demanda
+                                    creciente</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-orange-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-700">Santa Cruz: punto estratégico por <strong>crecimiento
+                                        demográfico</strong></span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Economy</span>
+                        </div>
+                    </div>
                 </div>
+
+                {{-- Sección de Alertas y Riesgos --}}
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Aspectos a Considerar</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                        {{-- Card Remates Judiciales --}}
+                        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-red-500">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-red-100 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 titulo-poppins">Remates e Inquietudes Crediticias</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Santa Cruz concentra <strong>más del 50%</strong> de los remates judiciales</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Descuentos promedio en remates: <strong>~11.7%</strong> en Santa Cruz</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Oportunidades para compradores con liquidez, pero riesgos para vendedores</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4">
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-3 py-1 rounded-full">Fuente:
+                                    LinkedIn</span>
+                            </div>
+                        </div>
+
+                        {{-- Card Riesgos Legales --}}
+                        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500">
+                            <div class="flex items-center mb-4">
+                                <div class="p-3 bg-yellow-100 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 titulo-poppins">Riesgos Legales y de Mercado</h3>
+                            </div>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Riesgos por <strong>títulos no bien saneados</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Importancia de <strong>verificación exhaustiva</strong> al comprar</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Posibles síntomas de <strong>sobrevaloración</strong> en el mercado</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4">
+                                <span
+                                    class="bg-yellow-100 text-yellow-800 text-xs font-medium px-3 py-1 rounded-full">Fuente:
+                                    NextEra</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </section>
-
-        <!-- Navegación de Páginas -->
-        <div class="flex justify-center items-center space-x-4" data-aos="fade-up" data-aos-duration="1000">
-            <button class="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors" disabled>
-                <i class="fas fa-chevron-left mr-2"></i>Anterior
-            </button>
-            <div class="flex space-x-2">
-                <button class="bg-[#404656] text-white w-10 h-10 rounded-lg font-bold">1</button>
-                <button
-                    class="bg-gray-200 text-gray-600 w-10 h-10 rounded-lg hover:bg-gray-300 transition-colors">2</button>
-                <button
-                    class="bg-gray-200 text-gray-600 w-10 h-10 rounded-lg hover:bg-gray-300 transition-colors">3</button>
-            </div>
-            <button class="bg-[#404656] text-white px-4 py-2 rounded-lg hover:bg-[#2c3e50] transition-colors">
-                Siguiente<i class="fas fa-chevron-right ml-2"></i>
-            </button>
-        </div>
     </div>
 @endsection
 
@@ -538,5 +466,5 @@
 </style>
 
 @push('scripts')
-    
+
 @endpush

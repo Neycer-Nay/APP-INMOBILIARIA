@@ -108,6 +108,7 @@ class CasaController extends Controller
             'caracteristicasServicios' => 'nullable|string',
             'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:8048',
             'videoUrl' => 'nullable|url',
+            'plano_distribucion' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
         // Procesar características (de texto a array)
@@ -148,6 +149,7 @@ class CasaController extends Controller
             'caracteristicasExternas' => $caracteristicasExternas,
             'caracteristicasServicios' => $caracteristicasServicios,
             'videoUrl' => $validatedData['videoUrl'] ?? null,
+            'plano_distribucion' => null, // Se actualizará después si hay archivo
         ]);
 
         // Guardar fotos
@@ -160,6 +162,13 @@ class CasaController extends Controller
                     'foto_principal' => $request->input('foto_principal') == $i,
                 ]);
             }
+        }
+
+        // Guardar plano de distribución
+        if ($request->hasFile('plano_distribucion')) {
+            $plano = $request->file('plano_distribucion');
+            $rutaPlano = $plano->store('planos', 'public');
+            $casa->update(['plano_distribucion' => $rutaPlano]);
         }
 
         return redirect()->route('casas.index')->with('success', 'Casa registrada correctamente.');
@@ -203,7 +212,8 @@ class CasaController extends Controller
             'caracteristicas' => 'nullable|string',
             'caracteristicasExternas' => 'nullable|string',
             'caracteristicasServicios' => 'nullable|string',
-                'videoUrl' => 'nullable|url',
+            'videoUrl' => 'nullable|url',
+            'plano_distribucion' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             // Puedes agregar validación para fotos si permites editar imágenes
         ]);
 
@@ -240,7 +250,17 @@ class CasaController extends Controller
             'videoUrl' => $validatedData['videoUrl'] ?? null,
         ]);
 
-        // Si quieres permitir editar fotos, agrega lógica aquí
+        // Actualizar plano de distribución si se subió uno nuevo
+        if ($request->hasFile('plano_distribucion')) {
+            // Eliminar plano anterior si existe
+            if ($casa->plano_distribucion) {
+                Storage::disk('public')->delete($casa->plano_distribucion);
+            }
+            
+            $plano = $request->file('plano_distribucion');
+            $rutaPlano = $plano->store('planos', 'public');
+            $casa->update(['plano_distribucion' => $rutaPlano]);
+        }
 
         return redirect()->route('casas.index')->with('success', 'Casa actualizada correctamente.');
     }
@@ -249,9 +269,15 @@ class CasaController extends Controller
     {
         $casa = Casa::findOrFail($id);
 
+        // Eliminar fotos
         foreach ($casa->fotos as $foto) {
             Storage::disk('public')->delete($foto->ruta_imagen);
             $foto->delete();
+        }
+
+        // Eliminar plano de distribución si existe
+        if ($casa->plano_distribucion) {
+            Storage::disk('public')->delete($casa->plano_distribucion);
         }
 
         $casa->delete();

@@ -65,6 +65,7 @@
         <span>Publicar Inmueble</span>
       </a>
     </button>
+    
   </div>
   <!-- Menú móvil -->
   <nav id="mobile-menu" class="md:hidden hidden bg-[#e09129] bg-opacity-95 text-[#404656] px-4 pt-2 pb-4">
@@ -103,8 +104,7 @@
     </div>
   </nav>
 </header>
-<a href="{{ route('casas.create') }}">CREAR</a>
-<a href="{{ route('casas.index') }}">INDEX</a>
+
 <style>
   .nav-text {
     transition: color 0.3s ease;

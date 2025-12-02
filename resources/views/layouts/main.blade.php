@@ -35,6 +35,8 @@
 <body fuente-gral style='background-color: #fffaf3  ;'>
     @include('shared.header')
 
+    <!-- Botones flotantes de navegación -->
+    @include('shared.btnFlotantes')
 
     @yield('contenido')
 
