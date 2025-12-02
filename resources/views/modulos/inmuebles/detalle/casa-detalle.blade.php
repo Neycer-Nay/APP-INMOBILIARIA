@@ -139,7 +139,20 @@
                 </div>
 
             @endif
-
+            
+            <!-- Tarjeta: Plano de Distribución -->
+            @if (!empty($casa->plano_distribucion))
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="font-bold text-lg mb-4 text-[#404656]">Plano de Distribución</h3>
+                    <div class="flex justify-center">
+                        <img src="{{ asset('storage/' . ltrim($casa->plano_distribucion, '/')) }}"
+                             alt="Plano de Distribución"
+                             class="w-1/2 h-auto rounded-lg shadow cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                             onclick="abrirModalPlano()">
+                    </div>
+                    <p class="text-center text-sm text-gray-500 mt-2">Haz clic en la imagen para verla en tamaño completo</p>
+                </div>
+            @endif
             <!-- Tarjeta: Video -->
             @if (!empty($casa->videoUrl))
                 <div class="bg-white rounded-lg shadow p-6">
@@ -161,6 +174,7 @@
                     </div>
                 </div>
             @endif
+
         </div>
 
         <!-- Columna derecha: Tarjeta de contacto -->
@@ -240,6 +254,18 @@
                 <div class="swiper-button-next modal-next"></div>
                 <div class="swiper-button-prev modal-prev"></div>
                 <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para visualizar plano de distribución -->
+    <div id="modalPlano"
+        class="fixed inset-0 bg-black/80 items-center justify-center z-50 hidden transition-opacity duration-300">
+        <button id="cerrarModalPlano" class="absolute top-2 right-2 text-white text-4xl cursor-pointer">&times;</button>
+        <div id="modalPlanoContent" class="rounded-lg shadow-lg p-4 relative max-w-6xl w-full">
+            <div class="flex items-center justify-center min-h-[60vh]">
+                <img id="planoModalImg" src="" alt="Plano de Distribución"
+                    class="max-h-[85vh] max-w-[90vw] w-auto rounded transition-all duration-300 object-contain">
             </div>
         </div>
     </div>
@@ -428,6 +454,45 @@
             modal.classList.remove('flex', 'opacity-100');
             document.body.classList.remove('overflow-hidden');
         }
+    </script>
+@endpush
+@push('scripts')
+    <script>
+        function abrirModalPlano() {
+            const modal = document.getElementById('modalPlano');
+            const img = document.getElementById('planoModalImg');
+            const planoSrc = '{{ !empty($casa->plano_distribucion) ? asset("storage/" . ltrim($casa->plano_distribucion, "/")) : "" }}';
+            
+            img.src = planoSrc;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex', 'opacity-100');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        document.getElementById('cerrarModalPlano').onclick = function () {
+            cerrarModalPlano();
+        };
+
+        // Cerrar al hacer click fuera del modal
+        document.getElementById('modalPlano').onclick = function (e) {
+            if (e.target === this) {
+                cerrarModalPlano();
+            }
+        };
+
+        function cerrarModalPlano() {
+            const modal = document.getElementById('modalPlano');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex', 'opacity-100');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                cerrarModalPlano();
+            }
+        });
     </script>
 @endpush
 @push('scripts')

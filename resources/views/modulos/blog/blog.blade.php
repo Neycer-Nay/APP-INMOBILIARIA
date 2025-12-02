@@ -2,7 +2,7 @@
 
 @section('contenido')
     <!-- Header del Blog -->
-    <div class="bg-gradient-to-r from-[#404656] to-[#2c3e50] text-white py-16">
+    <div class="bg-gradient-to-r from-[#293F5D] to-[#2c3e50] text-white py-16">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center" data-aos="fade-up" data-aos-duration="1000">
                 <h1 class="text-5xl md:text-6xl font-bold titulo-poppins mb-4">BLOG INMOBILIARIO</h1>

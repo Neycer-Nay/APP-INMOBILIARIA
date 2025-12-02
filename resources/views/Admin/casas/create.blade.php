@@ -166,6 +166,23 @@
 
             </div>
 
+            <div>
+                <label class="block text-gray-700 font-semibold mb-2">Plano de Distribución (JPG/PNG)</label>
+                <input type="file" id="plano_distribucion" name="plano_distribucion" accept="image/jpeg,image/png,image/jpg" class="hidden"
+                    onchange="previewPlano(event)">
+                <div id="planoPreview" class="mb-2"></div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="document.getElementById('plano_distribucion').click()"
+                        class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar
+                        Plano</button>
+                    <button type="button" onclick="cancelarPlano()"
+                        class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-1 px-4 rounded shadow text-sm">Cancelar</button>
+                </div>
+                <small class="text-gray-500">Formatos permitidos: JPG, PNG (máximo 5MB)</small>
+            </div>
+
+           
+
             <div class="mt-6">
                 <label class="block text-gray-700 font-semibold mb-2">Fotos (máximo 8)</label>
                 <input type="file" id="fotos" name="fotos[]" multiple accept="image/*" class="hidden"
@@ -239,6 +256,51 @@
             document.getElementById('fotos').value = '';
             document.getElementById('preview').innerHTML = '';
             document.getElementById('foto_principal').value = '';
+        }
+
+        function previewPlano(event) {
+            const preview = document.getElementById('planoPreview');
+            preview.innerHTML = '';
+            const file = event.target.files[0];
+            
+            if (file) {
+                // Validar tamaño (máximo 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('El archivo es muy grande. Máximo 5MB permitido.');
+                    event.target.value = '';
+                    return;
+                }
+                
+                // Validar tipo de archivo
+                if (!['image/jpeg', 'image/png', 'image/jpg'].includes(file.type)) {
+                    alert('Solo se permiten archivos JPG y PNG.');
+                    event.target.value = '';
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const div = document.createElement('div');
+                    div.className = "relative flex flex-col items-center";
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = "h-32 w-auto object-cover rounded border mb-1";
+                    
+                    const label = document.createElement('label');
+                    label.innerText = 'Plano de Distribución';
+                    label.className = "text-xs text-gray-600";
+                    
+                    div.appendChild(img);
+                    div.appendChild(label);
+                    preview.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function cancelarPlano() {
+            document.getElementById('plano_distribucion').value = '';
+            document.getElementById('planoPreview').innerHTML = '';
         }
     </script>
 @endsection
