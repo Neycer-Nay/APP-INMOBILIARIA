@@ -42,8 +42,12 @@
 
                     <span class="text-3xl font-bold text-[#404656] block mt-2">
                         {{ number_format($casa->precio, 0, ',', '.') }}
-                        {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}
+                        {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }} 
+                        @if ($casa->tipo === 'traspaso')
+                            Cuota inicial
+                        @endif
                     </span>
+                   
                 </div>
             </div>
 

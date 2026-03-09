@@ -132,8 +132,8 @@
                         @endif
                     </div>
 
-                    <span class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded-full mb-2">En
-                        {{ ucfirst($casa->tipo) }}</span>
+                    <span class="inline-block bg-[#f09e02] text-white text-xs px-3 font-bold py-1 rounded-full mb-2">EN
+                        {{ mb_strtoupper($casa->tipo) }}</span>
 
                     <!-- Título y dirección -->
 
