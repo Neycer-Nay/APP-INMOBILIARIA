@@ -34,7 +34,7 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             }
-        ])->where('estado', 'disponible')->get();
+        ])->where('estado', 'disponible')->orderBy('created_at', 'desc')->get();
 
         return view('modulos.inmuebles.buscador.buscador', compact('casas'));
     }
