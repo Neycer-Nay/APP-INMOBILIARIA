@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
+use Illuminate\Validation\Rule;
 
-class StoreCasaRequest extends FormRequest
+class UpdateCasaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,21 +20,19 @@ class StoreCasaRequest extends FormRequest
         if (! $this->filled('estado')) {
             $this->merge(['estado' => 'disponible']);
         }
-
-        if ($this->hasFile('fotos') && ! $this->filled('foto_principal')) {
-            $this->merge(['foto_principal' => 0]);
-        }
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, array<int, string>|string>
+     * @return array<string, array<int, string|Rule>|string>
      */
     public function rules(): array
     {
+        $id = (int) $this->route('id');
+
         return [
-            
+            'codigo' => ['required', 'string', 'max:255', Rule::unique('casas', 'codigo')->ignore($id)],
             'titulo' => ['required', 'string', 'max:255'],
             'tipo' => ['required', 'in:venta,alquiler,anticretico,traspaso'],
             'zona' => ['required', 'in:norte,sur,este,oeste,centro'],
@@ -54,28 +52,9 @@ class StoreCasaRequest extends FormRequest
             'caracteristicas' => ['nullable', 'string'],
             'caracteristicasExternas' => ['nullable', 'string'],
             'caracteristicasServicios' => ['nullable', 'string'],
-            'fotos' => ['nullable', 'array', 'max:8'],
-            'fotos.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:8048'],
-            'foto_principal' => ['nullable', 'integer', 'min:0'],
             'videoUrl' => ['nullable', 'url', 'max:1000'],
-            
+            'plano_distribucion' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:5120'],
         ];
-    }
-
-    public function withValidator(Validator $validator): void
-    {
-        $validator->after(function (Validator $validator): void {
-            if (! $this->hasFile('fotos')) {
-                return;
-            }
-
-            $totalFotos = count($this->file('fotos'));
-            $indicePrincipal = (int) $this->input('foto_principal', 0);
-
-            if ($indicePrincipal < 0 || $indicePrincipal >= $totalFotos) {
-                $validator->errors()->add('foto_principal', 'La foto principal seleccionada no es valida.');
-            }
-        });
     }
 
     public function attributes(): array
@@ -87,7 +66,6 @@ class StoreCasaRequest extends FormRequest
             'caracteristicasExternas' => 'caracteristicas externas',
             'caracteristicasServicios' => 'caracteristicas de servicios',
             'plano_distribucion' => 'plano de distribucion',
-            'foto_principal' => 'foto principal',
         ];
     }
 }

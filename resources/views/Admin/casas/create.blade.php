@@ -24,15 +24,12 @@
             @csrf
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Código</label>
-                    <input type="text" name="codigo"
-                        class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
-                </div>
+                
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Título</label>
                     <input type="text" name="titulo"
+                        value="{{ old('titulo') }}" maxlength="255"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
 
@@ -41,10 +38,10 @@
                     <select name="tipo"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                         <option value="">Tipo</option>
-                        <option value="venta">Venta</option>
-                        <option value="alquiler">Alquiler</option>
-                        <option value="anticretico">Anticretico</option>
-                        <option value="traspaso">Traspaso</option>
+                        <option value="venta" @selected(old('tipo') === 'venta')>Venta</option>
+                        <option value="alquiler" @selected(old('tipo') === 'alquiler')>Alquiler</option>
+                        <option value="anticretico" @selected(old('tipo') === 'anticretico')>Anticretico</option>
+                        <option value="traspaso" @selected(old('tipo') === 'traspaso')>Traspaso</option>
                     </select>
                 </div>
                 <div>
@@ -52,11 +49,11 @@
                     <select name="zona"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                         <option value="">Zona</option>
-                        <option value="norte">Norte</option>
-                        <option value="sur">Sur</option>
-                        <option value="este">Este</option>
-                        <option value="oeste">Oeste</option>
-                        <option value="centro">Centro</option>
+                        <option value="norte" @selected(old('zona') === 'norte')>Norte</option>
+                        <option value="sur" @selected(old('zona') === 'sur')>Sur</option>
+                        <option value="este" @selected(old('zona') === 'este')>Este</option>
+                        <option value="oeste" @selected(old('zona') === 'oeste')>Oeste</option>
+                        <option value="centro" @selected(old('zona') === 'centro')>Centro</option>
                     </select>
                 </div>
                 <div>
@@ -64,82 +61,85 @@
                     <select name="categoria"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                         <option value="">Categoría</option>
-                        <option value="casa">Casa</option>
-                        <option value="departamento">Departamento</option>
-                        <option value="casa_comercial">Casa Comercial</option>
-                        <option value="quinta">Quinta</option>
-                        <option value="terreno">Terreno</option>
+                        <option value="casa" @selected(old('categoria') === 'casa')>Casa</option>
+                        <option value="departamento" @selected(old('categoria') === 'departamento')>Departamento</option>
+                        <option value="casa_comercial" @selected(old('categoria') === 'casa_comercial')>Casa Comercial</option>
+                        <option value="quinta" @selected(old('categoria') === 'quinta')>Quinta</option>
+                        <option value="terreno" @selected(old('categoria') === 'terreno')>Terreno</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Superficie Terreno (m²)</label>
                     <input type="number" step="0.01" name="superficieTerreno"
+                        value="{{ old('superficieTerreno') }}" min="0"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Superficie Construida (m²)</label>
                     <input type="number" step="0.01" name="superficieConstruida"
+                        value="{{ old('superficieConstruida') }}" min="0"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Precio</label>
                     <input type="number" step="0.01" name="precio"
+                        value="{{ old('precio') }}" min="0"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Dirección</label>
                     <input type="text" name="direccion"
+                        value="{{ old('direccion') }}" maxlength="255"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Ciudad</label>
                     <input type="text" name="ciudad"
+                        value="{{ old('ciudad') }}" maxlength="100"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Descripción</label>
                     <textarea name="descripcion" rows="2"
-                        class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"></textarea>
+                        class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
+                        required>{{ old('descripcion') }}</textarea>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Tiendas</label>
                     <input type="number" name="tiendas" min="0"
+                        value="{{ old('tiendas') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Habitaciones</label>
                     <input type="number" name="habitaciones" min="0"
+                        value="{{ old('habitaciones') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Baños</label>
                     <input type="number" name="banos" min="0"
+                        value="{{ old('banos') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Garajes</label>
                     <input type="number" name="garajes" min="0"
+                        value="{{ old('garajes') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Plantas</label>
                     <input type="number" name="plantas" min="1"
+                        value="{{ old('plantas') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500">
                 </div>
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Estado</label>
-                    <select name="estado"
-                        class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500">
-                        <option value="disponible">Disponible</option>
-                        <option value="vendido">Vendido</option>
-                        <option value="alquilado">Alquilado</option>
-                        <option value="entregado">Entregado</option>
-                    </select>
-                </div>
+                
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Características Interior (separadas por
                         coma)</label>
                     <input type="text" name="caracteristicas"
+                        value="{{ old('caracteristicas') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="Piscina, Jardín, Seguridad...">
                 </div>
@@ -147,6 +147,7 @@
                     <label class="block text-gray-700 font-semibold mb-2">Características Externas (separadas por
                         coma)</label>
                     <input type="text" name="caracteristicasExternas"
+                        value="{{ old('caracteristicasExternas') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="Colegios, Parques, Mercados, Transporte...">
                 </div>
@@ -154,41 +155,30 @@
                     <label class="block text-gray-700 font-semibold mb-2">Características Servicios (separadas por
                         coma)</label>
                     <input type="text" name="caracteristicasServicios"
+                        value="{{ old('caracteristicasServicios') }}"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="agua, luz, internet, etc....">
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Insertar enlace del video de FB YT</label>
-                    <input type="text" name="videoUrl"
+                    <input type="url" name="videoUrl"
+                        value="{{ old('videoUrl') }}" maxlength="1000"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                         placeholder="https://www.youtube.com/watch?v=...">
                 </div>
 
             </div>
 
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Plano de Distribución (JPG/PNG)</label>
-                <input type="file" id="plano_distribucion" name="plano_distribucion" accept="image/jpeg,image/png,image/jpg" class="hidden"
-                    onchange="previewPlano(event)">
-                <div id="planoPreview" class="mb-2"></div>
-                <div class="flex gap-2">
-                    <button type="button" onclick="document.getElementById('plano_distribucion').click()"
-                        class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar
-                        Plano</button>
-                    <button type="button" onclick="cancelarPlano()"
-                        class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-1 px-4 rounded shadow text-sm">Cancelar</button>
-                </div>
-                <small class="text-gray-500">Formatos permitidos: JPG, PNG (máximo 5MB)</small>
-            </div>
+            
 
            
 
             <div class="mt-6">
                 <label class="block text-gray-700 font-semibold mb-2">Fotos (máximo 8)</label>
-                <input type="file" id="fotos" name="fotos[]" multiple accept="image/*" class="hidden"
+                <input type="file" id="fotos" name="fotos[]" multiple accept="image/jpeg,image/png,image/jpg,image/gif" class="hidden"
                     onchange="previewFotos(event)">
                 <div id="preview" class="flex flex-wrap gap-2 mb-2"></div>
-                <input type="hidden" name="foto_principal" id="foto_principal">
+                <input type="hidden" name="foto_principal" id="foto_principal" value="{{ old('foto_principal', 0) }}">
                 <div class="flex gap-2">
                     <button type="button" onclick="document.getElementById('fotos').click()"
                         class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar
@@ -215,11 +205,27 @@
             const preview = document.getElementById('preview');
             preview.innerHTML = '';
             const files = event.target.files;
+            const tiposPermitidos = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
             if (files.length > 8) {
                 alert('Solo puedes seleccionar hasta 8 fotos.');
                 event.target.value = '';
                 return;
             }
+
+            for (const file of files) {
+                if (!tiposPermitidos.includes(file.type)) {
+                    alert('Solo se permiten fotos JPG, JPEG, PNG o GIF.');
+                    event.target.value = '';
+                    return;
+                }
+
+                if (file.size > 8 * 1024 * 1024) {
+                    alert('Cada foto debe pesar como maximo 8MB.');
+                    event.target.value = '';
+                    return;
+                }
+            }
+
             Array.from(files).forEach((file, idx) => {
                 const reader = new FileReader();
                 reader.onload = e => {

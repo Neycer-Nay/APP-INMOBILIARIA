@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCasaRequest;
+use App\Http\Requests\UpdateCasaRequest;
 use Illuminate\Http\Request;
 use App\Models\Casa;
 use App\Models\FotoCasa;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -80,36 +83,14 @@ class CasaController extends Controller
 
     public function create()
     {
-        return view('Admin.casas.create');
+        $siguienteCodigo = $this->obtenerSiguienteCodigo();
+
+        return view('Admin.casas.create', compact('siguienteCodigo'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreCasaRequest $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'codigo' => 'required|string|unique:casas,codigo',
-            'titulo' => 'required|string|max:255',
-            'tipo' => 'required|in:venta,alquiler,anticretico,traspaso',
-            'zona' => 'required|in:norte,sur,este,oeste,centro',
-            'categoria' => 'required|in:casa,departamento,casa_comercial,quinta,terreno',
-            'superficieTerreno' => 'required|numeric|min:0',
-            'superficieConstruida' => 'required|numeric|min:0',
-            'precio' => 'required|numeric|min:0',
-            'direccion' => 'required|string|max:255',
-            'ciudad' => 'required|string|max:100',
-            'descripcion' => 'required|string',
-            'tiendas' => 'nullable|integer|min:0',
-            'habitaciones' => 'nullable|integer|min:0',
-            'banos' => 'nullable|integer|min:0',
-            'garajes' => 'nullable|integer|min:0',
-            'plantas' => 'nullable|integer|min:1',
-            'estado' => 'nullable|in:disponible,vendido,alquilado,entregado',
-            'caracteristicas' => 'nullable|string',
-            'caracteristicasExternas' => 'nullable|string',
-            'caracteristicasServicios' => 'nullable|string',
-            'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:8048',
-            'videoUrl' => 'nullable|url',
-            'plano_distribucion' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
-        ]);
+        $validatedData = $request->validated();
 
         // Procesar características (de texto a array)
         $caracteristicas = [];
@@ -126,50 +107,55 @@ class CasaController extends Controller
             $caracteristicasServicios = array_map('trim', explode(',', $validatedData['caracteristicasServicios']));
         }
 
-        // Crear la casa
-        $casa = Casa::create([
-            'codigo' => $validatedData['codigo'],
-            'titulo' => $validatedData['titulo'],
-            'tipo' => $validatedData['tipo'],
-            'zona' => $validatedData['zona'],
-            'categoria' => $validatedData['categoria'],
-            'superficieTerreno' => $validatedData['superficieTerreno'],
-            'superficieConstruida' => $validatedData['superficieConstruida'],
-            'precio' => $validatedData['precio'],
-            'direccion' => $validatedData['direccion'],
-            'ciudad' => $validatedData['ciudad'],
-            'descripcion' => $validatedData['descripcion'],
-            'tiendas' => $validatedData['tiendas'] ?? 0,
-            'habitaciones' => $validatedData['habitaciones'] ?? 0,
-            'banos' => $validatedData['banos'] ?? 0,
-            'garajes' => $validatedData['garajes'] ?? 0,
-            'plantas' => $validatedData['plantas'] ?? 1,
-            'estado' => $validatedData['estado'] ?? 'disponible',
-            'caracteristicas' => $caracteristicas,
-            'caracteristicasExternas' => $caracteristicasExternas,
-            'caracteristicasServicios' => $caracteristicasServicios,
-            'videoUrl' => $validatedData['videoUrl'] ?? null,
-            'plano_distribucion' => null, // Se actualizará después si hay archivo
-        ]);
+        $casa = DB::transaction(function () use ($validatedData, $caracteristicas, $caracteristicasExternas, $caracteristicasServicios, $request) {
+            $codigoGenerado = $this->obtenerSiguienteCodigo(true);
 
-        // Guardar fotos
-        if ($request->hasFile('fotos')) {
-            foreach ($request->file('fotos') as $i => $foto) {
-                $ruta = $foto->store('casas', 'public');
-                FotoCasa::create([
-                    'casa_id' => $casa->id,
-                    'ruta_imagen' => $ruta,
-                    'foto_principal' => $request->input('foto_principal') == $i,
-                ]);
+            // Crear la casa con codigo autogenerado
+            $casa = Casa::create([
+                'codigo' => (string) $codigoGenerado,
+                'titulo' => $validatedData['titulo'],
+                'tipo' => $validatedData['tipo'],
+                'zona' => $validatedData['zona'],
+                'categoria' => $validatedData['categoria'],
+                'superficieTerreno' => $validatedData['superficieTerreno'],
+                'superficieConstruida' => $validatedData['superficieConstruida'],
+                'precio' => $validatedData['precio'],
+                'direccion' => $validatedData['direccion'],
+                'ciudad' => $validatedData['ciudad'],
+                'descripcion' => $validatedData['descripcion'],
+                'tiendas' => $validatedData['tiendas'] ?? 0,
+                'habitaciones' => $validatedData['habitaciones'] ?? 0,
+                'banos' => $validatedData['banos'] ?? 0,
+                'garajes' => $validatedData['garajes'] ?? 0,
+                'plantas' => $validatedData['plantas'] ?? 1,
+                'estado' => $validatedData['estado'],
+                'caracteristicas' => $caracteristicas,
+                'caracteristicasExternas' => $caracteristicasExternas,
+                'caracteristicasServicios' => $caracteristicasServicios,
+                'videoUrl' => $validatedData['videoUrl'] ?? null,
+            ]);
+
+            // Guardar fotos
+            if ($request->hasFile('fotos')) {
+                foreach ($request->file('fotos') as $i => $foto) {
+                    $ruta = $foto->store('casas', 'public');
+                    FotoCasa::create([
+                        'casa_id' => $casa->id,
+                        'ruta_imagen' => $ruta,
+                        'foto_principal' => $request->input('foto_principal') == $i,
+                    ]);
+                }
             }
-        }
 
-        // Guardar plano de distribución
-        if ($request->hasFile('plano_distribucion')) {
-            $plano = $request->file('plano_distribucion');
-            $rutaPlano = $plano->store('planos', 'public');
-            $casa->update(['plano_distribucion' => $rutaPlano]);
-        }
+            // Guardar plano de distribución
+            if ($request->hasFile('plano_distribucion')) {
+                $plano = $request->file('plano_distribucion');
+                $rutaPlano = $plano->store('planos', 'public');
+                $casa->update(['plano_distribucion' => $rutaPlano]);
+            }
+
+            return $casa;
+        });
 
         return redirect()->route('casas.index')->with('success', 'Casa registrada correctamente.');
 
@@ -189,33 +175,9 @@ class CasaController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateCasaRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'codigo' => 'required|string|unique:casas,codigo,' . $id,
-            'titulo' => 'required|string|max:255',
-            'tipo' => 'required|in:venta,alquiler,anticretico,traspaso',
-            'zona' => 'required|in:norte,sur,este,oeste,centro',
-            'categoria' => 'required|in:casa,departamento,casa_comercial,quinta,terreno',
-            'superficieTerreno' => 'required|numeric|min:0',
-            'superficieConstruida' => 'required|numeric|min:0',
-            'precio' => 'required|numeric|min:0',
-            'direccion' => 'required|string|max:255',
-            'ciudad' => 'required|string|max:100',
-            'descripcion' => 'required|string',
-            'tiendas' => 'nullable|integer|min:0',
-            'habitaciones' => 'nullable|integer|min:0',
-            'banos' => 'nullable|integer|min:0',
-            'garajes' => 'nullable|integer|min:0',
-            'plantas' => 'nullable|integer|min:1',
-            'estado' => 'nullable|in:disponible,vendido,alquilado,entregado',
-            'caracteristicas' => 'nullable|string',
-            'caracteristicasExternas' => 'nullable|string',
-            'caracteristicasServicios' => 'nullable|string',
-            'videoUrl' => 'nullable|url',
-            'plano_distribucion' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
-            // Puedes agregar validación para fotos si permites editar imágenes
-        ]);
+        $validatedData = $request->validated();
 
         $casa = Casa::findOrFail($id);
         
@@ -243,7 +205,7 @@ class CasaController extends Controller
             'banos' => $validatedData['banos'] ?? 0,
             'garajes' => $validatedData['garajes'] ?? 0,
             'plantas' => $validatedData['plantas'] ?? 1,
-            'estado' => $validatedData['estado'] ?? 'disponible',
+            'estado' => $validatedData['estado'],
             'caracteristicas' => $caracteristicas,
             'caracteristicasExternas' => $caracteristicasExternas,
             'caracteristicasServicios' => $caracteristicasServicios,
@@ -324,5 +286,23 @@ class CasaController extends Controller
             }
         ])->where('tipo', 'traspaso')->whereIn('estado', ['disponible', 'vendido'])->orderBy('created_at', 'desc')->get();
         return view('modulos.inmuebles.traspaso.casa-traspaso', compact('casas'));
+    }
+
+    private function obtenerSiguienteCodigo(bool $bloquear = false): int
+    {
+        $query = Casa::query();
+
+        if ($bloquear) {
+            $query->lockForUpdate();
+        }
+
+        $driver = DB::getDriverName();
+        $cast = $driver === 'mysql' ? 'UNSIGNED' : 'INTEGER';
+
+        $ultimoCodigo = (int) ($query
+            ->selectRaw("MAX(CAST(codigo AS {$cast})) as max_codigo")
+            ->value('max_codigo') ?? 0);
+
+        return max($ultimoCodigo, 10000) + 1;
     }
 }

@@ -31,7 +31,7 @@ return new class extends Migration
             $table->integer('banos')->default(0);
             $table->integer('garajes')->default(0);
             $table->integer('plantas')->default(1);
-            $table->enum('estado', ['disponible', 'vendida', 'alquilada', 'entregada'])->default('disponible');
+            $table->enum('estado', ['disponible', 'vendido', 'alquilado', 'entregado'])->default('disponible');
             $table->json('caracteristicas')->nullable();
             $table->json('caracteristicasExternas')->nullable();
             $table->json('caracteristicasServicios')->nullable();
