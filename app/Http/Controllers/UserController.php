@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function crearAdmin()
     {
-        $usuario = User::where('email', 'Admin@gmail.com')->first();
+        $usuario = User::where('email', 'Neycer.dev@gmail.com')->first();
 
         if (!$usuario) {
             User::create([
