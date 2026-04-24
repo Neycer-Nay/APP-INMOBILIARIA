@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('casas', function (Blueprint $table) {
-            $table->decimal('precioAnterior', 12, 2)->nullable()->after('precio'); // Precio anterior
+        Schema::create('rols', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre')->unique();   
+            $table->string('descripcion')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('casas', function (Blueprint $table) {
-            $table->dropColumn('precioAnterior');
-        });
+        Schema::dropIfExists('rols');
     }
 };

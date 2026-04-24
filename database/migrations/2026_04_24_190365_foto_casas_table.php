@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('casas', function (Blueprint $table) {
-            $table->string('plano_distribucion')->nullable()->after('videoUrl');
+        Schema::create('foto_casas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('casa_id')->constrained('casas')->onDelete('cascade');
+            $table->string('ruta_imagen');
+            $table->boolean('foto_principal')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('casas', function (Blueprint $table) {
-            $table->dropColumn('plano_distribucion');
-        });
+        Schema::dropIfExists('foto_casas');
     }
 };

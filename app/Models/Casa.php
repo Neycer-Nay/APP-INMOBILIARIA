@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Casa extends Model
 {
+
+    protected $table = 'casas';
     protected $fillable = [
         'codigo',
         'titulo',
@@ -38,8 +40,25 @@ class Casa extends Model
         'caracteristicasServicios' => 'array',
     ];
 
+
+    public function propietario()
+    {
+        return $this->belongsTo(Propietario::class);
+    }
+
+    public function agente()
+    {
+        return $this->belongsTo(Agente::class);
+    }
+
     public function fotos()
     {
-        return $this->hasMany(FotoCasa::class, 'casa_id');
+        return $this->hasMany(FotoCasa::class);
     }
+
+    public function venta()
+    {
+        return $this->hasOne(Venta::class); // una casa solo se vende una vez
+    }
+   
 }
