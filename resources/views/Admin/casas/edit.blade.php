@@ -26,13 +26,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Código</label>
-                    <input type="text" name="codigo" value="{{ $casa->codigo }}"
+                    <input type="text" name="codigo" value="{{ old('codigo', $casa->codigo) }}" maxlength="255"
                         class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
                 </div>
 
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Título</label>
-                    <input type="text" name="titulo" value="{{ $casa->titulo }}"
+                    <input type="text" name="titulo" value="{{ old('titulo', $casa->titulo) }}" maxlength="255"
                         class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
                 </div>
 
@@ -41,10 +41,10 @@
                     <select name="tipo"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                         <option value="">Tipo</option>
-                        <option value="venta" {{ $casa->tipo == 'venta' ? 'selected' : '' }}>Venta</option>
-                        <option value="alquiler" {{ $casa->tipo == 'alquiler' ? 'selected' : '' }}>Alquiler</option>
-                        <option value="anticretico" {{ $casa->tipo == 'anticretico' ? 'selected' : '' }}>Anticretico</option>
-                        <option value="traspaso" {{ $casa->tipo == 'traspaso' ? 'selected' : '' }}>Traspaso</option>
+                        <option value="venta" @selected(old('tipo', $casa->tipo) === 'venta')>Venta</option>
+                        <option value="alquiler" @selected(old('tipo', $casa->tipo) === 'alquiler')>Alquiler</option>
+                        <option value="anticretico" @selected(old('tipo', $casa->tipo) === 'anticretico')>Anticretico</option>
+                        <option value="traspaso" @selected(old('tipo', $casa->tipo) === 'traspaso')>Traspaso</option>
                     </select>
                 </div>
                 <div>
@@ -52,11 +52,11 @@
                     <select name="zona"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                         <option value="">Zona</option>
-                        <option value="norte" {{ $casa->zona == 'norte' ? 'selected' : '' }}>Norte</option>
-                        <option value="sur" {{ $casa->zona == 'sur' ? 'selected' : '' }}>Sur</option>
-                        <option value="este" {{ $casa->zona == 'este' ? 'selected' : '' }}>Este</option>
-                        <option value="oeste" {{ $casa->zona == 'oeste' ? 'selected' : '' }}>Oeste</option>
-                        <option value="centro" {{ $casa->zona == 'centro' ? 'selected' : '' }}>Centro</option>
+                        <option value="norte" @selected(old('zona', $casa->zona) === 'norte')>Norte</option>
+                        <option value="sur" @selected(old('zona', $casa->zona) === 'sur')>Sur</option>
+                        <option value="este" @selected(old('zona', $casa->zona) === 'este')>Este</option>
+                        <option value="oeste" @selected(old('zona', $casa->zona) === 'oeste')>Oeste</option>
+                        <option value="centro" @selected(old('zona', $casa->zona) === 'centro')>Centro</option>
                     </select>
                 </div>
                 <div>
@@ -64,46 +64,49 @@
                     <select name="categoria"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                         <option value="">Categoría</option>
-                        <option value="casa" {{ $casa->categoria == 'casa' ? 'selected' : '' }}>Casa</option>
-                        <option value="departamento" {{ $casa->categoria == 'departamento' ? 'selected' : '' }}>Departamento
+                        <option value="casa" @selected(old('categoria', $casa->categoria) === 'casa')>Casa</option>
+                        <option value="departamento" @selected(old('categoria', $casa->categoria) === 'departamento')>Departamento
                         </option>
-                        <option value="casa_comercial" {{ $casa->categoria == 'casa_comercial' ? 'selected' : '' }}>Casa
+                        <option value="casa_comercial" @selected(old('categoria', $casa->categoria) === 'casa_comercial')>Casa
                             Comercial</option>
-                        <option value="quinta" {{ $casa->categoria == 'quinta' ? 'selected' : '' }}>Quinta</option>
-                        <option value="terreno" {{ $casa->categoria == 'terreno' ? 'selected' : '' }}>Terreno</option>
+                        <option value="quinta" @selected(old('categoria', $casa->categoria) === 'quinta')>Quinta</option>
+                        <option value="terreno" @selected(old('categoria', $casa->categoria) === 'terreno')>Terreno</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Superficie Terreno (m²)</label>
                     <input type="number" step="0.01" name="superficieTerreno"
                         value="{{ old('superficieTerreno', $casa->superficieTerreno) }}"
+                        min="0"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Superficie Construida (m²)</label>
                     <input type="number" step="0.01" name="superficieConstruida"
                         value="{{ old('superficieConstruida', $casa->superficieConstruida) }}"
+                        min="0"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Precio</label>
                     <input type="number" step="0.01" name="precio" value="{{ old('precio', $casa->precio) }}"
+                        min="0"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Dirección</label>
-                    <input type="text" name="direccion" value="{{ old('direccion', $casa->direccion) }}"
+                    <input type="text" name="direccion" value="{{ old('direccion', $casa->direccion) }}" maxlength="255"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Ciudad</label>
-                    <input type="text" name="ciudad" value="{{ $casa->ciudad }}"
+                    <input type="text" name="ciudad" value="{{ old('ciudad', $casa->ciudad) }}" maxlength="100"
                         class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100" readonly>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Descripción</label>
                     <textarea name="descripcion" rows="2" class="w-full border-b border-blue-300 px-2 py-1 bg-gray-100"
-                        readonly>{{ $casa->descripcion }}</textarea>
+                        readonly>{{ old('descripcion', $casa->descripcion) }}</textarea>
                 </div>
                 <div>
                     <label class="block text-gray-700 font-semibold mb-2">Tiendas</label>
@@ -134,10 +137,10 @@
                     <label class="block text-gray-700 font-semibold mb-2">Estado</label>
                     <select name="estado"
                         class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500">
-                        <option value="disponible" {{ $casa->estado == 'disponible' ? 'selected' : '' }}>Disponible</option>
-                        <option value="vendido" {{ $casa->estado == 'vendido' ? 'selected' : '' }}>Vendido</option>
-                        <option value="alquilado" {{ $casa->estado == 'alquilado' ? 'selected' : '' }}>Alquilado</option>
-                        <option value="entregado" {{ $casa->estado == 'entregado' ? 'selected' : '' }}>Entregado</option>
+                        <option value="disponible" @selected(old('estado', $casa->estado) === 'disponible')>Disponible</option>
+                        <option value="vendido" @selected(old('estado', $casa->estado) === 'vendido')>Vendido</option>
+                        <option value="alquilado" @selected(old('estado', $casa->estado) === 'alquilado')>Alquilado</option>
+                        <option value="entregado" @selected(old('estado', $casa->estado) === 'entregado')>Entregado</option>
                     </select>
                 </div>
                 <div>
@@ -168,7 +171,7 @@
             
             <div class="mt-6">
                 <label class="block text-gray-700 font-semibold mb-2">Actualizar enlace del video de FB YT</label>
-                <input type="text" name="videoUrl" value="{{ old('videoUrl', $casa->videoUrl) }}"
+                <input type="url" name="videoUrl" value="{{ old('videoUrl', $casa->videoUrl) }}" maxlength="1000"
                     class="w-full border-b border-blue-300 px-2 py-1 focus:outline-none focus:border-blue-500"
                     placeholder="https://www.youtube.com/watch?v=...">
             </div>

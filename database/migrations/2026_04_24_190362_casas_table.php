@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('casas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('propietario_id')->constrained('propietarios');
+            $table->foreignId('agente_id')->constrained('agentes'); 
             $table->string('codigo')->unique();
             $table->string('titulo');
             $table->enum('tipo', ['venta', 'alquiler', 'anticretico', 'traspaso']);
@@ -24,20 +26,16 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('ciudad');
             $table->text('descripcion');
-            //Caracteristicas Principales
             $table->integer('tiendas')->default(0);
             $table->integer('habitaciones')->default(0);
             $table->integer('banos')->default(0);
             $table->integer('garajes')->default(0);
             $table->integer('plantas')->default(1);
-
-            $table->string('estado')->default('disponible'); // disponible, vendido, alquilado, etc.
-            $table->json('caracteristicas')->nullable(); // piscina, jardin, seguridad, etc.
-            $table->json('caracteristicasExternas')->nullable(); // colegios, parques, mercados, transporte, etc.
-            $table->json('caracteristicasServicios')->nullable(); // agua, luz, internet, etc.
-
+            $table->enum('estado', ['disponible', 'vendido', 'alquilado', 'entregado'])->default('disponible');
+            $table->json('caracteristicas')->nullable();
+            $table->json('caracteristicasExternas')->nullable();
+            $table->json('caracteristicasServicios')->nullable();
             $table->string('videoUrl')->nullable();
-            
             $table->timestamps();
         });
     }

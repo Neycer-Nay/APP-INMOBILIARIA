@@ -4,17 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('foto_casas', function (Blueprint $table) {
+        Schema::create('agentes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('casa_id')->constrained('casas')->onDelete('cascade');
-            $table->string('ruta_imagen');
-            $table->boolean('foto_principal')->default(false);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('telefono')->nullable();
+            $table->decimal('comision_predeterminada', 5, 2)->default(3.00); 
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('foto_casas');
+        Schema::dropIfExists('agentes');
     }
 };

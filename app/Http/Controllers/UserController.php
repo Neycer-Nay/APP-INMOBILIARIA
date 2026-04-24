@@ -21,6 +21,7 @@ class UserController extends Controller
             User::create([
                 'name' => 'Admin-Neycer',
                 'email' => 'Neycer.dev@gmail.com',
+                'role_id' => '1',
                 'password' => Hash::make('Micaela69234558N'),
 
             ]);
