@@ -53,7 +53,7 @@ class UpdateCasaRequest extends FormRequest
             'caracteristicasExternas' => ['nullable', 'string'],
             'caracteristicasServicios' => ['nullable', 'string'],
             'videoUrl' => ['nullable', 'url', 'max:1000'],
-            'plano_distribucion' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:5120'],
+            
         ];
     }
 
@@ -65,7 +65,7 @@ class UpdateCasaRequest extends FormRequest
             'superficieConstruida' => 'superficie construida',
             'caracteristicasExternas' => 'caracteristicas externas',
             'caracteristicasServicios' => 'caracteristicas de servicios',
-            'plano_distribucion' => 'plano de distribucion',
+           
         ];
     }
 }
