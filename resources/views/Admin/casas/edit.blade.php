@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('Admin.layouts.main')
 
 @section('contenido')
 
@@ -11,13 +11,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('logout') }}" method="POST" class="inline">
-        @csrf
-        <button type="submit" class="text-red-500 hover:underline bg-transparent border-0 p-0">
-            Cerrar sesión
-        </button>
-    </form>
-    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mt-8 mb-8 ">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mt-4 mb-8 ">
         <h2 class="text-xl font-semibold mb-6 text-[#404656]">EDITAR INMUEBLE</h2>
         <form action="{{ route('casas.update', $casa->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

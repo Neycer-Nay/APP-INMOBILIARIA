@@ -86,7 +86,7 @@ class StoreCasaRequest extends FormRequest
             'superficieConstruida' => 'superficie construida',
             'caracteristicasExternas' => 'caracteristicas externas',
             'caracteristicasServicios' => 'caracteristicas de servicios',
-            'plano_distribucion' => 'plano de distribucion',
+            
             'foto_principal' => 'foto principal',
         ];
     }
