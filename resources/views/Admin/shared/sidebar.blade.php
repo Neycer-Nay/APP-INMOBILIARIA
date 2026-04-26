@@ -2,9 +2,9 @@
 <aside id="admin-sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-[#404656] text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col shadow-2xl">
     <!-- Logo Area -->
     <div class="flex items-center justify-center h-16 border-b border-white/10 bg-[#e09129] ">
-        <a href="{{ route('inicio') }}" class="flex items-center gap-3">
-            <img src="{{ asset('recursos/img/LOGO-BLANCO.png') }}" alt="Logo" class="h-12 w-12 object-contain">
-            <span class="font-bold text-[#404656] text-lg tracking-wide menu-font">ADMIN</span>
+        <a href="#" class="flex items-center gap-3">
+            
+            <span class="font-bold text-white text-lg tracking-wide menu-font">INMOBILIARIA</span>
         </a>
     </div>
 
@@ -112,12 +112,27 @@
                 </ul>
             </li>
 
-            <!-- Usuarios -->
+            <!-- Usuarios Submenu -->
             <li>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group">
-                    <i class="fas fa-user-shield w-5 text-center group-hover:text-[#404656]"></i>
-                    <span class="font-medium menu-font">Usuarios</span>
-                </a>
+                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-user-shield w-5 text-center group-hover:text-[#404656]"></i>
+                        <span class="font-medium menu-font">Usuarios</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
+                </button>
+                <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
+                    <li>
+                        <a href="{{ route('usuarios.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                            Listar Usuarios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('usuarios.create') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                            Registrar Usuario
+                        </a>
+                    </li>
+                </ul>
             </li>
 
         </ul>

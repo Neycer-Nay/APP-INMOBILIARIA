@@ -23,17 +23,12 @@ class RolesTableSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
-                'nombre' => 'supervisor',
-                'descripcion' => 'Supervisa operaciones',
+                'nombre' => 'agente',
+                'descripcion' => 'Agente inmobiliario, registra propiedades',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
-            [
-                'nombre' => 'cajero',
-                'descripcion' => 'Gestiona cobros y caja',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
+            
         ], ['nombre_rol'], ['descripcion', 'updated_at']);
     }
 }

@@ -18,7 +18,7 @@ Route::get('/blog', function () {
     return view('modulos.blog.blog');
 })->name('blog');
 
-Route::get('/login', [App\Http\Controllers\UserController::class, 'index'])->name('login');
+Route::get('/login', [App\Http\Controllers\UserController::class, 'indexBoton'])->name('login');
 
 Route::post('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login.submit');
 
@@ -40,6 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/casas/{id}/edit', [App\Http\Controllers\CasaController::class, 'edit'])->name('casas.edit');
     Route::put('/casas/{id}', [App\Http\Controllers\CasaController::class, 'update'])->name('casas.update');
     Route::delete('/casas/{id}', [App\Http\Controllers\CasaController::class, 'destroy'])->name('casas.destroy');
+
+    Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');
+    Route::get('/usuarios/create', [App\Http\Controllers\UserController::class, 'create'])->name('usuarios.create');
+    Route::post('/usuarios', [App\Http\Controllers\UserController::class, 'store'])->name('usuarios.store');
+    Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
+    Route::put('/usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
+    Route::patch('/usuarios/{id}/toggle-status', [App\Http\Controllers\UserController::class, 'toggleStatus'])->name('usuarios.toggleStatus');
 });
 
 Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');
