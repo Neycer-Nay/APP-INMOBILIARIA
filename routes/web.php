@@ -41,6 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/casas/{id}', [App\Http\Controllers\CasaController::class, 'update'])->name('casas.update');
     Route::delete('/casas/{id}', [App\Http\Controllers\CasaController::class, 'destroy'])->name('casas.destroy');
 
+    Route::get('/propietarios', [App\Http\Controllers\PropietarioController::class, 'index'])->name('propietarios.index');
+    Route::post('/propietarios', [App\Http\Controllers\PropietarioController::class, 'store'])->name('propietarios.store');
+    Route::put('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'update'])->name('propietarios.update');
+    Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'destroy'])->name('propietarios.destroy');
+
     Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');
     Route::get('/usuarios/create', [App\Http\Controllers\UserController::class, 'create'])->name('usuarios.create');
     Route::post('/usuarios', [App\Http\Controllers\UserController::class, 'store'])->name('usuarios.store');
