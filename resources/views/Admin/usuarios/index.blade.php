@@ -4,10 +4,10 @@
     <div class="max-w-7xl mx-auto py-2 px-2">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-[#404656]">Listado de Usuarios</h2>
-            <a href="{{ route('usuarios.create') }}"
+            <button type="button" onclick="openModal('createModal')"
                class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">
                 <i class="fas fa-plus mr-1"></i> Nuevo Usuario
-            </a>
+            </button>
         </div>
 
         <div class="overflow-x-auto rounded-2xl">
@@ -39,11 +39,17 @@
                             </td>
                             <td class="py-2 px-4">{{ $usuario->created_at->format('d/m/Y') }}</td>
                             <td class="py-2 px-4">
-                                <a href="{{ route('usuarios.edit', $usuario->id) }}"
+                                <button type="button"
                                    class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 text-sm"
-                                   title="Editar">
+                                   title="Editar"
+                                   onclick="openEditModal(this)"
+                                   data-action="{{ route('usuarios.update', $usuario->id) }}"
+                                   data-user-id="{{ $usuario->id }}"
+                                   data-name="{{ $usuario->name }}"
+                                   data-email="{{ $usuario->email }}"
+                                   data-role-id="{{ $usuario->role_id }}">
                                     <i class="fas fa-edit"></i>
-                                </a>
+                                </button>
                                 <form action="{{ route('usuarios.userEstado', $usuario->id) }}" method="POST" class="form-estado" style="display:inline;">
                                     @csrf
                                     @method('PATCH')
@@ -56,7 +62,7 @@
                                     @else
                                         <button type="submit"
                                                 class="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600 text-sm"
-                                                title="Activar">                                                >
+                                                title="Activar">                                                    
                                             <i class="fas fa-user-check"></i>
                                         </button>
                                     @endif
@@ -78,9 +84,230 @@
             {{ $usuarios->links('pagination::tailwind') }}
         </div>
     </div>
+
+    {{-- Modal Crear Usuario --}}
+    <div id="createModal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeModal('createModal')"></div>
+        <div class="flex min-h-screen items-center justify-center p-4 text-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
+                <div class="bg-white px-6 pb-6 pt-5">
+                    <div class="flex items-center justify-between mb-6 border-b pb-4">
+                        <h3 class="text-2xl font-bold text-[#404656]" id="modal-title">Registrar Usuario</h3>
+                        <button type="button" onclick="closeModal('createModal')" class="text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <form action="{{ route('usuarios.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="create_name" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <input type="text" name="name" id="create_name" value="{{ old('name') }}"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="Nombre completo" required>
+                            @error('name')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="create_email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                            <input type="email" name="email" id="create_email" value="{{ old('email') }}"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="correo@ejemplo.com" required>
+                            @error('email')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="create_password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                            <input type="password" name="password" id="create_password"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="Mínimo 8 caracteres" required>
+                            @error('password')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="create_password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
+                            <input type="password" name="password_confirmation" id="create_password_confirmation"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="Repite la contraseña" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="create_role_id" class="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+                            <select name="role_id" id="create_role_id"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                    required>
+                                <option value="">Seleccione un rol</option>
+                                @foreach(App\Models\Rol::all() as $rol)
+                                    <option value="{{ $rol->id }}" {{ old('role_id') == $rol->id ? 'selected' : '' }}>
+                                        {{ $rol->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('role_id')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="flex items-center justify-end gap-3">
+                            <button type="button" onclick="closeModal('createModal')"
+                                   class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 text-sm font-semibold">
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                    class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">
+                                Guardar Usuario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Editar Usuario --}}
+    <div id="editModal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeModal('editModal')"></div>
+        <div class="flex min-h-screen items-center justify-center p-4 text-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
+                <div class="bg-white px-6 pb-6 pt-5">
+                    <div class="flex items-center justify-between mb-6 border-b pb-4">
+                        <h3 class="text-2xl font-bold text-[#404656]" id="modal-title">Editar Usuario</h3>
+                        <button type="button" onclick="closeModal('editModal')" class="text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <form id="editForm" action="" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="user_id" id="edit_user_id" value="{{ old('user_id') }}">
+
+                        <div class="mb-4">
+                            <label for="edit_name" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <input type="text" name="name" id="edit_name" value="{{ old('name') }}"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="Nombre completo" required>
+                            @error('name')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="edit_email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                            <input type="email" name="email" id="edit_email" value="{{ old('email') }}"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="correo@ejemplo.com" required>
+                            @error('email')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="edit_password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                            <input type="password" name="password" id="edit_password"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="Dejar en blanco para mantener la actual">
+                            @error('password')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="edit_password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
+                            <input type="password" name="password_confirmation" id="edit_password_confirmation"
+                                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                   placeholder="Repite la contraseña">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="edit_role_id" class="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+                            <select name="role_id" id="edit_role_id"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+                                    required>
+                                <option value="">Seleccione un rol</option>
+                                @foreach(App\Models\Rol::all() as $rol)
+                                    <option value="{{ $rol->id }}" {{ old('role_id') == $rol->id ? 'selected' : '' }}>
+                                        {{ $rol->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('role_id')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="flex items-center justify-end gap-3">
+                            <button type="button" onclick="closeModal('editModal')"
+                                   class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 text-sm font-semibold">
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                    class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">
+                                Actualizar Usuario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('scripts')
 <script>
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    function openEditModal(button) {
+        const action = button.getAttribute('data-action');
+        const userId = button.getAttribute('data-user-id');
+        const name = button.getAttribute('data-name');
+        const email = button.getAttribute('data-email');
+        const roleId = button.getAttribute('data-role-id');
+
+        document.getElementById('editForm').action = action;
+        document.getElementById('edit_user_id').value = userId;
+        document.getElementById('edit_name').value = name;
+        document.getElementById('edit_email').value = email;
+        document.getElementById('edit_password').value = '';
+        document.getElementById('edit_password_confirmation').value = '';
+
+        const roleSelect = document.getElementById('edit_role_id');
+        roleSelect.value = roleId || '';
+
+        openModal('editModal');
+    }
+
+    // Cerrar modales con tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal('createModal');
+            closeModal('editModal');
+        }
+    });
+
+    // Reabrir modal si hay errores de validación
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(old('_method') == 'PUT' && old('user_id'))
+            // Error en edición: reabrir modal de editar con valores old()
+            document.getElementById('editForm').action = "{{ route('usuarios.update', old('user_id')) }}";
+            openModal('editModal');
+        @elseif($errors->any())
+            // Error en creación: reabrir modal de crear
+            openModal('createModal');
+        @endif
+    });
+
     document.querySelectorAll('.form-estado').forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault(); // Evita el envío automático
