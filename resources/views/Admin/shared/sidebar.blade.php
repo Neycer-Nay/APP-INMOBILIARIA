@@ -54,13 +54,8 @@
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                        <a href="{{ route('propietarios.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                             Listar Propietarios
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Registrar Propietario
                         </a>
                     </li>
                 </ul>

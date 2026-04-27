@@ -14,19 +14,19 @@
             <table class="min-w-full bg-white rounded-lg shadow">
                 <thead>
                     <tr class="bg-[#404656] text-white">
-                        <th class="py-3 px-4 text-left">ID</th>
-                        <th class="py-3 px-4 text-left">Nombre</th>
-                        <th class="py-3 px-4 text-left">Correo </th>
-                        <th class="py-3 px-4 text-left">Rol</th>
-                        <th class="py-3 px-4 text-left">Estado</th>
-                        <th class="py-3 px-4 text-left">Registrado</th>
-                        <th class="py-3 px-4 text-left">Acciones</th>
+                        
+                        <th class="py-3 px-4 text-left uppercase">Nombre</th>
+                        <th class="py-3 px-4 text-left uppercase">Correo </th>
+                        <th class="py-3 px-4 text-left uppercase">Rol</th>
+                        <th class="py-3 px-4 text-left uppercase">Estado</th>
+                        <th class="py-3 px-4 text-left uppercase">Registrado</th>
+                        <th class="py-3 px-4 text-left uppercase">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($usuarios as $usuario)
                         <tr class="border-b">
-                            <td class="py-2 px-4">{{ $usuario->id }}</td>
+                            
                             <td class="py-2 px-4">{{ $usuario->name }}</td>
                             <td class="py-2 px-4">{{ $usuario->email }}</td>
                             <td class="py-2 px-4">{{ $usuario->rol ? $usuario->rol->nombre : 'Sin rol' }}</td>

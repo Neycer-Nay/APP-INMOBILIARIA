@@ -25,9 +25,9 @@ class UpdatePropietarioRequest extends FormRequest
         return [
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'documento' => 'required|integer|unique:propietarios,documento,' . $this->route('propietario'),
+            'documento' => 'required|integer|unique:propietarios,documento,' . $this->route('propietario')->id,
             'telefono' => 'nullable|string|max:20',
-            'email' => 'nullable|email|unique:propietarios,email,' . $this->route('propietario'),
+            'email' => 'nullable|email|unique:propietarios,email,' . $this->route('propietario')->id,
             'direccion' => 'nullable|string|max:255',
             'ciudad' => 'required|string|max:100',
         ];
