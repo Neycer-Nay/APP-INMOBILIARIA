@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('telefono')->nullable();
             $table->decimal('comision_predeterminada', 5, 2)->default(3.00); 
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

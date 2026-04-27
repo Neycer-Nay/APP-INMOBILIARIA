@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Propietario;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePropietarioRequest;
+use App\Http\Requests\UpdatePropietarioRequest;
 
 class PropietarioController extends Controller
 {
@@ -26,7 +28,7 @@ class PropietarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePropietarioRequest $request)
     {
         //
     }
@@ -50,7 +52,7 @@ class PropietarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Propietario $propietario)
+    public function update(UpdatePropietarioRequest $request, Propietario $propietario)
     {
         //
     }
