@@ -10,12 +10,11 @@ class Propietario extends Model
     protected $fillable = [
         'nombre',
         'apellido',
+        'documento',
         'telefono',
         'email',
         'direccion',
         'ciudad',
-        'pais',
-        'fotoPerfil',
     ];
 
    
