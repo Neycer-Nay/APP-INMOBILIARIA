@@ -9,14 +9,10 @@ class Agente extends Model
 
     protected $table = 'agentes';
     protected $fillable = [
-        'nombre',
-        'apellido',
+        'user_id',
         'telefono',
-        'email',
-        'direccion',
-        'ciudad',
-        'pais',
-        'fotoPerfil',
+        'comision_predeterminada',
+        'foto',
     ];
     public function user()
     {
