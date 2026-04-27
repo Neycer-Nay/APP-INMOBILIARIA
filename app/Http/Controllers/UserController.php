@@ -121,7 +121,7 @@ class UserController extends Controller
             ->with('success', 'Usuario actualizado exitosamente.');
     }
 
-    public function toggleStatus($id): RedirectResponse
+    public function userEstado($id): RedirectResponse
     {
         $user = User::findOrFail($id);
 

@@ -46,9 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/usuarios', [App\Http\Controllers\UserController::class, 'store'])->name('usuarios.store');
     Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
-    Route::patch('/usuarios/{id}/toggle-status', [App\Http\Controllers\UserController::class, 'toggleStatus'])->name('usuarios.toggleStatus');
+    Route::patch('/usuarios/{id}/toggle-status', [App\Http\Controllers\UserController::class, 'userEstado'])->name('usuarios.userEstado');
 });
 
+// Rutas publicas para mostrar casas por tipo de estado
 Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');
 Route::get('/venta', action: [App\Http\Controllers\CasaController::class, 'casasVenta'])->name('venta');
 Route::get('/anticretico', [App\Http\Controllers\CasaController::class, 'casasAnticretico'])->name('anticretico');
