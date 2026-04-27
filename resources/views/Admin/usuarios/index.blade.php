@@ -16,7 +16,7 @@
                     <tr class="bg-[#404656] text-white">
                         <th class="py-3 px-4 text-left">ID</th>
                         <th class="py-3 px-4 text-left">Nombre</th>
-                        <th class="py-3 px-4 text-left">Correo Electrónico</th>
+                        <th class="py-3 px-4 text-left">Correo </th>
                         <th class="py-3 px-4 text-left">Rol</th>
                         <th class="py-3 px-4 text-left">Estado</th>
                         <th class="py-3 px-4 text-left">Registrado</th>
@@ -44,21 +44,19 @@
                                    title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('usuarios.toggleStatus', $usuario->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('usuarios.userEstado', $usuario->id) }}" method="POST" class="form-estado" style="display:inline;">
                                     @csrf
                                     @method('PATCH')
                                     @if($usuario->active)
                                         <button type="submit"
                                                 class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 text-sm"
-                                                title="Desactivar"
-                                                onclick="return confirm('¿Estás seguro de desactivar este usuario?')">
-                                            <i class="fas fa-user-times"></i>
+                                                title="Desactivar">
+                                                 <i class="fas fa-user-times"></i>
                                         </button>
                                     @else
                                         <button type="submit"
                                                 class="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600 text-sm"
-                                                title="Activar"
-                                                onclick="return confirm('¿Estás seguro de activar este usuario?')">
+                                                title="Activar">                                                >
                                             <i class="fas fa-user-check"></i>
                                         </button>
                                     @endif
@@ -81,7 +79,38 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    document.querySelectorAll('.form-estado').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita el envío automático
 
+            // Determina el estado actual (activo o inactivo) para el mensaje
+            const button = this.querySelector('button[type="submit"]');
+            const isActive = button.classList.contains('bg-red-500'); // Ajusta según tu lógica
+            const title = isActive ? '¿Desactivar usuario?' : '¿Activar usuario?';
+            const text = isActive ? 'El usuario quedará inhabilitado para acceder al sistema.' : 'El usuario podrá acceder nuevamente al sistema.';
+            const confirmButtonText = isActive ? 'Sí, desactivar' : 'Sí, activar';
+
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: confirmButtonText,
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Envía el formulario manualmente
+                    this.submit();
+                }
+            });
+        });
+    });
+</script>
+@endpush
 @push('scripts')
     @if(session('success'))
         <script>
