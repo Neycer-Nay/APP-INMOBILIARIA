@@ -8,9 +8,10 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Agente;
 class UserController extends Controller
 {
-    
+
     public function indexBoton()
     {
         return view('Admin.login.login');
@@ -89,6 +90,13 @@ class UserController extends Controller
             'password' => Hash::make($validatedData['password']),
             'role_id' => $validatedData['role_id'],
         ]);
+        if ($user->role_id == 2) { // suponiendo que 2 es el rol de agente
+            $user->agente()->create([
+                'telefono' => null,
+                'comision_predeterminada' => 3.00,
+                'foto' => null,
+            ]);
+        }
 
         return redirect()->route('usuarios.index')
             ->with('success', 'Usuario creado exitosamente.');

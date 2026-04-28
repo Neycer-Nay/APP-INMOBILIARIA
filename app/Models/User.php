@@ -17,6 +17,11 @@ class User extends Authenticatable
         return $this->belongsTo(Rol::class, 'role_id');
     }
 
+    public function agente()
+    {
+        return $this->hasOne(Agente::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

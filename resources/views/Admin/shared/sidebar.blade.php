@@ -54,15 +54,11 @@
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                        <a href="{{ route('agentes.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                             Ver Agentes inmobiliarios
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Registrar Agente inmobiliario
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 
@@ -145,11 +141,7 @@
                             Listar Usuarios
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('usuarios.create') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Registrar Usuario
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 
