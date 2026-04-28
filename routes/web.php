@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/propietarios', [App\Http\Controllers\PropietarioController::class, 'index'])->name('propietarios.index');
     Route::post('/propietarios', [App\Http\Controllers\PropietarioController::class, 'store'])->name('propietarios.store');
+    Route::post('/propietarios/ajax', [App\Http\Controllers\PropietarioController::class, 'storeAjax'])->name('propietarios.store.ajax');
     Route::put('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'update'])->name('propietarios.update');
     Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 

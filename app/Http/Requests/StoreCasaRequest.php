@@ -36,6 +36,8 @@ class StoreCasaRequest extends FormRequest
         return [
             
             'titulo' => ['required', 'string', 'max:255'],
+            'propietario_id' => ['required', 'integer', 'exists:propietarios,id'],
+            
             'tipo' => ['required', 'in:venta,alquiler,anticretico,traspaso'],
             'zona' => ['required', 'in:norte,sur,este,oeste,centro'],
             'categoria' => ['required', 'in:casa,departamento,casa_comercial,quinta,terreno'],

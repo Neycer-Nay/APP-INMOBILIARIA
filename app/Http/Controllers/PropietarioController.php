@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Propietario;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StorePropietarioRequest;
 use App\Http\Requests\UpdatePropietarioRequest;
@@ -19,6 +20,16 @@ class PropietarioController extends Controller
     {
         Propietario::create($request->validated());
         return redirect()->route('propietarios.index')->with('success', 'Propietario creado exitosamente.');
+    }
+
+    public function storeAjax(StorePropietarioRequest $request): JsonResponse
+    {
+        $propietario = Propietario::create($request->validated());
+        return response()->json([
+            'success' => true,
+            'message' => 'Propietario creado exitosamente.',
+            'propietario' => $propietario,
+        ]);
     }
 
     public function update(UpdatePropietarioRequest $request, Propietario $propietario): RedirectResponse

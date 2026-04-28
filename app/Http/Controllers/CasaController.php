@@ -77,8 +77,14 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             },
+            'propietario',
+            'agente.user',
         ])->orderBy('created_at', 'desc')->get();
-        return view('Admin.casas.index', compact('casas'));
+
+        $propietarios = \App\Models\Propietario::orderBy('nombre')->get();
+        $agentes = \App\Models\Agente::with('user')->orderBy('id')->get();
+
+        return view('Admin.casas.index', compact('casas', 'propietarios', 'agentes'));
     }
 
     public function create()
@@ -110,8 +116,11 @@ class CasaController extends Controller
         $casa = DB::transaction(function () use ($validatedData, $caracteristicas, $caracteristicasExternas, $caracteristicasServicios, $request) {
             $codigoGenerado = $this->obtenerSiguienteCodigo(true);
 
+            $agente = auth()->user()->agente;
             // Crear la casa con codigo autogenerado
             $casa = Casa::create([
+                'propietario_id' => $validatedData['propietario_id'],
+                'agente_id' => $agente->id,
                 'codigo' => (string) $codigoGenerado,
                 'titulo' => $validatedData['titulo'],
                 'tipo' => $validatedData['tipo'],
@@ -147,12 +156,7 @@ class CasaController extends Controller
                 }
             }
 
-            // Guardar plano de distribución
-            if ($request->hasFile('plano_distribucion')) {
-                $plano = $request->file('plano_distribucion');
-                $rutaPlano = $plano->store('planos', 'public');
-                $casa->update(['plano_distribucion' => $rutaPlano]);
-            }
+            
 
             return $casa;
         });
@@ -188,6 +192,8 @@ class CasaController extends Controller
         $caracteristicasServicios = !empty($validatedData['caracteristicasServicios']) ? array_map('trim', explode(',', $validatedData['caracteristicasServicios'])) : [];
         $precioAnterior = $casa->precio;
         $casa->update([
+            'propietario_id' => $validatedData['propietario_id'],
+            'agente_id' => $validatedData['agente_id'],
             'codigo' => $validatedData['codigo'],
             'titulo' => $validatedData['titulo'],
             'tipo' => $validatedData['tipo'],
