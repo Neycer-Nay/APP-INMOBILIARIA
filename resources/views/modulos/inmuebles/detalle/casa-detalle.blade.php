@@ -42,12 +42,19 @@
 
                     <span class="text-3xl font-bold text-[#404656] block mt-2">
                         {{ number_format($casa->precio, 0, ',', '.') }}
-                        {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }} 
+                        {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}
                         @if ($casa->tipo === 'traspaso')
                             Cuota inicial
                         @endif
                     </span>
-                   
+                    @if(!is_null($casa->precioAnterior) && $casa->precioAnterior > $casa->precio)
+                        <span class="block font-bold text-red-500 text-2xl mt-1">
+                            <del>{{ number_format($casa->precioAnterior, 0, ',', '.') }}
+                                {{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}</del>
+                            <span class="ml-2">Antes</span>
+                        </span>
+                    @endif
+
                 </div>
             </div>
 
@@ -143,16 +150,15 @@
                 </div>
 
             @endif
-            
+
             <!-- Tarjeta: Plano de Distribución -->
             @if (!empty($casa->plano_distribucion))
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="font-bold text-lg mb-4 text-[#404656]">Plano de Distribución</h3>
                     <div class="flex justify-center">
-                        <img src="{{ asset('storage/' . ltrim($casa->plano_distribucion, '/')) }}"
-                             alt="Plano de Distribución"
-                             class="w-1/2 h-auto rounded-lg shadow cursor-pointer hover:shadow-lg transition-shadow duration-300"
-                             onclick="abrirModalPlano()">
+                        <img src="{{ asset('storage/' . ltrim($casa->plano_distribucion, '/')) }}" alt="Plano de Distribución"
+                            class="w-1/2 h-auto rounded-lg shadow cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                            onclick="abrirModalPlano()">
                     </div>
                     <p class="text-center text-sm text-gray-500 mt-2">Haz clic en la imagen para verla en tamaño completo</p>
                 </div>
@@ -162,18 +168,15 @@
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="font-bold text-lg mb-2 text-[#404656]"></h3>
                     <div class="aspect-w-16 aspect-h-9">
-                        <iframe 
-                            src="{{ 
-                                strpos($casa->videoUrl, 'youtu.be') !== false 
-                                    ? str_replace('youtu.be/', 'www.youtube.com/embed/', explode('?', $casa->videoUrl)[0]) 
-                                    : (strpos($casa->videoUrl, 'facebook.com') !== false 
-                                        ? 'https://www.facebook.com/plugins/video.php?href=' . urlencode($casa->videoUrl) 
-                                        : str_replace('watch?v=', 'embed/', $casa->videoUrl)) 
-                            }}" 
-                            frameborder="0"
+                        <iframe src="{{ 
+                                        strpos($casa->videoUrl, 'youtu.be') !== false
+                ? str_replace('youtu.be/', 'www.youtube.com/embed/', explode('?', $casa->videoUrl)[0])
+                : (strpos($casa->videoUrl, 'facebook.com') !== false
+                    ? 'https://www.facebook.com/plugins/video.php?href=' . urlencode($casa->videoUrl)
+                    : str_replace('watch?v=', 'embed/', $casa->videoUrl)) 
+                                    }}" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen 
-                            class="w-full h-64 md:h-[500px] rounded-lg">
+                            allowfullscreen class="w-full h-64 md:h-[500px] rounded-lg">
                         </iframe>
                     </div>
                 </div>
@@ -460,45 +463,7 @@
         }
     </script>
 @endpush
-@push('scripts')
-    <script>
-        function abrirModalPlano() {
-            const modal = document.getElementById('modalPlano');
-            const img = document.getElementById('planoModalImg');
-            const planoSrc = '{{ !empty($casa->plano_distribucion) ? asset("storage/" . ltrim($casa->plano_distribucion, "/")) : "" }}';
-            
-            img.src = planoSrc;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex', 'opacity-100');
-            document.body.classList.add('overflow-hidden');
-        }
 
-        document.getElementById('cerrarModalPlano').onclick = function () {
-            cerrarModalPlano();
-        };
-
-        // Cerrar al hacer click fuera del modal
-        document.getElementById('modalPlano').onclick = function (e) {
-            if (e.target === this) {
-                cerrarModalPlano();
-            }
-        };
-
-        function cerrarModalPlano() {
-            const modal = document.getElementById('modalPlano');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex', 'opacity-100');
-            document.body.classList.remove('overflow-hidden');
-        }
-
-        // Cerrar modal con tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                cerrarModalPlano();
-            }
-        });
-    </script>
-@endpush
 @push('scripts')
     <script>
         function enviarWhatsapp(event) {

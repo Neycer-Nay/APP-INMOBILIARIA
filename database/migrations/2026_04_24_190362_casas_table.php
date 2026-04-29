@@ -23,6 +23,7 @@ return new class extends Migration
             $table->float('superficieTerreno');
             $table->float('superficieConstruida');
             $table->decimal('precio', 12, 2);
+            $table->decimal('precioAnterior', 12, 2)->nullable();
             $table->string('direccion');
             $table->string('ciudad');
             $table->text('descripcion');
