@@ -14,7 +14,7 @@
             <table class="min-w-full bg-white rounded-lg shadow">
                 <thead>
                     <tr class="bg-[#404656] text-white">
-                        <th class="py-3 px-4 text-left">Foto</th>
+                        <th class="py-3 px-4 text-left">Agente</th>
                         <th class="py-3 px-4 text-left">Categoría</th>
                         <th class="py-3 px-4 text-left">Tipo</th>
                         <th class="py-3 px-4 text-left">Zona</th>
@@ -30,12 +30,7 @@
                     @forelse($casas as $casa)
                         <tr class="border-b">
                             <td class="py-2 px-4">
-                                @if($casa->fotos && $casa->fotos->first())
-                                    <img src="{{ asset('storage/' . ltrim($casa->fotos->first()->ruta_imagen, '/')) }}"
-                                        alt="Foto casa" class="w-16 h-16 object-cover rounded">
-                                @else
-                                    <span class="text-gray-400">Sin imagen</span>
-                                @endif
+                                {{ $casa->agente ? $casa->agente->user->name : '—' }}
                             </td>
                             <td class="py-2 px-4">{{ mb_strtoupper(str_replace('_', ' ', $casa->categoria)) }}</td>
                             <td class="py-2 px-4">{{ mb_strtoupper($casa->tipo) }}</td>
@@ -52,49 +47,32 @@
                             <td class="py-2 px-4">{{ $casa->estado }}</td>
                             <td class="py-2 px-4">
                                 <a href="{{ route('casas.show', $casa->id) }}"
-                                    class="bg-[#404656] text-white py-1 px-3 rounded hover:bg-[#2c3240] text-sm" title="Ver detalles">
+                                    class="bg-[#404656] text-white py-1 px-3 rounded hover:bg-[#2c3240] text-sm"
+                                    title="Ver detalles">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <button type="button"
                                     class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 text-sm"
-                                    title="Editar"
-                                    onclick="openEditModal(this)"
-                                    data-action="{{ route('casas.update', $casa->id) }}"
-                                    data-casa-id="{{ $casa->id }}"
-                                    data-codigo="{{ $casa->codigo }}"
-                                    data-titulo="{{ $casa->titulo }}"
-                                    data-tipo="{{ $casa->tipo }}"
-                                    data-zona="{{ $casa->zona }}"
+                                    title="Editar" onclick="openEditModal(this)"
+                                    data-action="{{ route('casas.update', $casa->id) }}" data-casa-id="{{ $casa->id }}"
+                                    data-codigo="{{ $casa->codigo }}" data-titulo="{{ $casa->titulo }}"
+                                    data-tipo="{{ $casa->tipo }}" data-zona="{{ $casa->zona }}"
                                     data-categoria="{{ $casa->categoria }}"
                                     data-superficie-terreno="{{ $casa->superficieTerreno }}"
                                     data-superficie-construida="{{ $casa->superficieConstruida }}"
-                                    data-precio="{{ $casa->precio }}"
-                                    data-direccion="{{ $casa->direccion }}"
-                                    data-ciudad="{{ $casa->ciudad }}"
-                                    data-descripcion="{{ $casa->descripcion }}"
-                                    data-tiendas="{{ $casa->tiendas }}"
-                                    data-habitaciones="{{ $casa->habitaciones }}"
-                                    data-banos="{{ $casa->banos }}"
-                                    data-garajes="{{ $casa->garajes }}"
-                                    data-plantas="{{ $casa->plantas }}"
-                                    data-estado="{{ $casa->estado }}"
+                                    data-precio="{{ $casa->precio }}" data-direccion="{{ $casa->direccion }}"
+                                    data-ciudad="{{ $casa->ciudad }}" data-descripcion="{{ $casa->descripcion }}"
+                                    data-tiendas="{{ $casa->tiendas }}" data-habitaciones="{{ $casa->habitaciones }}"
+                                    data-banos="{{ $casa->banos }}" data-garajes="{{ $casa->garajes }}"
+                                    data-plantas="{{ $casa->plantas }}" data-estado="{{ $casa->estado }}"
                                     data-caracteristicas="{{ is_array($casa->caracteristicas) ? implode(', ', $casa->caracteristicas) : $casa->caracteristicas }}"
                                     data-caracteristicas-externas="{{ is_array($casa->caracteristicasExternas) ? implode(', ', $casa->caracteristicasExternas) : $casa->caracteristicasExternas }}"
                                     data-caracteristicas-servicios="{{ is_array($casa->caracteristicasServicios) ? implode(', ', $casa->caracteristicasServicios) : $casa->caracteristicasServicios }}"
-                                    data-videourl="{{ $casa->videoUrl }}"
-                                    data-propietario-id="{{ $casa->propietario_id }}"
+                                    data-videourl="{{ $casa->videoUrl }}" data-propietario-id="{{ $casa->propietario_id }}"
                                     data-agente-id="{{ $casa->agente_id }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <form action="{{ route('casas.destroy', $casa->id) }}" method="POST" class="form-eliminar" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 text-sm"
-                                        title="Eliminar">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
+                                
                             </td>
                         </tr>
                     @empty
@@ -111,13 +89,16 @@
 
     {{-- Modal Crear Casa --}}
     <div id="createModal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeModal('createModal')"></div>
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeModal('createModal')">
+        </div>
         <div class="flex min-h-screen items-start justify-center p-4 pt-10 text-center sm:p-0 overflow-y-auto">
-            <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl">
+            <div
+                class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl">
                 <div class="bg-white px-6 pb-6 pt-5 max-h-[90vh] overflow-y-auto">
                     <div class="flex items-center justify-between mb-6 border-b pb-4 sticky top-0 bg-white z-10">
                         <h3 class="text-2xl font-bold text-[#404656]" id="modal-title">Registrar Casa</h3>
-                        <button type="button" onclick="closeModal('createModal')" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <button type="button" onclick="closeModal('createModal')"
+                            class="text-gray-400 hover:text-gray-600 transition-colors">
                             <i class="fas fa-times text-xl"></i>
                         </button>
                     </div>
@@ -142,9 +123,11 @@
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100 text-gray-500">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Título <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Título <span
+                                        class="text-red-500">*</span></label>
                                 <input type="text" name="titulo" value="{{ old('titulo') }}"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('titulo')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
@@ -153,7 +136,8 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
                                 <select name="estado"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]">
-                                    <option value="disponible" @selected(old('estado', 'disponible') === 'disponible')>Disponible</option>
+                                    <option value="disponible" @selected(old('estado', 'disponible') === 'disponible')>
+                                        Disponible</option>
                                     <option value="vendido" @selected(old('estado') === 'vendido')>Vendido</option>
                                     <option value="alquilado" @selected(old('estado') === 'alquilado')>Alquilado</option>
                                     <option value="entregado" @selected(old('estado') === 'entregado')>Entregado</option>
@@ -166,10 +150,12 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Propietario <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Propietario <span
+                                        class="text-red-500">*</span></label>
                                 <div class="flex gap-2">
                                     <select name="propietario_id" id="create_propietario_id"
-                                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                        required>
                                         <option value="">Seleccione un propietario</option>
                                         @foreach($propietarios as $p)
                                             <option value="{{ $p->id }}" @selected(old('propietario_id') == $p->id)>
@@ -187,13 +173,39 @@
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
                             </div>
-                            
-                        </div>
 
+                        </div>
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                        @if($user->rol->nombre === 'superadministrador')
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Agente <span
+                                            class="text-red-500">*</span></label>
+                                    <select name="agente_id" id="create_agente_id"
+                                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                        required>
+                                        <option value="">Seleccione un agente</option>
+                                        @foreach($agentes as $a)
+                                            <option value="{{ $a->id }}" @selected(old('agente_id') == $a->id)>
+                                                {{ $a->user->name ?? 'Sin nombre' }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('agente_id')
+                                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        @endif
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Tipo <span class="text-red-500">*</span></label>
-                                <select name="tipo" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tipo <span
+                                        class="text-red-500">*</span></label>
+                                <select name="tipo"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                     <option value="venta" @selected(old('tipo') === 'venta')>Venta</option>
                                     <option value="alquiler" @selected(old('tipo') === 'alquiler')>Alquiler</option>
                                     <option value="anticretico" @selected(old('tipo') === 'anticretico')>Anticretico</option>
@@ -204,8 +216,11 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Zona <span class="text-red-500">*</span></label>
-                                <select name="zona" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Zona <span
+                                        class="text-red-500">*</span></label>
+                                <select name="zona"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                     <option value="">Zona</option>
                                     <option value="norte" @selected(old('zona') === 'norte')>Norte</option>
                                     <option value="sur" @selected(old('zona') === 'sur')>Sur</option>
@@ -218,12 +233,17 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Categoría <span class="text-red-500">*</span></label>
-                                <select name="categoria" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Categoría <span
+                                        class="text-red-500">*</span></label>
+                                <select name="categoria"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                     <option value="">Categoría</option>
                                     <option value="casa" @selected(old('categoria') === 'casa')>Casa</option>
-                                    <option value="departamento" @selected(old('categoria') === 'departamento')>Departamento</option>
-                                    <option value="casa_comercial" @selected(old('categoria') === 'casa_comercial')>Casa Comercial</option>
+                                    <option value="departamento" @selected(old('categoria') === 'departamento')>Departamento
+                                    </option>
+                                    <option value="casa_comercial" @selected(old('categoria') === 'casa_comercial')>Casa
+                                        Comercial</option>
                                     <option value="quinta" @selected(old('categoria') === 'quinta')>Quinta</option>
                                     <option value="terreno" @selected(old('categoria') === 'terreno')>Terreno</option>
                                 </select>
@@ -235,17 +255,23 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Terreno (m²) <span class="text-red-500">*</span></label>
-                                <input type="number" step="0.01" name="superficieTerreno" value="{{ old('superficieTerreno') }}" min="0"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Terreno (m²) <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" step="0.01" name="superficieTerreno"
+                                    value="{{ old('superficieTerreno') }}" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('superficieTerreno')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Construida (m²) <span class="text-red-500">*</span></label>
-                                <input type="number" step="0.01" name="superficieConstruida" value="{{ old('superficieConstruida') }}" min="0"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Construida (m²) <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" step="0.01" name="superficieConstruida"
+                                    value="{{ old('superficieConstruida') }}" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('superficieConstruida')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
@@ -254,17 +280,21 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Precio <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Precio <span
+                                        class="text-red-500">*</span></label>
                                 <input type="number" step="0.01" name="precio" value="{{ old('precio') }}" min="0"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('precio')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Dirección <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Dirección <span
+                                        class="text-red-500">*</span></label>
                                 <input type="text" name="direccion" value="{{ old('direccion') }}" maxlength="255"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('direccion')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
@@ -273,17 +303,21 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Ciudad <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Ciudad <span
+                                        class="text-red-500">*</span></label>
                                 <input type="text" name="ciudad" value="{{ old('ciudad') }}" maxlength="100"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('ciudad')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Descripción <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Descripción <span
+                                        class="text-red-500">*</span></label>
                                 <textarea name="descripcion" rows="2"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>{{ old('descripcion') }}</textarea>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>{{ old('descripcion') }}</textarea>
                                 @error('descripcion')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
@@ -292,25 +326,31 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Tiendas <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tiendas <span
+                                        class="text-red-500">*</span></label>
                                 <input type="number" name="tiendas" min="0" value="{{ old('tiendas') }}"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('tiendas')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Habitaciones <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Habitaciones <span
+                                        class="text-red-500">*</span></label>
                                 <input type="number" name="habitaciones" min="0" value="{{ old('habitaciones') }}"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('habitaciones')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Baños <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Baños <span
+                                        class="text-red-500">*</span></label>
                                 <input type="number" name="banos" min="0" value="{{ old('banos') }}"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]" required>
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
                                 @error('banos')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
@@ -328,7 +368,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Plantas</label>
-                                <input type="number" name="plantas" min="1" value="{{ old('plantas') }}"
+                                <input type="number" name="plantas" min="0" value="{{ old('plantas') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]">
                                 @error('plantas')
                                     <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -338,7 +378,8 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Interior (separadas por coma)</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Interior
+                                    (separadas por coma)</label>
                                 <input type="text" name="caracteristicas" value="{{ old('caracteristicas') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
                                     placeholder="Piscina, Jardín, Seguridad...">
@@ -347,8 +388,10 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Externas (separadas por coma)</label>
-                                <input type="text" name="caracteristicasExternas" value="{{ old('caracteristicasExternas') }}"
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Externas
+                                    (separadas por coma)</label>
+                                <input type="text" name="caracteristicasExternas"
+                                    value="{{ old('caracteristicasExternas') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
                                     placeholder="Colegios, Parques, Mercados, Transporte...">
                                 @error('caracteristicasExternas')
@@ -359,8 +402,10 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Servicios (separadas por coma)</label>
-                                <input type="text" name="caracteristicasServicios" value="{{ old('caracteristicasServicios') }}"
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Servicios
+                                    (separadas por coma)</label>
+                                <input type="text" name="caracteristicasServicios"
+                                    value="{{ old('caracteristicasServicios') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
                                     placeholder="Agua, luz, internet, etc...">
                                 @error('caracteristicasServicios')
@@ -368,7 +413,8 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Insertar enlace del video de FB o YT</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Insertar enlace del video de FB
+                                    o YT</label>
                                 <input type="url" name="videoUrl" value="{{ old('videoUrl') }}" maxlength="1000"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
                                     placeholder="https://www.youtube.com/watch?v=...">
@@ -380,13 +426,16 @@
 
                         <div class="mt-6">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Fotos (máximo 8)</label>
-                            <input type="file" id="fotos" name="fotos[]" multiple accept="image/jpeg,image/png,image/jpg,image/gif" class="hidden"
+                            <input type="file" id="fotos" name="fotos[]" multiple
+                                accept="image/jpeg,image/png,image/jpg,image/gif" class="hidden"
                                 onchange="previewFotos(event)">
                             <div id="preview" class="flex flex-wrap gap-2 mb-2"></div>
-                            <input type="hidden" name="foto_principal" id="foto_principal" value="{{ old('foto_principal', 0) }}">
+                            <input type="hidden" name="foto_principal" id="foto_principal"
+                                value="{{ old('foto_principal', 0) }}">
                             <div class="flex gap-2">
                                 <button type="button" onclick="document.getElementById('fotos').click()"
-                                    class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar Fotos</button>
+                                    class="bg-[#293F5D] hover:bg-blue-800 text-white py-1 px-4 rounded shadow text-sm">Seleccionar
+                                    Fotos</button>
                                 <button type="button" onclick="cancelarFotos()"
                                     class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-1 px-4 rounded shadow text-sm">Cancelar</button>
                             </div>
@@ -397,7 +446,8 @@
                             <button type="button" onclick="closeModal('createModal')"
                                 class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 text-sm font-semibold">Cancelar</button>
                             <button type="submit"
-                                class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">Guardar Casa</button>
+                                class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">Guardar
+                                Casa</button>
                         </div>
                     </form>
                 </div>
@@ -406,14 +456,17 @@
     </div>
 
     {{-- Modal Crear Propietario --}}
-    <div id="createPropietarioModal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="createPropietarioModal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
         <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeNestedModal()"></div>
         <div class="flex min-h-screen items-center justify-center p-4 text-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
+            <div
+                class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
                 <div class="bg-white px-6 pb-6 pt-5">
                     <div class="flex items-center justify-between mb-6 border-b pb-4">
                         <h3 class="text-2xl font-bold text-[#404656]" id="modal-title">Registrar Propietario</h3>
-                        <button type="button" onclick="closeNestedModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <button type="button" onclick="closeNestedModal()"
+                            class="text-gray-400 hover:text-gray-600 transition-colors">
                             <i class="fas fa-times text-xl"></i>
                         </button>
                     </div>
@@ -428,13 +481,14 @@
                         </div>
                     @endif
 
-                    <form  id="createPropietarioForm"  action="{{ route('propietarios.store.ajax') }}" method="POST">
+                    <form id="createPropietarioForm" action="{{ route('propietarios.store.ajax') }}" method="POST">
                         @csrf
                         <div id="propietarioErrors" class="mb-3 hidden text-sm text-red-700 bg-red-100 p-2 rounded"></div>
                         <input type="hidden" name="from_casa_modal" value="1">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="mb-2">
-                                <label for="create_nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                                <label for="create_nombre"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
                                 <input type="text" name="nombre" id="create_nombre" value="{{ old('nombre') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
                                     placeholder="Nombre" required>
@@ -444,7 +498,8 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="create_apellido" class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+                                <label for="create_apellido"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
                                 <input type="text" name="apellido" id="create_apellido" value="{{ old('apellido') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
                                     placeholder="Apellido" required>
@@ -454,7 +509,8 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="create_documento" class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
+                                <label for="create_documento"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
                                 <input type="number" name="documento" id="create_documento" value="{{ old('documento') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
                                     placeholder="Número de documento" required>
@@ -464,7 +520,8 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="create_telefono" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                                <label for="create_telefono"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
                                 <input type="text" name="telefono" id="create_telefono" value="{{ old('telefono') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
                                     placeholder="Teléfono">
@@ -474,7 +531,8 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="create_email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                                <label for="create_email" class="block text-sm font-medium text-gray-700 mb-1">Correo
+                                    Electrónico</label>
                                 <input type="email" name="email" id="create_email" value="{{ old('email') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
                                     placeholder="correo@ejemplo.com">
@@ -484,7 +542,8 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="create_ciudad" class="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
+                                <label for="create_ciudad"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
                                 <input type="text" name="ciudad" id="create_ciudad" value="{{ old('ciudad') }}"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
                                     placeholder="Ciudad" required>
@@ -495,7 +554,8 @@
                         </div>
 
                         <div class="mb-4 mt-2">
-                            <label for="create_direccion" class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+                            <label for="create_direccion"
+                                class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
                             <input type="text" name="direccion" id="create_direccion" value="{{ old('direccion') }}"
                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
                                 placeholder="Dirección">
@@ -508,7 +568,8 @@
                             <button type="button" onclick="closeNestedModal()"
                                 class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 text-sm font-semibold">Cancelar</button>
                             <button type="submit"
-                                class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">Guardar Propietario</button>
+                                class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">Guardar
+                                Propietario</button>
                         </div>
                     </form>
                 </div>
@@ -518,156 +579,156 @@
 
 @endsection
 @push('scripts')
-<script>
-    function isModalOpen(modalId) {
-        const modal = document.getElementById(modalId);
-        return modal && !modal.classList.contains('hidden');
-    }
-
-    function openModal(modalId) {
-        document.getElementById(modalId).classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('hidden');
-        }
-        if (!isModalOpen('createModal') && !isModalOpen('createPropietarioModal')) {
-            document.body.style.overflow = '';
-        }
-    }
-
-    function openNestedModal() {
-        openModal('createPropietarioModal');
-    }
-
-    function closeNestedModal() {
-        closeModal('createPropietarioModal');
-    }
-
-    function previewFotos(event) {
-        const preview = document.getElementById('preview');
-        preview.innerHTML = '';
-        const files = event.target.files;
-        const tiposPermitidos = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
-        if (files.length > 8) {
-            alert('Solo puedes seleccionar hasta 8 fotos.');
-            event.target.value = '';
-            return;
+    <script>
+        function isModalOpen(modalId) {
+            const modal = document.getElementById(modalId);
+            return modal && !modal.classList.contains('hidden');
         }
 
-        for (const file of files) {
-            if (!tiposPermitidos.includes(file.type)) {
-                alert('Solo se permiten fotos JPG, JPEG, PNG o GIF.');
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+            if (!isModalOpen('createModal') && !isModalOpen('createPropietarioModal')) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function openNestedModal() {
+            openModal('createPropietarioModal');
+        }
+
+        function closeNestedModal() {
+            closeModal('createPropietarioModal');
+        }
+
+        function previewFotos(event) {
+            const preview = document.getElementById('preview');
+            preview.innerHTML = '';
+            const files = event.target.files;
+            const tiposPermitidos = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+            if (files.length > 8) {
+                alert('Solo puedes seleccionar hasta 8 fotos.');
                 event.target.value = '';
                 return;
             }
 
-            if (file.size > 8 * 1024 * 1024) {
-                alert('Cada foto debe pesar como maximo 8MB.');
-                event.target.value = '';
-                return;
-            }
-        }
+            for (const file of files) {
+                if (!tiposPermitidos.includes(file.type)) {
+                    alert('Solo se permiten fotos JPG, JPEG, PNG o GIF.');
+                    event.target.value = '';
+                    return;
+                }
 
-        Array.from(files).forEach((file, idx) => {
-            const reader = new FileReader();
-            reader.onload = e => {
-                const div = document.createElement('div');
-                div.className = 'relative flex flex-col items-center';
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'h-20 w-20 object-cover rounded border mb-1';
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = 'select_principal';
-                radio.value = idx;
-                radio.className = 'mb-1';
-                radio.onclick = function () {
-                    document.getElementById('foto_principal').value = idx;
+                if (file.size > 8 * 1024 * 1024) {
+                    alert('Cada foto debe pesar como maximo 8MB.');
+                    event.target.value = '';
+                    return;
+                }
+            }
+
+            Array.from(files).forEach((file, idx) => {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const div = document.createElement('div');
+                    div.className = 'relative flex flex-col items-center';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'h-20 w-20 object-cover rounded border mb-1';
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = 'select_principal';
+                    radio.value = idx;
+                    radio.className = 'mb-1';
+                    radio.onclick = function () {
+                        document.getElementById('foto_principal').value = idx;
+                    };
+                    const label = document.createElement('label');
+                    label.innerText = ' ';
+                    label.className = 'text-xs';
+                    div.appendChild(img);
+                    div.appendChild(radio);
+                    div.appendChild(label);
+                    preview.appendChild(div);
                 };
-                const label = document.createElement('label');
-                label.innerText = ' ';
-                label.className = 'text-xs';
-                div.appendChild(img);
-                div.appendChild(radio);
-                div.appendChild(label);
-                preview.appendChild(div);
-            };
-            reader.readAsDataURL(file);
-        });
-        document.getElementById('foto_principal').value = 0;
-    }
-
-    function cancelarFotos() {
-        document.getElementById('fotos').value = '';
-        document.getElementById('preview').innerHTML = '';
-        document.getElementById('foto_principal').value = '';
-    }
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            if (isModalOpen('createPropietarioModal')) {
-                closeNestedModal();
-                return;
-            }
-            closeModal('createModal');
+                reader.readAsDataURL(file);
+            });
+            document.getElementById('foto_principal').value = 0;
         }
-    });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        @if($errors->any() && old('from_casa_modal'))
-            openModal('createModal');
-            openNestedModal();
-        @elseif($errors->any())
-            openModal('createModal');
-        @endif
-    });
-    const propietarioForm = document.getElementById('createPropietarioForm');
-const propietarioErrors = document.getElementById('propietarioErrors');
+        function cancelarFotos() {
+            document.getElementById('fotos').value = '';
+            document.getElementById('preview').innerHTML = '';
+            document.getElementById('foto_principal').value = '';
+        }
 
-if (propietarioForm) {
-    propietarioForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        propietarioErrors.classList.add('hidden');
-        propietarioErrors.innerHTML = '';
-
-        const response = await fetch(propietarioForm.action, {
-            method: 'POST',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'application/json'
-            },
-            body: new FormData(propietarioForm)
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                if (isModalOpen('createPropietarioModal')) {
+                    closeNestedModal();
+                    return;
+                }
+                closeModal('createModal');
+            }
         });
 
-        if (!response.ok) {
-            if (response.status === 422) {
+        document.addEventListener('DOMContentLoaded', function () {
+            @if($errors->any() && old('from_casa_modal'))
+                openModal('createModal');
+                openNestedModal();
+            @elseif($errors->any())
+                openModal('createModal');
+            @endif
+            });
+        const propietarioForm = document.getElementById('createPropietarioForm');
+        const propietarioErrors = document.getElementById('propietarioErrors');
+
+        if (propietarioForm) {
+            propietarioForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                propietarioErrors.classList.add('hidden');
+                propietarioErrors.innerHTML = '';
+
+                const response = await fetch(propietarioForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json'
+                    },
+                    body: new FormData(propietarioForm)
+                });
+
+                if (!response.ok) {
+                    if (response.status === 422) {
+                        const data = await response.json();
+                        const errors = Object.values(data.errors || {}).flat();
+                        propietarioErrors.innerHTML = errors.map(err => `<div>${err}</div>`).join('');
+                        propietarioErrors.classList.remove('hidden');
+                    }
+                    return;
+                }
+
                 const data = await response.json();
-                const errors = Object.values(data.errors || {}).flat();
-                propietarioErrors.innerHTML = errors.map(err => `<div>${err}</div>`).join('');
-                propietarioErrors.classList.remove('hidden');
-            }
-            return;
+                const p = data.propietario;
+
+                const select = document.getElementById('create_propietario_id');
+                const label = `${p.nombre} ${p.apellido} - ${p.documento}`;
+                const option = new Option(label, p.id, true, true);
+                select.add(option);
+
+                propietarioForm.reset();
+                closeNestedModal();
+                // toastr.success(data.message); // opcional
+            });
         }
-
-        const data = await response.json();
-        const p = data.propietario;
-
-        const select = document.getElementById('create_propietario_id');
-        const label = `${p.nombre} ${p.apellido} - ${p.documento}`;
-        const option = new Option(label, p.id, true, true);
-        select.add(option);
-
-        propietarioForm.reset();
-        closeNestedModal();
-        // toastr.success(data.message); // opcional
-    });
-}
-</script>
+    </script>
     @if(session('success'))
         <script>
             toastr.success("{{ session('success') }}");

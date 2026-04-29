@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 class StoreCasaRequest extends FormRequest
 {
@@ -17,11 +18,11 @@ class StoreCasaRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if (! $this->filled('estado')) {
+        if (!$this->filled('estado')) {
             $this->merge(['estado' => 'disponible']);
         }
 
-        if ($this->hasFile('fotos') && ! $this->filled('foto_principal')) {
+        if ($this->hasFile('fotos') && !$this->filled('foto_principal')) {
             $this->merge(['foto_principal' => 0]);
         }
     }
@@ -34,10 +35,14 @@ class StoreCasaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+
             'titulo' => ['required', 'string', 'max:255'],
             'propietario_id' => ['required', 'integer', 'exists:propietarios,id'],
-            
+            'agente_id' => [
+                Rule::requiredIf(fn() => auth()->user()?->rol?->nombre === 'superadministrador'),
+                'integer',
+                'exists:agentes,id'
+            ],
             'tipo' => ['required', 'in:venta,alquiler,anticretico,traspaso'],
             'zona' => ['required', 'in:norte,sur,este,oeste,centro'],
             'categoria' => ['required', 'in:casa,departamento,casa_comercial,quinta,terreno'],
@@ -51,7 +56,7 @@ class StoreCasaRequest extends FormRequest
             'habitaciones' => ['required', 'integer', 'min:0'],
             'banos' => ['required', 'integer', 'min:0'],
             'garajes' => ['nullable', 'integer', 'min:0'],
-            'plantas' => ['nullable', 'integer', 'min:1'],
+            'plantas' => ['nullable', 'integer', 'min:0'],
             'estado' => ['nullable', 'in:disponible,vendido,alquilado,entregado'],
             'caracteristicas' => ['nullable', 'string'],
             'caracteristicasExternas' => ['nullable', 'string'],
@@ -60,14 +65,14 @@ class StoreCasaRequest extends FormRequest
             'fotos.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:8048'],
             'foto_principal' => ['nullable', 'integer', 'min:0'],
             'videoUrl' => ['nullable', 'url', 'max:1000'],
-            
+
         ];
     }
 
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator): void {
-            if (! $this->hasFile('fotos')) {
+            if (!$this->hasFile('fotos')) {
                 return;
             }
 
@@ -88,7 +93,7 @@ class StoreCasaRequest extends FormRequest
             'superficieConstruida' => 'superficie construida',
             'caracteristicasExternas' => 'caracteristicas externas',
             'caracteristicasServicios' => 'caracteristicas de servicios',
-            
+
             'foto_principal' => 'foto principal',
         ];
     }
