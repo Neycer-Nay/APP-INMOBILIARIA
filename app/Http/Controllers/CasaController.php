@@ -73,13 +73,27 @@ class CasaController extends Controller
     }
     public function index()
     {
-        $casas = Casa::with([
+        $user = auth()->user();
+
+        $casasQuery = Casa::with([
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             },
             'propietario',
             'agente.user',
-        ])->orderBy('created_at', 'desc')->get();
+        ])->orderBy('created_at', 'desc');
+
+        if ($user && $user->rol && $user->rol->nombre === 'agente') {
+            $agenteId = optional($user->agente)->id;
+
+            if ($agenteId) {
+                $casasQuery->where('agente_id', $agenteId);
+            } else {
+                $casasQuery->whereRaw('1 = 0');
+            }
+        }
+
+        $casas = $casasQuery->get();
 
         $propietarios = \App\Models\Propietario::orderBy('nombre')->get();
         $agentes = \App\Models\Agente::with('user')->orderBy('id')->get();

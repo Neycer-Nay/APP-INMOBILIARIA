@@ -32,14 +32,10 @@
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
                         <a href="{{ route('casas.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Listar Casas
+                            Ver casas
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('casas.create') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Registrar Casa
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 
@@ -126,24 +122,26 @@
                 </ul>
             </li>
 
-            <!-- Usuarios Submenu -->
-            <li>
-                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-user-shield w-5 text-center group-hover:text-[#404656]"></i>
-                        <span class="font-medium menu-font">Usuarios</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
-                </button>
-                <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
-                    <li>
-                        <a href="{{ route('usuarios.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Listar Usuarios
-                        </a>
-                    </li>
-                    
-                </ul>
-            </li>
+            @if(auth()->check() && auth()->user()->rol && auth()->user()->rol->nombre !== 'agente')
+                <!-- Usuarios Submenu -->
+                <li>
+                    <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-user-shield w-5 text-center group-hover:text-[#404656]"></i>
+                            <span class="font-medium menu-font">Usuarios</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
+                    </button>
+                    <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
+                        <li>
+                            <a href="{{ route('usuarios.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                                Listar Usuarios
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+            @endif
 
         </ul>
     </nav>
