@@ -34,6 +34,8 @@ class UpdateCasaRequest extends FormRequest
         return [
             'codigo' => ['required', 'string', 'max:255', Rule::unique('casas', 'codigo')->ignore($id)],
             'titulo' => ['required', 'string', 'max:255'],
+            'propietario_id' => ['required', 'integer', 'exists:propietarios,id'],
+            'agente_id' => ['required', 'integer', 'exists:agentes,id'],
             'tipo' => ['required', 'in:venta,alquiler,anticretico,traspaso'],
             'zona' => ['required', 'in:norte,sur,este,oeste,centro'],
             'categoria' => ['required', 'in:casa,departamento,casa_comercial,quinta,terreno'],

@@ -9,6 +9,8 @@ class Casa extends Model
 
     protected $table = 'casas';
     protected $fillable = [
+        'propietario_id',
+        'agente_id',
         'codigo',
         'titulo',
         'tipo',
@@ -31,7 +33,7 @@ class Casa extends Model
         'caracteristicasExternas',
         'caracteristicasServicios',
         'videoUrl',
-       
+        'plano_distribucion',
     ];
 
     protected $casts = [

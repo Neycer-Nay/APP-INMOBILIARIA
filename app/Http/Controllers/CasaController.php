@@ -77,8 +77,14 @@ class CasaController extends Controller
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             },
+            'propietario',
+            'agente.user',
         ])->orderBy('created_at', 'desc')->get();
-        return view('Admin.casas.index', compact('casas'));
+
+        $propietarios = \App\Models\Propietario::orderBy('nombre')->get();
+        $agentes = \App\Models\Agente::with('user')->orderBy('id')->get();
+
+        return view('Admin.casas.index', compact('casas', 'propietarios', 'agentes'));
     }
 
     public function create()
@@ -91,6 +97,15 @@ class CasaController extends Controller
     public function store(StoreCasaRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
+
+        $user = auth()->user();
+        $agenteId = $user->rol->nombre === 'superadministrador'
+            ? ($validatedData['agente_id'] ?? null)
+            : optional($user->agente)->id;
+
+        if (!$agenteId) {
+            return back()->withErrors(['agente_id' => 'Debe seleccionar un agente.'])->withInput();
+        }
 
         // Procesar características (de texto a array)
         $caracteristicas = [];
@@ -107,11 +122,13 @@ class CasaController extends Controller
             $caracteristicasServicios = array_map('trim', explode(',', $validatedData['caracteristicasServicios']));
         }
 
-        $casa = DB::transaction(function () use ($validatedData, $caracteristicas, $caracteristicasExternas, $caracteristicasServicios, $request) {
+        $casa = DB::transaction(function () use ($validatedData, $caracteristicas, $caracteristicasExternas, $caracteristicasServicios, $request, $agenteId) {
             $codigoGenerado = $this->obtenerSiguienteCodigo(true);
 
-            // Crear la casa con codigo autogenerado
+
             $casa = Casa::create([
+                'propietario_id' => $validatedData['propietario_id'],
+                'agente_id' => $agenteId,
                 'codigo' => (string) $codigoGenerado,
                 'titulo' => $validatedData['titulo'],
                 'tipo' => $validatedData['tipo'],
@@ -147,12 +164,7 @@ class CasaController extends Controller
                 }
             }
 
-            // Guardar plano de distribución
-            if ($request->hasFile('plano_distribucion')) {
-                $plano = $request->file('plano_distribucion');
-                $rutaPlano = $plano->store('planos', 'public');
-                $casa->update(['plano_distribucion' => $rutaPlano]);
-            }
+
 
             return $casa;
         });
@@ -180,14 +192,16 @@ class CasaController extends Controller
         $validatedData = $request->validated();
 
         $casa = Casa::findOrFail($id);
-        
-        
+
+
         // Procesar características
         $caracteristicas = !empty($validatedData['caracteristicas']) ? array_map('trim', explode(',', $validatedData['caracteristicas'])) : [];
         $caracteristicasExternas = !empty($validatedData['caracteristicasExternas']) ? array_map('trim', explode(',', $validatedData['caracteristicasExternas'])) : [];
         $caracteristicasServicios = !empty($validatedData['caracteristicasServicios']) ? array_map('trim', explode(',', $validatedData['caracteristicasServicios'])) : [];
         $precioAnterior = $casa->precio;
         $casa->update([
+            'propietario_id' => $validatedData['propietario_id'],
+            'agente_id' => $validatedData['agente_id'],
             'codigo' => $validatedData['codigo'],
             'titulo' => $validatedData['titulo'],
             'tipo' => $validatedData['tipo'],
@@ -218,7 +232,7 @@ class CasaController extends Controller
             if ($casa->plano_distribucion) {
                 Storage::disk('public')->delete($casa->plano_distribucion);
             }
-            
+
             $plano = $request->file('plano_distribucion');
             $rutaPlano = $plano->store('planos', 'public');
             $casa->update(['plano_distribucion' => $rutaPlano]);
@@ -227,25 +241,9 @@ class CasaController extends Controller
         return redirect()->route('casas.index')->with('success', 'Casa actualizada correctamente.');
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $casa = Casa::findOrFail($id);
-
-        // Eliminar fotos
-        foreach ($casa->fotos as $foto) {
-            Storage::disk('public')->delete($foto->ruta_imagen);
-            $foto->delete();
-        }
-
-        // Eliminar plano de distribución si existe
-        if ($casa->plano_distribucion) {
-            Storage::disk('public')->delete($casa->plano_distribucion);
-        }
-
-        $casa->delete();
-
-        return redirect()->route('casas.index')->with('success', 'Casa eliminada correctamente.');
-    }
+     }
 
     public function casasAlquiler()
     {
