@@ -34,14 +34,13 @@ class UpdateCasaRequest extends FormRequest
         return [
             'codigo' => ['required', 'string', 'max:255', Rule::unique('casas', 'codigo')->ignore($id)],
             'titulo' => ['required', 'string', 'max:255'],
-            'propietario_id' => ['required', 'integer', 'exists:propietarios,id'],
-            'agente_id' => ['required', 'integer', 'exists:agentes,id'],
             'tipo' => ['required', 'in:venta,alquiler,anticretico,traspaso'],
             'zona' => ['required', 'in:norte,sur,este,oeste,centro'],
             'categoria' => ['required', 'in:casa,departamento,casa_comercial,quinta,terreno'],
             'superficieTerreno' => ['required', 'numeric', 'min:0'],
             'superficieConstruida' => ['required', 'numeric', 'min:0'],
             'precio' => ['required', 'numeric', 'min:0'],
+            'precioAnterior' => ['nullable', 'numeric', 'min:0'],
             'direccion' => ['required', 'string', 'max:255'],
             'ciudad' => ['required', 'string', 'max:100'],
             'descripcion' => ['required', 'string'],
@@ -49,12 +48,14 @@ class UpdateCasaRequest extends FormRequest
             'habitaciones' => ['required', 'integer', 'min:0'],
             'banos' => ['required', 'integer', 'min:0'],
             'garajes' => ['nullable', 'integer', 'min:0'],
-            'plantas' => ['nullable', 'integer', 'min:1'],
+            'plantas' => ['nullable', 'integer', 'min:0'],
             'estado' => ['nullable', 'in:disponible,vendido,alquilado,entregado'],
             'caracteristicas' => ['nullable', 'string'],
             'caracteristicasExternas' => ['nullable', 'string'],
             'caracteristicasServicios' => ['nullable', 'string'],
             'videoUrl' => ['nullable', 'url', 'max:1000'],
+            'fotos.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:8048'],
+            'foto_principal' => ['nullable', 'integer', 'min:0'],
             
         ];
     }
@@ -67,6 +68,8 @@ class UpdateCasaRequest extends FormRequest
             'superficieConstruida' => 'superficie construida',
             'caracteristicasExternas' => 'caracteristicas externas',
             'caracteristicasServicios' => 'caracteristicas de servicios',
+            'fotos' => 'fotos',
+            'foto_principal' => 'foto principal',
            
         ];
     }

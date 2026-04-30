@@ -42,10 +42,19 @@
 
             <div class="flex items-center gap-4">
                 <div class="hidden md:flex items-center gap-3 bg-[#e09129]/10 px-4 py-1.5 rounded-full">
-                    <div
-                        class="w-8 h-8 rounded-full bg-[#404656] flex items-center justify-center text-white text-sm font-bold">
-                        <i class="fas fa-user"></i>
-                    </div>
+                    @php
+            $agente = auth()->user()->agente ?? null;
+            $fotoAgente = $agente && $agente->foto ? asset('storage/' . $agente->foto) : null;
+        @endphp
+
+        @if($fotoAgente)
+            <img src="{{ $fotoAgente }}" alt="Foto del agente"
+                 class="w-8 h-8 rounded-full object-cover border border-white shadow-sm">
+        @else
+            <div class="w-8 h-8 rounded-full bg-[#404656] flex items-center justify-center text-white text-sm font-bold">
+                <i class="fas fa-user"></i>
+            </div>
+        @endif
                     <span class="text-sm font-semibold text-[#404656] menu-font">
                         {{ auth()->check() ? auth()->user()->name : 'Invitado' }}
                     </span>

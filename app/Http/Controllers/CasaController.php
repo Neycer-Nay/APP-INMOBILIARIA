@@ -73,15 +73,37 @@ class CasaController extends Controller
     }
     public function index()
     {
-        $casas = Casa::with([
+        $user = auth()->user();
+        $isAgente = $user && $user->rol && $user->rol->nombre === 'agente';
+        $agenteId = $isAgente ? optional($user->agente)->id : null;
+
+        $casasQuery = Casa::with([
             'fotos' => function ($q) {
                 $q->orderByDesc('foto_principal');
             },
             'propietario',
             'agente.user',
-        ])->orderBy('created_at', 'desc')->get();
+        ])->orderBy('created_at', 'desc');
 
-        $propietarios = \App\Models\Propietario::orderBy('nombre')->get();
+        if ($isAgente) {
+            if ($agenteId) {
+                $casasQuery->where('agente_id', $agenteId);
+            } else {
+                $casasQuery->whereRaw('1 = 0');
+            }
+        }
+
+        $casas = $casasQuery->get();
+
+        $propietariosQuery = \App\Models\Propietario::orderBy('nombre');
+        if ($isAgente) {
+            if ($agenteId) {
+                $propietariosQuery->where('agente_id', $agenteId);
+            } else {
+                $propietariosQuery->whereRaw('1 = 0');
+            }
+        }
+        $propietarios = $propietariosQuery->get();
         $agentes = \App\Models\Agente::with('user')->orderBy('id')->get();
 
         return view('Admin.casas.index', compact('casas', 'propietarios', 'agentes'));
@@ -200,8 +222,6 @@ class CasaController extends Controller
         $caracteristicasServicios = !empty($validatedData['caracteristicasServicios']) ? array_map('trim', explode(',', $validatedData['caracteristicasServicios'])) : [];
         $precioAnterior = $casa->precio;
         $casa->update([
-            'propietario_id' => $validatedData['propietario_id'],
-            'agente_id' => $validatedData['agente_id'],
             'codigo' => $validatedData['codigo'],
             'titulo' => $validatedData['titulo'],
             'tipo' => $validatedData['tipo'],

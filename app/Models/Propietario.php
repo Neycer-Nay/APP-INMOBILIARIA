@@ -8,6 +8,7 @@ class Propietario extends Model
 {
     protected $table = 'propietarios';
     protected $fillable = [
+        'agente_id',
         'nombre',
         'apellido',
         'documento',

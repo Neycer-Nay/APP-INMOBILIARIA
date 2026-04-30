@@ -68,11 +68,12 @@
                                     data-caracteristicas="{{ is_array($casa->caracteristicas) ? implode(', ', $casa->caracteristicas) : $casa->caracteristicas }}"
                                     data-caracteristicas-externas="{{ is_array($casa->caracteristicasExternas) ? implode(', ', $casa->caracteristicasExternas) : $casa->caracteristicasExternas }}"
                                     data-caracteristicas-servicios="{{ is_array($casa->caracteristicasServicios) ? implode(', ', $casa->caracteristicasServicios) : $casa->caracteristicasServicios }}"
-                                    data-videourl="{{ $casa->videoUrl }}" data-propietario-id="{{ $casa->propietario_id }}"
-                                    data-agente-id="{{ $casa->agente_id }}">
+                                    data-videourl="{{ $casa->videoUrl }}"
+                                    data-propietario-text="{{ $casa->propietario ? $casa->propietario->nombre . ' ' . $casa->propietario->apellido : '—' }}"
+                                    data-agente-text="{{ $casa->agente ? $casa->agente->user->name : '—' }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                
+
                             </td>
                         </tr>
                     @empty
@@ -455,6 +456,262 @@
         </div>
     </div>
 
+    {{-- Modal Editar Casa --}}
+    <div id="editModal" class="fixed inset-0 z-50 hidden" aria-labelledby="edit-modal-title" role="dialog"
+        aria-modal="true">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeModal('editModal')"></div>
+        <div class="flex min-h-screen items-start justify-center p-4 pt-10 text-center sm:p-0 overflow-y-auto">
+            <div
+                class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl">
+                <div class="bg-white px-6 pb-6 pt-5 max-h-[90vh] overflow-y-auto">
+                    <div class="flex items-center justify-between mb-6 border-b pb-4 sticky top-0 bg-white z-10">
+                        <h3 class="text-2xl font-bold text-[#404656]" id="edit-modal-title">Editar Casa</h3>
+                        <button type="button" onclick="closeModal('editModal')"
+                            class="text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+
+                    <form id="editForm" action="" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Agente</label>
+                                <input type="text" id="edit_agente_text"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100 text-gray-500"
+                                    readonly>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Propietario</label>
+                                <input type="text" id="edit_propietario_text"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100 text-gray-500"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Código</label>
+                                <input type="text" name="codigo" id="edit_codigo"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Título <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text" name="titulo" id="edit_titulo"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+                                <select name="estado" id="edit_estado"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]">
+                                    <option value="disponible">Disponible</option>
+                                    <option value="vendido">Vendido</option>
+                                    <option value="alquilado">Alquilado</option>
+                                    <option value="entregado">Entregado</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tipo <span
+                                        class="text-red-500">*</span></label>
+                                <select name="tipo" id="edit_tipo"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                                    <option value="venta">Venta</option>
+                                    <option value="alquiler">Alquiler</option>
+                                    <option value="anticretico">Anticretico</option>
+                                    <option value="traspaso">Traspaso</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Zona <span
+                                        class="text-red-500">*</span></label>
+                                <select name="zona" id="edit_zona"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                                    <option value="norte">Norte</option>
+                                    <option value="sur">Sur</option>
+                                    <option value="este">Este</option>
+                                    <option value="oeste">Oeste</option>
+                                    <option value="centro">Centro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Categoría <span
+                                        class="text-red-500">*</span></label>
+                                <select name="categoria" id="edit_categoria"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                                    <option value="casa">Casa</option>
+                                    <option value="departamento">Departamento</option>
+                                    <option value="casa_comercial">Casa Comercial</option>
+                                    <option value="quinta">Quinta</option>
+                                    <option value="terreno">Terreno</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Terreno (m²) <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" step="0.01" name="superficieTerreno" id="edit_superficie_terreno"
+                                    min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Construida (m²) <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" step="0.01" name="superficieConstruida" id="edit_superficie_construida"
+                                    min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Precio <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" step="0.01" name="precio" id="edit_precio" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Dirección <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text" name="direccion" id="edit_direccion" maxlength="255"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Ciudad <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text" name="ciudad" id="edit_ciudad" maxlength="100"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Descripción <span
+                                        class="text-red-500">*</span></label>
+                                <textarea name="descripcion" id="edit_descripcion" rows="2"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tiendas <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" name="tiendas" id="edit_tiendas" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Habitaciones <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" name="habitaciones" id="edit_habitaciones" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Baños <span
+                                        class="text-red-500">*</span></label>
+                                <input type="number" name="banos" id="edit_banos" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Garajes</label>
+                                <input type="number" name="garajes" id="edit_garajes" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Plantas</label>
+                                <input type="number" name="plantas" id="edit_plantas" min="0"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Interior
+                                    (separadas por coma)</label>
+                                <input type="text" name="caracteristicas" id="edit_caracteristicas"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    placeholder="Piscina, Jardín, Seguridad...">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Externas
+                                    (separadas por coma)</label>
+                                <input type="text" name="caracteristicasExternas" id="edit_caracteristicas_externas"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    placeholder="Colegios, Parques, Mercados, Transporte...">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Características Servicios
+                                    (separadas por coma)</label>
+                                <input type="text" name="caracteristicasServicios" id="edit_caracteristicas_servicios"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    placeholder="Agua, luz, internet, etc...">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Insertar enlace del video de FB
+                                    o YT</label>
+                                <input type="url" name="videoUrl" id="edit_videourl" maxlength="1000"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129]"
+                                    placeholder="https://www.youtube.com/watch?v=...">
+                            </div>
+                        </div>
+                        //por ahora no se mostrara las fotos en el modal de edicion, se podran editar desde la seccion de fotos del detalle de la casa
+                      {{--<div class="mt-6">
+                            <label class="block text-gray-700 font-semibold mb-2">Fotos</label>
+                            <div class="flex flex-wrap gap-2 mb-2">
+                                @forelse($casa->fotos as $foto)
+                                    <div class="relative flex flex-col items-center">
+                                        <img src="{{ asset('storage/' . ltrim($foto->ruta_imagen, '/')) }}"
+                                            class="h-20 w-20 object-cover rounded border mb-1" alt="Foto casa">
+                                        @if($foto->foto_principal)
+                                            <span class="text-xs text-blue-600 font-bold">Principal</span>
+                                        @endif
+                                    </div>
+                                @empty
+                                    <span class="text-gray-500">Sin fotos</span>
+                                @endforelse
+                            </div>
+                            <small class="text-gray-500">Las fotos no se pueden editar desde aquí.</small>
+                        </div>--}}
+
+                        <div class="mt-8 flex items-center justify-end gap-3">
+                            <button type="button" onclick="closeModal('editModal')"
+                                class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 text-sm font-semibold">Cancelar</button>
+                            <button type="submit"
+                                class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">Actualizar
+                                Casa</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Modal Crear Propietario --}}
     <div id="createPropietarioModal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
@@ -595,7 +852,7 @@
             if (modal) {
                 modal.classList.add('hidden');
             }
-            if (!isModalOpen('createModal') && !isModalOpen('createPropietarioModal')) {
+            if (!isModalOpen('createModal') && !isModalOpen('createPropietarioModal') && !isModalOpen('editModal')) {
                 document.body.style.overflow = '';
             }
         }
@@ -606,6 +863,37 @@
 
         function closeNestedModal() {
             closeModal('createPropietarioModal');
+        }
+
+        function openEditModal(button) {
+            const form = document.getElementById('editForm');
+            form.action = button.dataset.action;
+
+            document.getElementById('edit_agente_text').value = button.dataset.agenteText || '';
+            document.getElementById('edit_propietario_text').value = button.dataset.propietarioText || '';
+            document.getElementById('edit_codigo').value = button.dataset.codigo || '';
+            document.getElementById('edit_titulo').value = button.dataset.titulo || '';
+            document.getElementById('edit_tipo').value = button.dataset.tipo || '';
+            document.getElementById('edit_zona').value = button.dataset.zona || '';
+            document.getElementById('edit_categoria').value = button.dataset.categoria || '';
+            document.getElementById('edit_superficie_terreno').value = button.dataset.superficieTerreno || '';
+            document.getElementById('edit_superficie_construida').value = button.dataset.superficieConstruida || '';
+            document.getElementById('edit_precio').value = button.dataset.precio || '';
+            document.getElementById('edit_direccion').value = button.dataset.direccion || '';
+            document.getElementById('edit_ciudad').value = button.dataset.ciudad || '';
+            document.getElementById('edit_descripcion').value = button.dataset.descripcion || '';
+            document.getElementById('edit_tiendas').value = button.dataset.tiendas || 0;
+            document.getElementById('edit_habitaciones').value = button.dataset.habitaciones || 0;
+            document.getElementById('edit_banos').value = button.dataset.banos || 0;
+            document.getElementById('edit_garajes').value = button.dataset.garajes || 0;
+            document.getElementById('edit_plantas').value = button.dataset.plantas || 0;
+            document.getElementById('edit_estado').value = button.dataset.estado || 'disponible';
+            document.getElementById('edit_caracteristicas').value = button.dataset.caracteristicas || '';
+            document.getElementById('edit_caracteristicas_externas').value = button.dataset.caracteristicasExternas || '';
+            document.getElementById('edit_caracteristicas_servicios').value = button.dataset.caracteristicasServicios || '';
+            document.getElementById('edit_videourl').value = button.dataset.videourl || '';
+
+            openModal('editModal');
         }
 
         function previewFotos(event) {
@@ -674,6 +962,10 @@
                     closeNestedModal();
                     return;
                 }
+                if (isModalOpen('editModal')) {
+                    closeModal('editModal');
+                    return;
+                }
                 closeModal('createModal');
             }
         });
@@ -685,7 +977,7 @@
             @elseif($errors->any())
                 openModal('createModal');
             @endif
-            });
+                    });
         const propietarioForm = document.getElementById('createPropietarioForm');
         const propietarioErrors = document.getElementById('propietarioErrors');
 

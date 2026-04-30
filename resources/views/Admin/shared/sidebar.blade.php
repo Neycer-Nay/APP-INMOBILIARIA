@@ -1,9 +1,10 @@
 <!-- Sidebar Admin -->
-<aside id="admin-sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-[#404656] text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col shadow-2xl">
+<aside id="admin-sidebar"
+    class="fixed inset-y-0 left-0 z-50 w-64 bg-[#404656] text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col shadow-2xl">
     <!-- Logo Area -->
     <div class="flex items-center justify-center h-16 border-b border-white/10 bg-[#e09129] ">
         <a href="#" class="flex items-center gap-3">
-            
+
             <span class="font-bold text-white text-lg tracking-wide menu-font">INMOBILIARIA</span>
         </a>
     </div>
@@ -14,15 +15,17 @@
 
             <!-- Dashboard -->
             <li>
-                <a href="{{ route('casas.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group">
-                    <i class="fas fa-home w-5 text-center group-hover:text-[#404656]"></i>
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group">
+                    <i class="fas fa-id-card w-5 text-center group-hover:text-[#404656]"></i>
                     <span class="font-medium menu-font">Dashboard</span>
                 </a>
             </li>
 
             <!-- Casas Submenu -->
             <li>
-                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                <button type="button"
+                    class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-building w-5 text-center group-hover:text-[#404656]"></i>
                         <span class="font-medium menu-font">Casas</span>
@@ -31,40 +34,43 @@
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="{{ route('casas.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Listar Casas
+                        <a href="{{ route('casas.index') }}"
+                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                            Ver casas
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('casas.create') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Registrar Casa
-                        </a>
-                    </li>
+
                 </ul>
             </li>
 
-            <!-- Casas Submenu -->
-            <li>
-                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-house-user w-5 text-center group-hover:text-[#404656]"></i>
-                        <span class="font-medium menu-font">Agentes</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
-                </button>
-                <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
-                    <li>
-                        <a href="{{ route('agentes.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Ver Agentes inmobiliarios
-                        </a>
-                    </li>
-                    
-                </ul>
-            </li>
+            @if(auth()->check() && auth()->user()->rol && auth()->user()->rol->nombre !== 'agente')
 
+                <!-- Casas Submenu -->
+                <li>
+                    <button type="button"
+                        class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-house-user w-5 text-center group-hover:text-[#404656]"></i>
+                            <span class="font-medium menu-font">Agentes</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
+                    </button>
+                    <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
+                        <li>
+                            <a href="{{ route('agentes.index') }}"
+                                class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                                Ver Agentes inmobiliarios
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+            @endif
             <!-- Propietarios Submenu -->
             <li>
-                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                <button type="button"
+                    class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-user-tie w-5 text-center group-hover:text-[#404656]"></i>
                         <span class="font-medium menu-font">Propietarios</span>
@@ -73,7 +79,8 @@
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="{{ route('propietarios.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                        <a href="{{ route('propietarios.index') }}"
+                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                             Listar Propietarios
                         </a>
                     </li>
@@ -82,7 +89,8 @@
 
             <!-- Clientes Submenu -->
             <li>
-                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                <button type="button"
+                    class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-users w-5 text-center group-hover:text-[#404656]"></i>
                         <span class="font-medium menu-font">Clientes</span>
@@ -91,12 +99,14 @@
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                        <a href="#"
+                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                             Listar Clientes
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                        <a href="#"
+                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                             Registrar Cliente
                         </a>
                     </li>
@@ -105,7 +115,8 @@
 
             <!-- Ventas Submenu -->
             <li>
-                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                <button type="button"
+                    class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-handshake w-5 text-center group-hover:text-[#404656]"></i>
                         <span class="font-medium menu-font">Ventas</span>
@@ -114,37 +125,52 @@
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                        <a href="#"
+                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                             Listar Ventas
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                        <a href="#"
+                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                             Registrar Venta
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <!-- Usuarios Submenu -->
-            <li>
-                <button type="button" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-user-shield w-5 text-center group-hover:text-[#404656]"></i>
-                        <span class="font-medium menu-font">Usuarios</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
-                </button>
-                <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
-                    <li>
-                        <a href="{{ route('usuarios.index') }}" class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Listar Usuarios
-                        </a>
-                    </li>
-                    
-                </ul>
-            </li>
+            @if(auth()->check() && auth()->user()->rol && auth()->user()->rol->nombre !== 'agente')
+                <!-- Usuarios Submenu -->
+                <li>
+                    <button type="button"
+                        class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-user-shield w-5 text-center group-hover:text-[#404656]"></i>
+                            <span class="font-medium menu-font">Usuarios</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
+                    </button>
+                    <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
+                        <li>
+                            <a href="{{ route('usuarios.index') }}"
+                                class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                                Listar Usuarios
+                            </a>
+                        </li>
 
+                    </ul>
+                </li>
+            @endif
+
+            @if(auth()->check() && auth()->user()->rol && auth()->user()->rol->nombre !== 'superadministrador')
+                <li>
+                    <a href="{{ route('agente.perfil') }}"
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group">
+                        <i class="fas fa-user-cog w-5 text-center group-hover:text-[#404656]"></i>
+                        <span class="font-medium menu-font">Configurar perfil</span>
+                    </a>
+                </li>
+            @endif
         </ul>
     </nav>
 
@@ -152,7 +178,8 @@
     <div class="p-4 border-t border-white/10">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
-            <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white transition-colors duration-200 menu-font text-sm font-semibold">
+            <button type="submit"
+                class="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white transition-colors duration-200 menu-font text-sm font-semibold">
                 <i class="fas fa-sign-out-alt"></i>
                 Cerrar Sesión
             </button>
@@ -161,19 +188,35 @@
 </aside>
 
 <!-- Mobile Sidebar Overlay -->
-<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden backdrop-blur-sm transition-opacity">
+</div>
 
 <style>
-    .menu-font { font-family: 'Muli', sans-serif; }
+    .menu-font {
+        font-family: 'Muli', sans-serif;
+    }
+
     /* Custom scrollbar for sidebar */
-    #admin-sidebar nav::-webkit-scrollbar { width: 4px; }
-    #admin-sidebar nav::-webkit-scrollbar-track { background: transparent; }
-    #admin-sidebar nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
-    #admin-sidebar nav::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+    #admin-sidebar nav::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    #admin-sidebar nav::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #admin-sidebar nav::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+    }
+
+    #admin-sidebar nav::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
 </style>
 
 <script>
-    (function() {
+    (function () {
         // Toggle sidebar on mobile
         const toggleBtn = document.getElementById('sidebar-toggle');
         const sidebar = document.getElementById('admin-sidebar');
@@ -189,7 +232,7 @@
         }
 
         if (toggleBtn && sidebar && overlay) {
-            toggleBtn.addEventListener('click', function() {
+            toggleBtn.addEventListener('click', function () {
                 if (sidebar.classList.contains('-translate-x-full')) {
                     openSidebar();
                 } else {
@@ -200,8 +243,8 @@
         }
 
         // Submenu accordion
-        document.querySelectorAll('.sidebar-submenu-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() {
+        document.querySelectorAll('.sidebar-submenu-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
                 const submenu = this.nextElementSibling;
                 const icon = this.querySelector('.submenu-icon');
                 if (!submenu) return;
@@ -210,7 +253,7 @@
                 // Close all sibling submenus
                 const parentLi = this.closest('li');
                 const parentUl = parentLi.parentElement;
-                parentUl.querySelectorAll('.submenu-list').forEach(function(ul) {
+                parentUl.querySelectorAll('.submenu-list').forEach(function (ul) {
                     if (ul !== submenu) {
                         ul.classList.add('hidden');
                         const otherBtn = ul.previousElementSibling;
@@ -232,4 +275,3 @@
         });
     })();
 </script>
-

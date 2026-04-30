@@ -24,7 +24,7 @@ Route::post('/login', [App\Http\Controllers\UserController::class, 'login'])->na
 
 Route::post('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
 
-Route::get('/User', function () {
+Route::get('/user', function () {
     return app(App\Http\Controllers\UserController::class)->index();
 })->name('user.index');
 
@@ -33,7 +33,23 @@ Route::get('/crear-admin', function () {
     return app(App\Http\Controllers\UserController::class)->crearAdmin();
 });
 
+// Rutas publicas para mostrar casas por tipo de estado
+Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');
+Route::get('/venta', [App\Http\Controllers\CasaController::class, 'casasVenta'])->name('venta');
+Route::get('/anticretico', [App\Http\Controllers\CasaController::class, 'casasAnticretico'])->name('anticretico');
+Route::get('/traspaso', [App\Http\Controllers\CasaController::class, 'casasTraspaso'])->name('traspaso');
+
+//Ruta para ver detalles de una casa
+Route::get('/casas/{id}', [App\Http\Controllers\CasaController::class, 'show'])->name('casas.show');
+
+// Rutas publicas para agentes
+Route::get('/agentes', [App\Http\Controllers\AgenteController::class, 'agentesPublicos'])->name('agentes.publicos');
+Route::get('/agentes/{id}', [App\Http\Controllers\AgenteController::class, 'verAgentePublico'])->name('agentes.ver');
+
 Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
     Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
     Route::get('/casas/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
     Route::get('/casas/index', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
@@ -47,24 +63,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'update'])->name('propietarios.update');
     Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 
-    Route::get('/agentes', [App\Http\Controllers\AgenteController::class, 'index'])->name('agentes.index');
+    Route::get('/agentes/admin', [App\Http\Controllers\AgenteController::class, 'index'])->name('admin.agentes.index');
+    Route::get('/agentes/mi-perfil', [App\Http\Controllers\AgenteController::class, 'miPerfil'])->name('agente.perfil');
+    Route::put('/agentes/mi-perfil', [App\Http\Controllers\AgenteController::class, 'actualizarMiPerfil'])->name('agente.perfil.update');
     Route::put('/agentes/{id}', [App\Http\Controllers\AgenteController::class, 'update'])->name('agentes.update');
 
-    Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');
-    Route::get('/usuarios/create', [App\Http\Controllers\UserController::class, 'create'])->name('usuarios.create');
-    Route::post('/usuarios', [App\Http\Controllers\UserController::class, 'store'])->name('usuarios.store');
-    Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
-    Route::put('/usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
-    Route::patch('/usuarios/{id}/toggle-status', [App\Http\Controllers\UserController::class, 'userEstado'])->name('usuarios.userEstado');
+    Route::middleware('no-agente')->group(function () {
+        Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');
+        Route::get('/usuarios/create', [App\Http\Controllers\UserController::class, 'create'])->name('usuarios.create');
+        Route::post('/usuarios', [App\Http\Controllers\UserController::class, 'store'])->name('usuarios.store');
+        Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
+        Route::put('/usuarios/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
+        Route::patch('/usuarios/{id}/toggle-status', [App\Http\Controllers\UserController::class, 'userEstado'])->name('usuarios.userEstado');
+    });
 });
-
-// Rutas publicas para mostrar casas por tipo de estado
-Route::get('/alquiler', [App\Http\Controllers\CasaController::class, 'casasAlquiler'])->name('alquiler');
-Route::get('/venta', action: [App\Http\Controllers\CasaController::class, 'casasVenta'])->name('venta');
-Route::get('/anticretico', [App\Http\Controllers\CasaController::class, 'casasAnticretico'])->name('anticretico');
-Route::get('/traspaso', [App\Http\Controllers\CasaController::class, 'casasTraspaso'])->name('traspaso');
-
-//Ruta para ver detalles de una casa
-Route::get('/casas/{id}', [App\Http\Controllers\CasaController::class, 'show'])->name('casas.show');
-
-

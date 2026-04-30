@@ -14,6 +14,7 @@
 
                         <th class="py-3 px-4 text-left uppercase">Nombre</th>
                         <th class="py-3 px-4 text-left uppercase">Correo </th>
+                        <th class="py-3 px-4 text-left uppercase">Celular </th>
                         <th class="py-3 px-4 text-left uppercase">Foto</th>
                         <th class="py-3 px-4 text-left uppercase">Estado</th>
                         <th class="py-3 px-4 text-left uppercase">Registrado</th>
@@ -26,6 +27,7 @@
 
                             <td class="py-2 px-4">{{ $agente->user->name }}</td>
                             <td class="py-2 px-4">{{ $agente->user->email }}</td>
+                            <td class="py-2 px-4">{{ $agente->telefono }}</td>
                             <td class="py-2 px-4">
                                 @if($agente->foto)
                                     <img src="{{ asset('storage/' . $agente->foto) }}" alt="Foto de {{ $agente->user->name }}" class="h-12 w-12 rounded-full object-cover border">

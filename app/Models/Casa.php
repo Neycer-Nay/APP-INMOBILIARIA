@@ -33,7 +33,7 @@ class Casa extends Model
         'caracteristicasExternas',
         'caracteristicasServicios',
         'videoUrl',
-        'plano_distribucion',
+        
     ];
 
     protected $casts = [

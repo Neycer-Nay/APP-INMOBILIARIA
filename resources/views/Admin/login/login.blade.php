@@ -90,37 +90,37 @@
     </div>
 <script>
         document.addEventListener('DOMContentLoaded', function () {
-            @if(isset($success))
+            @if(session()->has('success'))
                 Swal.fire({
                     title: '¡Éxito!',
-                    text: "{{ $success }}",
+                    text: "{{ session('success') }}",
                     icon: 'success',
                     confirmButtonText: 'OK'
                 });
             @endif
 
-            @if(isset($error))
+            @if(session()->has('error'))
                 Swal.fire({
                     title: 'Error',
-                    text: "{{ $error }}",
+                    text: "{{ session('error') }}",
                     icon: 'error',
                     confirmButtonText: 'Entendido'
                 });
             @endif
 
-            @if(isset($warning))
+            @if(session()->has('warning'))
                 Swal.fire({
                     title: 'Advertencia',
-                    text: "{{ $warning }}",
+                    text: "{{ session('warning') }}",
                     icon: 'warning',
                     confirmButtonText: 'Revisar'
                 });
             @endif
 
-            @if(isset($info))
+            @if(session()->has('info'))
                 Swal.fire({
                     title: 'Información',
-                    text: "{{ $info }}",
+                    text: "{{ session('info') }}",
                     icon: 'info',
                     confirmButtonText: 'OK'
                 });
