@@ -197,7 +197,7 @@ class CasaController extends Controller
 
     public function show($id)
     {
-        $casa = Casa::with('fotos')->findOrFail($id);
+        $casa = Casa::with(['fotos', 'agente.user'])->findOrFail($id);
         return view('modulos.inmuebles.detalle.casa-detalle', compact('casa'));
     }
 

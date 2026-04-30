@@ -189,14 +189,13 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="font-bold text-lg mb-4 text-[#404656] text-center">¿Necesitas más información?</h3>
                 <div class="flex flex-col items-center mb-4">
-                    <img src="{{ asset('recursos/img/casaperfil.jpg') }}" alt="perfil"
+                    <img src="{{ $casa->agente && $casa->agente->foto ? asset('storage/' . ltrim($casa->agente->foto, '/')) : asset('recursos/img/casaperfil.jpg') }}" alt="perfil"
                         class="w-54 h-54 rounded-full object-cover mb-2 border">
-                    <span class="font-semibold text-[#404656]">Casa y Chalet Bienes Raices</span>
-                    <a href="https://wa.me/59175026366?text=Necesito%20Mas%20Información%20sobre%20la%20propiedad%20con%20COD:%20{{ $casa->codigo }}%20En%20{{ $casa->direccion }}%20{{ $casa->zona }}%20Con%20precio%20de%20:{{ number_format($casa->precio, 0, ',', '.') }}%20{{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}"
-                        target="blank" class="text-[#404656] hover:underline text-sm">+591
-                        75026366</a>
-                    <a href="casa_y_chalet@hotmail.com" target="blank"
-                        class="text-[#404656] hover:underline  text-sm">casa_y_chalet@hotmail.com</a>
+                    <span class="font-semibold text-[#404656]">{{ $casa->agente->user->name ?? 'Casa y Chalet Bienes Raices' }}</span>
+                    <a href="https://wa.me/591{{ str_pad(($casa->agente->telefono ?? ''), 9, '0', STR_PAD_LEFT) }}?text=Necesito%20Mas%20Información%20sobre%20la%20propiedad%20con%20COD:%20{{ $casa->codigo }}%20En%20{{ $casa->direccion }}%20{{ $casa->zona }}%20Con%20precio%20de%20:{{ number_format($casa->precio, 0, ',', '.') }}%20{{ $casa->tipo == 'alquiler' ? 'Bs' : '$us' }}"
+                        target="blank" class="text-[#404656] hover:underline text-sm">+591 {{ number_format($casa->agente->telefono ?? '75026366', 0, '', '') }}</a>
+                    <a href="{{ $casa->agente->user->email ?? '' }}" target="blank"
+                        class="text-[#404656] hover:underline  text-sm">{{ $casa->agente->user->email ?? '' }}</a>
                 </div>
 
                 <form id="formContacto" class="space-y-4" onsubmit="enviarWhatsapp(event)">
@@ -265,17 +264,7 @@
         </div>
     </div>
 
-    <!-- Modal para visualizar plano de distribución -->
-    <div id="modalPlano"
-        class="fixed inset-0 bg-black/80 items-center justify-center z-50 hidden transition-opacity duration-300">
-        <button id="cerrarModalPlano" class="absolute top-2 right-2 text-white text-4xl cursor-pointer">&times;</button>
-        <div id="modalPlanoContent" class="rounded-lg shadow-lg p-4 relative max-w-6xl w-full">
-            <div class="flex items-center justify-center min-h-[60vh]">
-                <img id="planoModalImg" src="" alt="Plano de Distribución"
-                    class="max-h-[85vh] max-w-[90vw] w-auto rounded transition-all duration-300 object-contain">
-            </div>
-        </div>
-    </div>
+    
 
 
 @endsection
@@ -483,7 +472,7 @@
             }
 
             // Número de WhatsApp destino (cambia por el tuyo)
-            const numero = '59175026366';
+            const numero = '591{{ str_pad(($casa->agente->telefono ?? '75026366'), 9, '0', STR_PAD_LEFT) }}';
 
             // Construir mensaje
             let texto = `Hola, mi nombre es ${nombre}.\n Y mi teléfono es: ${telefono}`;
