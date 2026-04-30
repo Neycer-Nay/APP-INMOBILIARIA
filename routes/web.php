@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/', [App\Http\Controllers\CasaController::class, 'store'])->name('casas.store');
     Route::get('/casas/create', [App\Http\Controllers\CasaController::class, 'create'])->name('casas.create');
-    Route::get('/casas/index', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
+    Route::get('/casas-index', [App\Http\Controllers\CasaController::class, 'index'])->name('casas.index');
     Route::get('/casas/{id}/edit', [App\Http\Controllers\CasaController::class, 'edit'])->name('casas.edit');
     Route::put('/casas/{id}', [App\Http\Controllers\CasaController::class, 'update'])->name('casas.update');
     Route::delete('/casas/{id}', [App\Http\Controllers\CasaController::class, 'destroy'])->name('casas.destroy');
@@ -63,8 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'update'])->name('propietarios.update');
     Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 
-    Route::get('/agentes/admin', [App\Http\Controllers\AgenteController::class, 'index'])->name('admin.agentes.index');
-    Route::get('/agentes/mi-perfil', [App\Http\Controllers\AgenteController::class, 'miPerfil'])->name('agente.perfil');
+    Route::get('/agentes-admin', [App\Http\Controllers\AgenteController::class, 'index'])->name('admin.agentes.index');
+    Route::get('/agentes-mi-perfil', [App\Http\Controllers\AgenteController::class, 'miPerfil'])->name('agente.perfil');
     Route::put('/agentes/mi-perfil', [App\Http\Controllers\AgenteController::class, 'actualizarMiPerfil'])->name('agente.perfil.update');
     Route::put('/agentes/{id}', [App\Http\Controllers\AgenteController::class, 'update'])->name('agentes.update');
 
@@ -77,3 +77,5 @@ Route::middleware('auth')->group(function () {
         Route::patch('/usuarios/{id}/toggle-status', [App\Http\Controllers\UserController::class, 'userEstado'])->name('usuarios.userEstado');
     });
 });
+
+

@@ -37,16 +37,16 @@ class AgenteController extends Controller
      */
     public function verAgentePublico($id)
     {
-        $agente = Agente::with([
-            'user',
-            'casas' => function ($query) {
-                $query->with(['fotos' => function ($q) {
-                    $q->orderByDesc('foto_principal');
-                }])->whereIn('estado', ['disponible', 'vendido', 'alquilado', 'entregado']);
-            }
-        ])->findOrFail($id);
+        $agente = Agente::with('user')->findOrFail($id);
 
-        return view('modulos.agentes.ver-agente', compact('agente'));
+        $casas = $agente->casas()
+            ->with(['fotos' => function ($query) {
+                $query->orderByDesc('foto_principal');
+            }])
+            ->whereIn('estado', ['disponible', 'vendido', 'alquilado', 'entregado'])
+            ->paginate(10);
+
+        return view('modulos.agentes.ver-agente', compact('agente', 'casas'));
     }
 
     public function verAgente($id)

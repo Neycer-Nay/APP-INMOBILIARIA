@@ -2,7 +2,7 @@
   <div class="container mx-auto flex items-center h-24 justify-between md:justify-center space-x-0 md:space-x-32 px-4">
     <!-- Logo -->
     <a href="{{ route('inicio') }}" class="flex items-center justify-center">
-      <img class="h-16 w-16 md:h-24 md:w-24" src="recursos/img/logo-blanco.png" alt="" />
+      <img class="h-24 w-24 md:h-32 md:w-48" src="recursos/img/logo-blanco.png" alt="" />
     </a>
     <!-- Menú hamburguesa (solo móvil) -->
     <button id="mobile-menu-button"

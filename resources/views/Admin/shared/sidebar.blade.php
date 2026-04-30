@@ -4,8 +4,7 @@
     <!-- Logo Area -->
     <div class="flex items-center justify-center h-16 border-b border-white/10 bg-[#e09129] ">
         <a href="#" class="flex items-center gap-3">
-
-            <span class="font-bold text-white text-lg tracking-wide menu-font">INMOBILIARIA</span>
+            <img class="h-24 w-24 md:h-32 md:w-48" src="recursos/img/logo-blanco.png" alt="" />
         </a>
     </div>
 
@@ -45,7 +44,7 @@
 
             @if(auth()->check() && auth()->user()->rol && auth()->user()->rol->nombre !== 'agente')
 
-                <!-- Casas Submenu -->
+                <!-- Agente Submenu -->
                 <li>
                     <button type="button"
                         class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
@@ -57,7 +56,7 @@
                     </button>
                     <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                         <li>
-                            <a href="{{ route('agentes.index') }}"
+                            <a href="{{ route('admin.agentes.index') }}"
                                 class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                                 Ver Agentes inmobiliarios
                             </a>
