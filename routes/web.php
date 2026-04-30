@@ -82,6 +82,8 @@ Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioCo
 
     Route::get('/reportes-ventas-por-agente', [App\Http\Controllers\ReporteController::class, 'ventasPorAgente'])->name('reportes.ventasPorAgente');
     Route::get('/reportes-ventas-por-agente/pdf', [App\Http\Controllers\ReporteController::class, 'ventasPorAgentePdf'])->name('reportes.ventasPorAgente.pdf');
+    Route::get('/reportes-propiedades-disponibles', [App\Http\Controllers\ReporteController::class, 'propiedadesDisponibles'])->name('reportes.propiedadesDisponibles');
+    Route::get('/reportes-propiedades-disponibles/pdf', [App\Http\Controllers\ReporteController::class, 'propiedadesDisponiblesPdf'])->name('reportes.propiedadesDisponibles.pdf');
 
     Route::middleware('no-agente')->group(function () {
         Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');

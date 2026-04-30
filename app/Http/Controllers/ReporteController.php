@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agente;
+use App\Models\Casa;
 use App\Models\Venta;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -89,5 +90,79 @@ class ReporteController extends Controller
         $pdf = Pdf::loadView('Admin.reportes.reporte-ventas-pdf', compact('ventas', 'filtros', 'agenteSeleccionado'));
 
         return $pdf->stream('reporte-ventas.pdf');
+    }
+
+    public function propiedadesDisponibles(Request $request)
+    {
+        $user = $request->user();
+        $agenteActual = $user ? $user->agente : null;
+
+        $tipos = [
+            'venta' => 'Venta',
+            'alquiler' => 'Alquiler',
+            'anticretico' => 'Anticretico',
+            'traspaso' => 'Traspaso',
+        ];
+
+        $filtros = [
+            'tipo' => $request->input('tipo'),
+        ];
+
+        $mostrarTabla = $request->has('consultar');
+        $casas = collect();
+
+        if ($mostrarTabla) {
+            $casasQuery = Casa::with(['agente.user'])
+                ->where('estado', 'disponible')
+                ->orderBy('created_at', 'desc');
+
+            if ($agenteActual) {
+                $casasQuery->where('agente_id', $agenteActual->id);
+            }
+
+            if (!empty($filtros['tipo'])) {
+                $casasQuery->where('tipo', $filtros['tipo']);
+            }
+
+            $casas = $casasQuery->get();
+        }
+
+        return view('Admin.reportes.reporte-propiedades-disponible', compact('tipos', 'filtros', 'mostrarTabla', 'casas'));
+    }
+
+    public function propiedadesDisponiblesPdf(Request $request)
+    {
+        $user = $request->user();
+        $agenteActual = $user ? $user->agente : null;
+
+        $tipos = [
+            'venta' => 'Venta',
+            'alquiler' => 'Alquiler',
+            'anticretico' => 'Anticretico',
+            'traspaso' => 'Traspaso',
+        ];
+
+        $filtros = [
+            'tipo' => $request->input('tipo'),
+        ];
+
+        $casasQuery = Casa::with(['agente.user'])
+            ->where('estado', 'disponible')
+            ->orderBy('created_at', 'desc');
+
+        if ($agenteActual) {
+            $casasQuery->where('agente_id', $agenteActual->id);
+        }
+
+        if (!empty($filtros['tipo'])) {
+            $casasQuery->where('tipo', $filtros['tipo']);
+        }
+
+        $casas = $casasQuery->get();
+        $tipoSeleccionado = $filtros['tipo'] ? ($tipos[$filtros['tipo']] ?? 'Todos') : 'Todos';
+
+        $pdf = Pdf::loadView('Admin.reportes.reporte-propiedades-disponible-pdf', compact('casas', 'filtros', 'tipoSeleccionado', 'tipos'));
+
+        return $pdf->stream('reporte-propiedades-disponibles.pdf');
     }
 }

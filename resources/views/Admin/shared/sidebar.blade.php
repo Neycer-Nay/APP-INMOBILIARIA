@@ -177,6 +177,13 @@
                                 Reportes de ventas
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('reportes.propiedadesDisponibles') }}"
+                                class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                               
+                                Reporte de propiedades disponibles
+                            </a>
+                        </li>
 
                     </ul>
                 </li>
