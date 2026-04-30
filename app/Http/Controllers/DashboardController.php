@@ -10,7 +10,7 @@ use App\Models\Cliente;
 use App\Models\Venta;
 use App\Models\User;
 use App\Models\Casa;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class DashboardController extends Controller
 {
     public function index()
@@ -69,5 +69,17 @@ class DashboardController extends Controller
             'totalUsuarios',
             'esSuperAdministrador'
         ));
+    }
+
+    public function exportarPDF()
+    {
+        // Recuperar agentes desde la base de datos
+        $agentes = Agente::all();
+
+        // Generar PDF con la vista Blade
+        $pdf = Pdf::loadView('modulos.agentes.agentespdf', compact('agentes'));
+
+        // Mostrar en navegador
+        return $pdf->stream('agentes.pdf');
     }
 }

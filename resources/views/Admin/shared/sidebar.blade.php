@@ -16,7 +16,7 @@
             <li>
                 <a href="{{ route('dashboard') }}"
                     class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group">
-                    <i class="fas fa-id-card w-5 text-center group-hover:text-[#404656]"></i>
+                    <i class="fas fa-tachometer-alt w-5 text-center group-hover:text-[#404656]"></i>
                     <span class="font-medium menu-font">Dashboard</span>
                 </a>
             </li>
@@ -160,7 +160,26 @@
                     </ul>
                 </li>
             @endif
+            <li>
+                    <button type="button"
+                        class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-chart-line w-5 text-center group-hover:text-[#404656]"></i>
+                            <span class="font-medium menu-font">Reportes</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
+                    </button>
+                    <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
+                        <li>
+                            <a href="#"
+                                class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
+                                
+                                Reportes de ventas
+                            </a>
+                        </li>
 
+                    </ul>
+                </li>
             @if(auth()->check() && auth()->user()->rol && auth()->user()->rol->nombre !== 'superadministrador')
                 <li>
                     <a href="{{ route('agente.perfil') }}"

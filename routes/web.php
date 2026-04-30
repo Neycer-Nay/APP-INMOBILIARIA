@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta para buscar casas
@@ -27,6 +28,8 @@ Route::post('/logout', [App\Http\Controllers\UserController::class, 'logout'])->
 Route::get('/user', function () {
     return app(App\Http\Controllers\UserController::class)->index();
 })->name('user.index');
+
+Route::get('/pdf-agentes', [DashboardController::class, 'exportarPDF']);
 
 
 Route::get('/crear-admin', function () {
