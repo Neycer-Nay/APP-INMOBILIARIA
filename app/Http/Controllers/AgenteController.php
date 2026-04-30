@@ -8,13 +8,51 @@ use Illuminate\Support\Facades\Storage;
 
 class AgenteController extends Controller
 {
-    /**
+/**
      * Display a listing of the resource.
      */
     public function index()
     {
         $agentes = Agente::with('user.rol')->paginate(10);
         return view('Admin.agentes.index', compact('agentes'));
+    }
+
+    /**
+     * Public view - list all agents for public display
+     */
+    public function agentesPublicos()
+    {
+        // Get all agents where the user role is 'agente' and user is active
+        $agentes = Agente::whereHas('user', function ($query) {
+            $query->where('active', 1)->whereHas('rol', function ($q) {
+                $q->where('nombre', 'agente');
+            });
+        })->with('user')->get();
+        
+        return view('modulos.agentes.agentes', compact('agentes'));
+    }
+
+    /**
+     * Public view - show agent details with their houses
+     */
+    public function verAgentePublico($id)
+    {
+        $agente = Agente::with([
+            'user',
+            'casas' => function ($query) {
+                $query->with(['fotos' => function ($q) {
+                    $q->orderByDesc('foto_principal');
+                }])->whereIn('estado', ['disponible', 'vendido', 'alquilado', 'entregado']);
+            }
+        ])->findOrFail($id);
+
+        return view('modulos.agentes.ver-agente', compact('agente'));
+    }
+
+    public function verAgente($id)
+    {
+        $agente = Agente::with('user.rol')->findOrFail($id);
+        return view('Admin.agentes.show', compact('agente'));
     }
 
     /**
@@ -79,11 +117,60 @@ class AgenteController extends Controller
 
     }
 
-    /**
+/**
      * Remove the specified resource from storage.
      */
     public function destroy(Agente $agente)
     {
         //
+    }
+
+    /**
+     * Show the profile editing form for the logged-in agent.
+     */
+    public function miPerfil()
+    {
+        $user = auth()->user();
+        
+        if (!$user || !$user->agente) {
+            return redirect()->route('dashboard')->with('error', 'No tienes un perfil de agente asociado.');
+        }
+
+        $agente = $user->agente;
+        return view('Admin.agentes.editarPerfil', compact('agente'));
+    }
+
+    /**
+     * Update the logged-in agent's profile.
+     */
+    public function actualizarMiPerfil(Request $request)
+    {
+        $user = auth()->user();
+        
+        if (!$user || !$user->agente) {
+            return redirect()->route('dashboard')->with('error', 'No tienes un perfil de agente asociado.');
+        }
+
+        $agente = $user->agente;
+
+        $request->validate([
+            'telefono' => 'nullable|string|max:20',
+            'comision_predeterminada' => 'nullable|numeric|min:0|max:100',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $data = $request->only(['telefono', 'comision_predeterminada']);
+
+        if ($request->hasFile('foto')) {
+            if ($agente->foto) {
+                Storage::disk('public')->delete($agente->foto);
+            }
+
+            $data['foto'] = $request->file('foto')->store('agentes', 'public');
+        }
+
+        $agente->update($data);
+
+        return redirect()->route('agente.perfil')->with('success', 'Perfil actualizado correctamente.');
     }
 }

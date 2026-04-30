@@ -59,7 +59,7 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             // redirige a la ruta originalmente intentada o a casas.index por defecto
-            return redirect()->intended(route('casas.index'))->with('success', 'Bienvenido al panel de administración.');
+            return redirect()->intended(route('dashboard',))->with('success', 'Bienvenido al panel de administración.');
         }
 
         return back()->with('error', 'Las credenciales proporcionadas no son correctas.')->withInput($request->only('email'));

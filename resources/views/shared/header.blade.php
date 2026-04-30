@@ -47,9 +47,9 @@
             <span class="nav-text">NOSOTROS</span>
           </a>
         </li>
-        <li class="px-3">
-          <a href="{{ route('blog') }}">
-            <span class="nav-text">BLOG</span>
+<li class="px-3">
+          <a href="{{ route('agentes.publicos') }}">
+            <span class="nav-text">AGENTES</span>
           </a>
         </li>
       </ul>
@@ -90,8 +90,8 @@
       <li>
         <a href="{{ route('nosotros') }}" class="block py-2 px-2 nav-text">NOSOTROS</a>
       </li>
-      <li>
-        <a href="" class="block py-2 px-2 nav-text">BLOG</a>
+<li>
+        <a href="{{ route('agentes.publicos') }}" class="block py-2 px-2 nav-text">AGENTES</a>
       </li>
 
     </ul>
