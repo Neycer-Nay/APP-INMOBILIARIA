@@ -61,7 +61,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/propietarios', [App\Http\Controllers\PropietarioController::class, 'store'])->name('propietarios.store');
     Route::post('/propietarios/ajax', [App\Http\Controllers\PropietarioController::class, 'storeAjax'])->name('propietarios.store.ajax');
     Route::put('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'update'])->name('propietarios.update');
-    Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'destroy'])->name('propietarios.destroy');
+Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioController::class, 'destroy'])->name('propietarios.destroy');
+
+    Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('clientes.index');
+    Route::post('/clientes', [App\Http\Controllers\ClienteController::class, 'store'])->name('clientes.store');
+
+    // Rutas de transacciones/ventas
+    Route::get('/transacciones', [App\Http\Controllers\VentaController::class, 'index'])->name('transacciones.index');
+    Route::get('/transacciones/create', [App\Http\Controllers\VentaController::class, 'create'])->name('transacciones.create');
+    Route::post('/transacciones', [App\Http\Controllers\VentaController::class, 'store'])->name('transacciones.store');
+    Route::get('/transacciones/{venta}', [App\Http\Controllers\VentaController::class, 'show'])->name('transacciones.show');
 
     Route::get('/agentes-admin', [App\Http\Controllers\AgenteController::class, 'index'])->name('admin.agentes.index');
     Route::get('/agentes-mi-perfil', [App\Http\Controllers\AgenteController::class, 'miPerfil'])->name('agente.perfil');

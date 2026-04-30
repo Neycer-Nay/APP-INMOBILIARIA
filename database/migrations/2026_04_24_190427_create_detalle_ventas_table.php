@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('detalle_ventas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('venta_id')->constrained()->onDelete('cascade');
-            $table->string('concepto'); // ej: "Gastos notariales", "Impuesto de transmisión"
-            $table->decimal('monto', 10, 2);
+            $table->foreignId('propietario_id')->constrained()->onDelete('cascade');
+            $table->decimal('monto_comision', 10, 2);
+            $table->decimal('porcentaje_comision', 5, 2);
             $table->text('observaciones')->nullable();
             $table->timestamps();
         });

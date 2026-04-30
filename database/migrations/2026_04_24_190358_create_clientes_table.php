@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('agente_id')->nullable()->constrained('agentes')->nullOnDelete();
+            
             $table->string('nombre');
             $table->string('apellido');
             $table->string('telefono')->nullable();

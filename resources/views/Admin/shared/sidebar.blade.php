@@ -98,9 +98,9 @@
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="#"
+                        <a href="{{ route('clientes.index') }}"
                             class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Listar Clientes
+                            Ver Clientes
                         </a>
                     </li>
                     <li>
@@ -118,21 +118,21 @@
                     class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg hover:bg-[#e09129] hover:text-[#404656] transition-colors duration-200 group sidebar-submenu-btn">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-handshake w-5 text-center group-hover:text-[#404656]"></i>
-                        <span class="font-medium menu-font">Ventas</span>
+                        <span class="font-medium menu-font">Trasnsacciones</span>
                     </div>
                     <i class="fas fa-chevron-down text-xs transition-transform duration-200 submenu-icon"></i>
                 </button>
                 <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                     <li>
-                        <a href="#"
+                        <a href="{{ route('transacciones.index') }}"
                             class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Listar Ventas
+                            Ver Transacciones
                         </a>
                     </li>
                     <li>
                         <a href="#"
                             class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Registrar Venta
+                            Nuevas Transacción
                         </a>
                     </li>
                 </ul>
