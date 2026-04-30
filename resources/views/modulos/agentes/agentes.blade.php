@@ -40,7 +40,7 @@
                         </div>
                         <div class="flex flex-col items-center mt-2">
                             <span class="text-white text-sm mb-1">Seguir en</span>
-                            <a href="https://wa.me/{{ $agente->telefono ?? '' }}" target="_blank" class="bg-white rounded-full p-3 shadow hover:bg-[#e0e0e0] transition">
+                            <a href="https://wa.me/{{ $agente->telefono ?? '' }}?text={{ urlencode('Necesito más información') }}" target="_blank" class="bg-white rounded-full p-3 shadow hover:bg-[#e0e0e0] transition">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-7 h-7">
                             </a>
                         </div>

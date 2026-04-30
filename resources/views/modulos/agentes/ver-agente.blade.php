@@ -64,7 +64,7 @@
                         </div>
 
                         @if($agente->telefono)
-                            <a href="https://wa.me/{{ $whats }}" target="_blank" rel="noopener noreferrer"
+                            <a href="https://wa.me/{{ $agente->telefono ?? '' }}?text={{ urlencode('Necesito más información') }}" target="_blank" rel="noopener noreferrer"
                                 class="mt-5 inline-flex w-full items-center justify-center gap-2 bg-[#f09e02] hover:bg-[#d88a01] text-white font-semibold py-3 rounded-full transition">
                                 <i class="fab fa-whatsapp"></i>
                                 Enviar Whatsapp
