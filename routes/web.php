@@ -9,8 +9,8 @@ Route::get('/', [App\Http\Controllers\CasaController::class, 'inicio']);
 Route::get('/inicio', [App\Http\Controllers\CasaController::class, 'inicio'])->name('inicio');
 
 Route::get('/nosotros', function () {
-    return view('modulos.nosotros.nosotros');
-})->name('nosotros');
+    return view('modulos.nosotrosInmoClick.nosotrosInmo');
+})->name('nosotrosInmo');
 Route::get('/servicios', function () {
     return view('modulos.servicios.servicios');
 })->name('servicios');

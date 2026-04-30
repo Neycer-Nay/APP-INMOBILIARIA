@@ -43,7 +43,7 @@
           </ul>-->
         </li>
         <li class="px-3">
-          <a href="{{ route('nosotros') }}">
+          <a href="{{ route('nosotrosInmo') }}">
             <span class="nav-text">NOSOTROS</span>
           </a>
         </li>
@@ -88,7 +88,7 @@
         <a href="{{ route('servicios') }}" class="block py-2 px-2 nav-text">SERVICIOS</a>
       </li>
       <li>
-        <a href="{{ route('nosotros') }}" class="block py-2 px-2 nav-text">NOSOTROS</a>
+        <a href="{{ route('nosotrosInmo') }}" class="block py-2 px-2 nav-text">NOSOTROS</a>
       </li>
 <li>
         <a href="{{ route('agentes.publicos') }}" class="block py-2 px-2 nav-text">AGENTES</a>
