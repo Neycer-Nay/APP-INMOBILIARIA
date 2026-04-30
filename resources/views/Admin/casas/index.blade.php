@@ -29,6 +29,8 @@
                 <tbody>
                     @forelse($casas as $casa)
                         <tr class="border-b">
+                            @if(!Auth::user()->agente)
+                            @endif
                             <td class="py-2 px-4">
                                 {{ $casa->agente ? $casa->agente->user->name : '—' }}
                             </td>
@@ -680,7 +682,7 @@
                                     placeholder="https://www.youtube.com/watch?v=...">
                             </div>
                         </div>
-                        //por ahora no se mostrara las fotos en el modal de edicion, se podran editar desde la seccion de fotos del detalle de la casa
+                        {{--  por ahora no se mostrara las fotos en el modal de edicion, se podran editar desde la seccion de fotos del detalle de la casa--}}
                       {{--<div class="mt-6">
                             <label class="block text-gray-700 font-semibold mb-2">Fotos</label>
                             <div class="flex flex-wrap gap-2 mb-2">
