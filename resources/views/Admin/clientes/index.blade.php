@@ -1,0 +1,177 @@
+@extends('Admin.layouts.main')
+
+@section('contenido')
+	<div class="max-w-7xl mx-auto py-2 px-2">
+		<div class="flex items-center justify-between mb-6">
+			<h2 class="text-2xl font-bold text-[#404656]">Mis Clientes</h2>
+			<button type="button" onclick="openModal('createModal')"
+				class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold uppercase">
+				<i class="fas fa-plus mr-1"></i> Nuevo Cliente
+			</button>
+		</div>
+
+		@if(session('success'))
+			<div class="mb-4 rounded-lg bg-green-100 text-green-800 px-4 py-2">
+				{{ session('success') }}
+			</div>
+		@endif
+		@if(session('error'))
+			<div class="mb-4 rounded-lg bg-red-100 text-red-800 px-4 py-2">
+				{{ session('error') }}
+			</div>
+		@endif
+
+		<div class="overflow-x-auto rounded-2xl">
+			<table class="min-w-full bg-white rounded-lg shadow">
+				<thead>
+					<tr class="bg-[#404656] text-white">
+						<th class="py-3 px-4 text-left uppercase">Nombre Completo</th>
+						<th class="py-3 px-4 text-left uppercase">Teléfono</th>
+						<th class="py-3 px-4 text-left uppercase">Correo</th>
+						<th class="py-3 px-4 text-left uppercase">Ciudad</th>
+						<th class="py-3 px-4 text-left uppercase">Dirección</th>
+					</tr>
+				</thead>
+				<tbody>
+					@forelse($clientes as $cliente)
+						<tr class="border-b">
+							<td class="py-2 px-4">{{ $cliente->nombre }} {{ $cliente->apellido }}</td>
+							<td class="py-2 px-4">{{ $cliente->telefono ?? '-' }}</td>
+							<td class="py-2 px-4">{{ $cliente->email }}</td>
+							<td class="py-2 px-4">{{ $cliente->ciudad ?? '-' }}</td>
+							<td class="py-2 px-4">{{ $cliente->direccion ?? '-' }}</td>
+						</tr>
+					@empty
+						<tr>
+							<td colspan="5" class="text-center text-gray-500 py-6">
+								No hay clientes registrados.
+							</td>
+						</tr>
+					@endforelse
+				</tbody>
+			</table>
+		</div>
+
+		<div class="mt-4">
+			{{ $clientes->links('pagination::tailwind') }}
+		</div>
+	</div>
+
+	{{-- Modal Crear Cliente --}}
+	<div id="createModal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+		<div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="closeModal('createModal')"></div>
+		<div class="flex min-h-screen items-center justify-center p-4 text-center sm:p-0">
+			<div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
+				<div class="bg-white px-6 pb-6 pt-5">
+					<div class="flex items-center justify-between mb-6 border-b pb-4">
+						<h3 class="text-2xl font-bold text-[#404656]" id="modal-title">Registrar Cliente</h3>
+						<button type="button" onclick="closeModal('createModal')" class="text-gray-400 hover:text-gray-600 transition-colors">
+							<i class="fas fa-times text-xl"></i>
+						</button>
+					</div>
+					<form action="{{ route('clientes.store') }}" method="POST">
+						@csrf
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+							<div class="mb-2">
+								<label for="create_nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+								<input type="text" name="nombre" id="create_nombre" value="{{ old('nombre') }}"
+									   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+									   placeholder="Nombre" required>
+								@error('nombre')
+									<span class="text-red-500 text-xs">{{ $message }}</span>
+								@enderror
+							</div>
+
+							<div class="mb-2">
+								<label for="create_apellido" class="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+								<input type="text" name="apellido" id="create_apellido" value="{{ old('apellido') }}"
+									   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+									   placeholder="Apellido" required>
+								@error('apellido')
+									<span class="text-red-500 text-xs">{{ $message }}</span>
+								@enderror
+							</div>
+
+							<div class="mb-2">
+								<label for="create_telefono" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+								<input type="text" name="telefono" id="create_telefono" value="{{ old('telefono') }}"
+									   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+									   placeholder="Teléfono">
+								@error('telefono')
+									<span class="text-red-500 text-xs">{{ $message }}</span>
+								@enderror
+							</div>
+
+							<div class="mb-2">
+								<label for="create_email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+								<input type="email" name="email" id="create_email" value="{{ old('email') }}"
+									   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+									   placeholder="correo@ejemplo.com" required>
+								@error('email')
+									<span class="text-red-500 text-xs">{{ $message }}</span>
+								@enderror
+							</div>
+
+							<div class="mb-2">
+								<label for="create_ciudad" class="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
+								<input type="text" name="ciudad" id="create_ciudad" value="{{ old('ciudad') }}"
+									   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+									   placeholder="Ciudad">
+								@error('ciudad')
+									<span class="text-red-500 text-xs">{{ $message }}</span>
+								@enderror
+							</div>
+						</div>
+
+						<div class="mb-4 mt-2">
+							<label for="create_direccion" class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+							<input type="text" name="direccion" id="create_direccion" value="{{ old('direccion') }}"
+								   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent"
+								   placeholder="Dirección">
+							@error('direccion')
+								<span class="text-red-500 text-xs">{{ $message }}</span>
+							@enderror
+						</div>
+
+						<div class="flex items-center justify-end gap-3 mt-4">
+							<button type="button" onclick="closeModal('createModal')"
+								   class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 text-sm font-semibold">
+								Cancelar
+							</button>
+							<button type="submit"
+									class="bg-[#e09129] text-white py-2 px-4 rounded hover:bg-[#c57d1f] text-sm font-semibold">
+								Guardar Cliente
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection
+
+@push('scripts')
+<script>
+	function openModal(modalId) {
+		document.getElementById(modalId).classList.remove('hidden');
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeModal(modalId) {
+		document.getElementById(modalId).classList.add('hidden');
+		document.body.style.overflow = '';
+	}
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			closeModal('createModal');
+		}
+	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+		@if($errors->any())
+			openModal('createModal');
+		@endif
+	});
+</script>
+@endpush

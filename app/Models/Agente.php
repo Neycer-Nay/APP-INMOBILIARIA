@@ -28,4 +28,9 @@ class Agente extends Model
     {
         return $this->hasMany(Venta::class);
     }
+
+    public function clientes()
+    {
+        return $this->hasMany(Cliente::class);
+    }
 }

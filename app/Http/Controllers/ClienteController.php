@@ -12,7 +12,17 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+
+        if (!$user || !$user->agente) {
+            return redirect()->route('dashboard')->with('error', 'No tienes un perfil de agente asociado.');
+        }
+
+        $clientes = Cliente::where('agente_id', $user->agente->id)
+            ->orderByDesc('created_at')
+            ->paginate(10);
+
+        return view('Admin.clientes.index', compact('clientes'));
     }
 
     /**
@@ -28,7 +38,26 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+
+        if (!$user || !$user->agente) {
+            return redirect()->route('dashboard')->with('error', 'No tienes un perfil de agente asociado.');
+        }
+
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:100',
+            'apellido' => 'required|string|max:100',
+            'telefono' => 'nullable|string|max:20',
+            'email' => 'required|email|max:255|unique:clientes,email',
+            'direccion' => 'nullable|string|max:255',
+            'ciudad' => 'nullable|string|max:100',
+        ]);
+
+        $validated['agente_id'] = $user->agente->id;
+
+        Cliente::create($validated);
+
+        return redirect()->route('clientes.index')->with('success', 'Cliente registrado correctamente.');
     }
 
     /**

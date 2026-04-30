@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Venta extends Model
 {
     protected $table = 'ventas';
-    protected $fillable = [
+protected $fillable = [
         'casa_id',
+        'propietario_id',
+        'cliente_id',
         'agente_id',
         'fecha_venta',
         'precio_venta',
