@@ -171,7 +171,7 @@
                     </button>
                     <ul class="hidden pl-12 pr-2 py-1 space-y-1 submenu-list">
                         <li>
-                            <a href="#"
+                            <a href="{{ route('reportes.ventasPorAgente') }}"
                                 class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
                                 
                                 Reportes de ventas
