@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta para buscar casas
@@ -27,6 +28,8 @@ Route::post('/logout', [App\Http\Controllers\UserController::class, 'logout'])->
 Route::get('/user', function () {
     return app(App\Http\Controllers\UserController::class)->index();
 })->name('user.index');
+
+Route::get('/pdf-agentes', [DashboardController::class, 'exportarPDF']);
 
 
 Route::get('/crear-admin', function () {
@@ -76,6 +79,9 @@ Route::delete('/propietarios/{propietario}', [App\Http\Controllers\PropietarioCo
     Route::get('/agentes-mi-perfil', [App\Http\Controllers\AgenteController::class, 'miPerfil'])->name('agente.perfil');
     Route::put('/agentes/mi-perfil', [App\Http\Controllers\AgenteController::class, 'actualizarMiPerfil'])->name('agente.perfil.update');
     Route::put('/agentes/{id}', [App\Http\Controllers\AgenteController::class, 'update'])->name('agentes.update');
+
+    Route::get('/reportes-ventas-por-agente', [App\Http\Controllers\ReporteController::class, 'ventasPorAgente'])->name('reportes.ventasPorAgente');
+    Route::get('/reportes-ventas-por-agente/pdf', [App\Http\Controllers\ReporteController::class, 'ventasPorAgentePdf'])->name('reportes.ventasPorAgente.pdf');
 
     Route::middleware('no-agente')->group(function () {
         Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');
