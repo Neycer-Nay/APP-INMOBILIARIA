@@ -103,12 +103,7 @@
                             Ver Clientes
                         </a>
                     </li>
-                    <li>
-                        <a href="#"
-                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Registrar Cliente
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 
@@ -129,12 +124,7 @@
                             Ver Transacciones
                         </a>
                     </li>
-                    <li>
-                        <a href="#"
-                            class="block px-4 py-2 rounded-lg text-sm hover:bg-white/10 hover:text-[#e09129] transition-colors menu-font">
-                            Nuevas Transacción
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 

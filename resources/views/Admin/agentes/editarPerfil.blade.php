@@ -35,7 +35,7 @@
                     <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2 menu-font">
                         <i class="fas fa-phone mr-2 text-[#e09129]"></i>Teléfono
                     </label>
-                    <input type="text" name="telefono" id="telefono" 
+                    <input type="number" name="telefono" id="telefono" 
                         value="{{ old('telefono', $agente->telefono) }}"
                         class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#e09129] focus:border-transparent menu-font"
                         placeholder="Ej. 70000000">

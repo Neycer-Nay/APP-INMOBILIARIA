@@ -102,7 +102,7 @@
             </div>
         @endif
 
-        <!-- Quick Actions -->
+        <!-- Quick Actions 
         <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-6">
             <h3 class="text-lg font-bold text-[#404656] mb-4 menu-font">Accesos Rápidos</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -127,7 +127,7 @@
                     <span class="text-sm font-semibold menu-font text-center">Registrar Venta</span>
                 </a>
             </div>
-        </div>
+        </div>-->
     </div>
 
 
