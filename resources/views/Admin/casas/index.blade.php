@@ -48,11 +48,7 @@
                             </td>
                             <td class="py-2 px-4">{{ $casa->estado }}</td>
                             <td class="py-2 px-4">
-                                <a href="{{ route('casas.show', $casa->id) }}"
-                                    class="bg-[#404656] text-white py-1 px-3 rounded hover:bg-[#2c3240] text-sm"
-                                    title="Ver detalles">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+                                
                                 <button type="button"
                                     class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 text-sm"
                                     title="Editar" onclick="openEditModal(this)"
